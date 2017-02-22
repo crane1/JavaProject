@@ -3,18 +3,19 @@ package com.javateam1.restuarant.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.javateam1.restuarant.control.Account;
-import com.javateam1.restuarant.control.AccountArray;
-import com.javateam1.restuarant.control.Manager;
+import com.javateam1.restuarant.control.AccountManager;
+import com.javateam1.restuarant.control.FoodManager;
+import com.javateam1.restuarant.control.RestaurantManager;
+import com.javateam1.restuarant.control.OrderManager;
 import com.javateam1.restuarant.model.*;
 
 public class Menu {
 	static Scanner sc = new Scanner(System.in);
 	Restaurant rest = new Restaurant();
-	AccountArray accountarray = new AccountArray();
-	Manager manager = new Manager();
-	FoodList foodlist = rest.getFoodlist();
-	OrderList orders = rest.getOrders();
+	AccountManager accountarray = new AccountManager();
+	RestaurantManager manager = new RestaurantManager();
+	FoodManager foodlist = rest.getFoodlist();
+	OrderManager orders = rest.getOrders();
 	
 	public void printMain(){
 		while(true){
@@ -31,7 +32,7 @@ public class Menu {
 				}
 				break;
 			case 2:
-				Manager manager =  (Manager) accountarray.signIn(1);
+				RestaurantManager manager =  (RestaurantManager) accountarray.signIn(1);
 				if( manager != null){
 					printManagerMenu(manager);
 				}
@@ -55,7 +56,7 @@ public class Menu {
 		}
 	}
 	
-	public void printManagerMenu(Manager manager){
+	public void printManagerMenu(RestaurantManager manager){
 //		j.修改菜单内容（增添菜） 查询账户余额， 查询全部订单内容 ，删除订单
 		while(true){
 			System.out.println("\n1.修改菜单内容 2.查询账户余额 3.查询全部订单内容   4.删除订单 0.退出");

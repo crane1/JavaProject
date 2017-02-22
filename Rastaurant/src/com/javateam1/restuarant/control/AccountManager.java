@@ -2,20 +2,21 @@ package com.javateam1.restuarant.control;
 
 import java.util.Scanner;
 
+import com.javateam1.restuarant.model.Account;
 import com.javateam1.restuarant.view.Menu;
 
-public class AccountArray {
+public class AccountManager {
 	private final int INIT_NUM = 10;
 	private Account[] accounts = new Account[100];
 	private int listLength = 0;
 	
-	public AccountArray(){
+	public AccountManager(){
 		initAccountArray();
 	}
 	
 	private void initAccountArray() {
 		// 初始化管理员账户
-		accounts[0] = new Manager();
+		accounts[0] = new RestaurantManager();
 		accounts[0].setId("admin");
 		accounts[0].setPwd("admin");
 		accounts[0].setType(1);
@@ -66,7 +67,7 @@ public class AccountArray {
 			if (str == 0){
 				ac = new Account();
 			}else if (str == 1){
-				ac = new Manager();
+				ac = new RestaurantManager();
 			} else {
 				System.out.println("请重新输入");
 				continue;
@@ -130,7 +131,7 @@ public class AccountArray {
 	}
 
 	public static void main(String[] args) {
-		AccountArray a = new AccountArray();
+		AccountManager a = new AccountManager();
 		a.printAccountArray();
 		a.addAccount();
 		a.printAccountArray();

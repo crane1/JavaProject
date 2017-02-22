@@ -1,21 +1,24 @@
 package com.javateam1.restuarant.model;
 
+import com.javateam1.restuarant.control.FoodManager;
+import com.javateam1.restuarant.control.OrderManager;
+
 public class Restaurant {
-	private FoodList foodlist;
+	private FoodManager foodlist;
 	private Balance balance;
-	private OrderList orders;
+	private OrderManager orders;
 	
 	public Restaurant(){
-		foodlist = new FoodList();
+		foodlist = new FoodManager();
 		balance = new Balance();
-		setOrders(new OrderList());
+		setOrders(new OrderManager());
 	}
 
-	public FoodList getFoodlist() {
+	public FoodManager getFoodlist() {
 		return foodlist;
 	}
 
-	public void setFoodlist(FoodList foodlist) {
+	public void setFoodlist(FoodManager foodlist) {
 		this.foodlist = foodlist;
 	}
 
@@ -27,11 +30,11 @@ public class Restaurant {
 		this.balance = balance;
 	}
 
-	public OrderList getOrders() {
+	public OrderManager getOrders() {
 		return orders;
 	}
 
-	public void setOrders(OrderList orders) {
+	public void setOrders(OrderManager orders) {
 		this.orders = orders;
 	}
 	

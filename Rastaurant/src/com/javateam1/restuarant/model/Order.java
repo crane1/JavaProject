@@ -105,17 +105,6 @@ public class Order {
 	public String getPayStatus(){
 		return isPay ? "“—÷ß∏∂" : "Œ¥÷ß∏∂"; 
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		Order o1 = new Order();
-		Food[] f = {new Food("Õ‚∆≈≤À≥¥∫”œ∫", 42), new Food("Õ‚∆≈≤À≥¥∫”œ∫", 42),};
-		Order o2 = new Order(f);
-		o1.printInfo();
-		o2.printInfo();
-		
-	}
 	public boolean isDelete() {
 		return isDelete;
 	}

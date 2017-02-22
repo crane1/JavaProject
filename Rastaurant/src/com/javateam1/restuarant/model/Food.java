@@ -32,10 +32,6 @@ public class Food {
 		System.out.printf("%s\t%s\n",getName(),getPrice());
 	}
 	
-	public static void main(String[] args) {
-		Food f = new Food("¾Â²Ë¼¦µ°", 8);
-		f.printInfo();
-	}
 	public boolean isDelete() {
 		return isDelete;
 	}

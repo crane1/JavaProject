@@ -1,13 +1,9 @@
-package com.javateam1.restuarant.control;
+package com.javateam1.restuarant.model;
 
 import java.util.Scanner;
 
-import com.javateam1.restuarant.model.Balance;
-import com.javateam1.restuarant.model.Food;
-import com.javateam1.restuarant.model.FoodList;
-import com.javateam1.restuarant.model.Order;
-import com.javateam1.restuarant.model.OrderList;
-import com.javateam1.restuarant.model.Restaurant;
+import com.javateam1.restuarant.control.FoodManager;
+import com.javateam1.restuarant.control.OrderManager;
 import com.javateam1.restuarant.view.Menu;
 
 public class Account {
@@ -17,14 +13,14 @@ public class Account {
 	private String id;
 	private String pwd;
 	private Balance balance;
-	private OrderList orderlist;
+	private OrderManager orderlist;
 	private int type; // 0 普通账户  1 管理员
 	
 	public Account(){
 		id = String.format("%04d", i++);
 		pwd = id;
 		balance = new Balance();
-		orderlist = new OrderList();
+		orderlist = new OrderManager();
 		setType(0);
 	}
 	
@@ -51,9 +47,21 @@ public class Account {
 	public void setBalance(Balance balance) {
 		this.balance = balance;
 	}
+	
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public void printOrderInfo() {
+		orderlist.printOrderList();
+	}
 
 	
-	public void order(FoodList foods, Restaurant rest){
+	public void order(FoodManager foods, Restaurant rest){
 		Food[] foodlist = new Food[INIT_FOODLIST_NUM];
 		Order order = new Order();
 		int i = 0;
@@ -129,23 +137,6 @@ public class Account {
 	
 	public void printAccountInfo(){
 		System.out.println("账号：" + getId() + "\t密码：" + getPwd());
-	}
-	
-	public static void main(String[] args) {
-		Account a = new Account();
-		a.printAccountInfo();
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public void printOrderInfo() {
-		orderlist.printOrderList();
 	}
 	
 	public void deletOrder(){

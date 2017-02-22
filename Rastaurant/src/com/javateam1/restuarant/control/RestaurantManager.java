@@ -5,29 +5,29 @@ import java.util.Scanner;
 import com.javateam1.restuarant.model.*;
 import com.javateam1.restuarant.view.Menu;
 
-public class Manager extends Account{
+public class RestaurantManager extends Account{
 	private Scanner sc = new Scanner(System.in);
 	
-	public Manager(){
+	public RestaurantManager(){
 	}
 
-	public void addFood(FoodList foodlist){
+	public void addFood(FoodManager foodlist){
 		foodlist.addFood();
 	}
 	
-	public void deletFood(FoodList foodlist){
+	public void deletFood(FoodManager foodlist){
 		foodlist.deleteFood();
 	}
 	
-	public void modifyFood(FoodList foodlist){
+	public void modifyFood(FoodManager foodlist){
 		foodlist.modifyFood();
 	}
 	
-	public void findFood(FoodList foodlist){
+	public void findFood(FoodManager foodlist){
 		foodlist.findFood();
 	}
 	
-	public void printModifyFoodlist(FoodList foodlist){
+	public void printModifyFoodlist(FoodManager foodlist){
 		while(true){
 			System.out.println("1.Ìí¼Ó²Ë  2.É¾³ý²Ë  3.ÐÞ¸Ä²Ë  4.²éÕÒ²Ë 5.ÍË³ö");
 			System.out.print("#:");
@@ -54,11 +54,11 @@ public class Manager extends Account{
 		
 	}
 
-	public void printAllOrder(OrderList orders) {
+	public void printAllOrder(OrderManager orders) {
 		orders.printOrderList();
 	}
 
-	public void deleteOrder(OrderList orders) {
+	public void deleteOrder(OrderManager orders) {
 		orders.printOrderList();
 		System.out.println("ÇëÊäÈëÄãÒªÉ¾³ýµÄ¶©µ¥±àºÅ");
 		System.out.println("#");

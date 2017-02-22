@@ -1,8 +1,10 @@
-package com.javateam1.restuarant.model;
+package com.javateam1.restuarant.control;
 
 import java.util.Scanner;
 
-public class FoodList {
+import com.javateam1.restuarant.model.Food;
+
+public class FoodManager {
 	private final Food[] foods = {
 		new Food("外婆菜炒河虾", 42), new Food("香蕉鲈鱼", 42),
 		new Food("拆骨肉焖蛋", 38),  new Food("锅巴盖肉", 38),
@@ -15,10 +17,10 @@ public class FoodList {
 	private Food[] foodList;  // 所有菜组成的一个菜单
 	private int listLength;
 	
-	public FoodList(){
+	public FoodManager(){
 		initFoodList();
 	}
-	public FoodList(Food[] foodlist){
+	public FoodManager(Food[] foodlist){
 		initFoodList();
 		System.arraycopy(foodlist, 0, this.foodList, 0, foodlist.length);
 	}
@@ -175,7 +177,7 @@ public class FoodList {
 	
 	
 	public static void main(String[] args) {
-		FoodList fl = new FoodList();
+		FoodManager fl = new FoodManager();
 		fl.printList();
 		fl.addFood();
 		fl.printList();

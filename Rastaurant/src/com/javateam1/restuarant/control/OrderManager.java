@@ -1,10 +1,12 @@
-package com.javateam1.restuarant.model;
+package com.javateam1.restuarant.control;
 
-public class OrderList {
+import com.javateam1.restuarant.model.Order;
+
+public class OrderManager {
 	private Order[] orders;
 	private int listLength = 0;
 	
-	public OrderList(){
+	public OrderManager(){
 		orders = new Order[100];
 	}
 	
