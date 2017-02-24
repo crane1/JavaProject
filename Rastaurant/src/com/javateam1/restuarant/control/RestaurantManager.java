@@ -27,11 +27,18 @@ public class RestaurantManager extends Account{
 		foodlist.findFood();
 	}
 	
+	public void printFoodList(FoodManager foodlist){
+		foodlist.printList();
+	}
+	
 	public void printModifyFoodlist(FoodManager foodlist){
 		while(true){
-			System.out.println("1.Ìí¼Ó²Ë  2.É¾³ı²Ë  3.ĞŞ¸Ä²Ë  4.²éÕÒ²Ë 5.ÍË³ö");
+			System.out.println("1.Ìí¼Ó²Ë  2.É¾³ı²Ë  3.ĞŞ¸Ä²Ë  4.²éÕÒ²Ë  5.´òÓ¡²Ëµ¥ 0.ÍË³ö");
 			System.out.print("#:");
 			int str = Menu.getInputIntNum();
+			if (str == 0){
+				break;
+			}
 			
 			switch(str) {
 			case 1:
@@ -45,6 +52,9 @@ public class RestaurantManager extends Account{
 				break;
 			case 4:
 				findFood(foodlist);
+				break;
+			case 5:
+				printFoodList(foodlist);
 				break;
 			default:
 				System.out.println("ÊäÈëÓĞÎó");

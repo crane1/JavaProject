@@ -3,6 +3,7 @@ package com.javateam1.restuarant.control;
 import java.util.Scanner;
 
 import com.javateam1.restuarant.model.Food;
+import com.javateam1.restuarant.view.Menu;
 
 public class FoodManager {
 	private final Food[] foods = {
@@ -73,7 +74,8 @@ public class FoodManager {
 		while(true){
 			System.out.println("请输入菜名：");
 			String name = sc.next();
-			if (findFood(name) < 0){
+			int index = findFood(name);  // 查找是否存在
+			if ( index < 0){  // 数组里面没有，直接添加
 				f.setName(name);
 				System.out.println("请输入价格：");
 				f.setPrice(sc.nextDouble());
@@ -86,8 +88,20 @@ public class FoodManager {
 				}
 				addFood(f);
 				break;
-			} else {
+			} else if(!foodList[index].isDelete()){  // 当前菜不可见，换句换说就是曾经被删除过
+				foodList[index].setDelete(true);  //直接让它可见即可
+				System.out.println("检测到你曾经添加过这道菜，需要修改内容吗？（'y' or 'n'）");
+				foodList[index].printInfo();
+				String str = sc.next();
+				if (str.equals("y")){
+					modifyFood(name);
+					break;
+				}else{
+					break;
+				}
+			}else {  
 				System.out.println("当前菜已存在");
+				break;
 			}
 		}
 		
@@ -117,8 +131,8 @@ public class FoodManager {
 	public void deleteFood(){
 		System.out.println("删除菜：");
 		System.out.println("请输入菜的索引：");
-		int index = sc.nextInt();
-		deleteFood(index);
+		int num = Menu.getInputIntNum();
+		deleteFood(num);
 	}
 	
 	// 查找食物
@@ -129,7 +143,7 @@ public class FoodManager {
 			Food f = foodList[i];
 			if (f == null) break;
 			if (f.getName().equals(name)){
-				f.printInfo();
+//				f.printInfo();
 				isFind = true;
 				index = i;
 			}
@@ -143,7 +157,8 @@ public class FoodManager {
 	public void findFood(){
 		System.out.println("请输入要查询的菜名");
 		String name = sc.next();
-		if(findFood(name) < 0){
+		int index = findFood(name);
+		if( index < 0 || !foodList[index].isDelete()){
 			System.out.println("输入菜名不存在，联系老板添加");
 		}
 	}
@@ -151,7 +166,10 @@ public class FoodManager {
 	// 修改食物
 	public void modifyFood(String name){
 		int index = findFood(name);
-		System.out.println("index=" + index);
+		if (index < 0){
+			System.out.println("当前菜不存在");
+			return;
+		}
 		System.out.println("请输入菜名(不变按'n'):");
 		String str = sc.next();
 		if(str.equals("n") || str.equals("N")){
