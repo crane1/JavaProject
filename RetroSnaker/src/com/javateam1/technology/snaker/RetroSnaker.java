@@ -14,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class RetroSnaker {
+	public final static int PANEL_WIDTH = 400;
+	public final static int PANEL_HEIGHT = 300;
+	
 	private JFrame jframe;
 	private JButton start, pause;
 	private PlayPanel playArea;
@@ -24,45 +27,50 @@ public class RetroSnaker {
 	}
 	
 	public void init(){
+		// 获取jfram面板
 		Container contentPane = jframe.getContentPane();
+		
+		// 设置面板布局为边框布局
 		contentPane.setLayout(new BorderLayout());
 		
+		// 初始化贪吃蛇动画面板
 		playArea = new PlayPanel();
 		playArea.setBackground(Color.BLUE);
 		playArea.setFocusable(true);
         
-		
+		// 实例化按钮
 		start = new JButton("开始");
 		pause = new JButton("暂停");
 		
+		// 添加监听事件
 		start.addActionListener(new StartEvetListener());
 		
+		// 将两个按钮添加到一个面板上
 		JPanel controlPanel = new JPanel();
 		controlPanel.add(start);
 		controlPanel.add(pause);
 		
+		// 将动画面板和按钮面板添加到jfram面板上
 		contentPane.add("Center", playArea);
 		contentPane.add("South", controlPanel);
 		
 		jframe.setSize(400, 300);
 		jframe.setVisible(true);
 		
-		
-		Thread t = new Thread(playArea);//启动面板的动画线程  
+		//启动面板的动画线程  
+		Thread t = new Thread(playArea);
         t.start();
-	}
-	public static void main(String[] args) {
-		RetroSnaker snaker = new RetroSnaker();
-		snaker.init();
 	}
 }
 
 class PlayPanel extends JPanel implements Runnable{
 	Snaker snaker;
+	Food food;
 	
     public PlayPanel(){
     	this.setSize(400, 300);
     	snaker = new Snaker();
+    	food = new Food();
 //    	initPanel();
     }
     
@@ -112,6 +120,7 @@ class PlayPanel extends JPanel implements Runnable{
         super.paint(g);
         this.setBackground(Color.blue);//设定背景颜色  
         snaker.drawSnaker(g);
+        food.drawFood(g);
     }  
       
     //动画过程在线程内实现  
@@ -125,13 +134,14 @@ class PlayPanel extends JPanel implements Runnable{
     
     public void snakerMove(){
     	try {  
-            Thread.sleep(100);
+            Thread.sleep(500);
         } catch (InterruptedException e) {  
             e.printStackTrace();  
         }
         repaint(); 
 //        System.out.println("--------------movesnaker");
         snaker.move();
+        snaker.eatFood(food);
     }
 }  
 

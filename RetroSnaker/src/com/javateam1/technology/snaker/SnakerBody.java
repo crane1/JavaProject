@@ -3,7 +3,7 @@ package com.javateam1.technology.snaker;
 public class SnakerBody {
 	
 	// 蛇体宽高
-	private final int BODY_WIDTH = 20;
+	public final static int BODY_WIDTH = 20;
 	
 	// x,y轴坐标，以及朝向
 	private int x;

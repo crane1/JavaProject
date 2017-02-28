@@ -30,12 +30,10 @@ public class Snaker {
 	
 	// 绘制蛇身
 	public void drawSnaker(Graphics g){
-		int i = 0;
 		for (SnakerBody sb : snaker){
 			if (sb == null) {
 				break;
 			}
-//			System.out.println("_________draw");
 			g.setColor(Color.yellow);//设置画笔颜色  
 			int x = sb.getX();
 			int y = sb.getY();
@@ -85,7 +83,7 @@ public class Snaker {
 	}
 	
 	public void turnHead(Direction dir){
-		eatFood();
+//		eatFood();
 		Direction snakerDir = snaker[0].getDir();
 		switch (dir){
 		case UP:
@@ -122,6 +120,52 @@ public class Snaker {
 		}
 	}
 	
+	public void eatFood(Food f){
+		SnakerBody shead = getHeadPoint();
+		int sX = shead.getX();
+		int sY = shead.getY();
+		
+		int fX = f.getX();
+		int fY = f.getY();
+		int fw = f.getWidth();
+		
+		boolean xIsInner = sX >= fX && sX <= fX + fw;
+		boolean yIsInner = sY >= fY && sY <= fY + fw;
+		
+		if(xIsInner && yIsInner){
+			eatFood();
+			f.flushFood();
+		}
+	}
+	
+	public SnakerBody getHeadPoint(){
+		SnakerBody sb = new SnakerBody();
+		int x = 0;
+		int y = 0;
+		int halfWidth = (int) (SnakerBody.BODY_WIDTH * 0.5);
+		switch(snaker[0].getDir()){
+		case UP:
+			x = snaker[0].getX() + halfWidth;
+			y = snaker[0].getY();
+			break;
+		case RIGHT:
+			x = snaker[0].getX() + halfWidth * 2;
+			y = snaker[0].getY() + halfWidth;
+			break;
+		case DOWN:
+			x = snaker[0].getX() + halfWidth;
+			y = snaker[0].getY() + halfWidth * 2;
+			break;
+		case LEFT:
+			x = snaker[0].getX();
+			y = snaker[0].getY() + halfWidth;
+			break;
+		}
+		sb.setX(x);
+		sb.setY(y);
+		return sb;
+	}
+	
 	public void printSnaker(){
 		System.out.println();
 		for(SnakerBody sb : snaker){
@@ -129,4 +173,5 @@ public class Snaker {
 			System.out.println(sb);
 		}
 	}
+	
 }
