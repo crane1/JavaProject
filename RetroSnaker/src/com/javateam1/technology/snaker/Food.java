@@ -9,6 +9,7 @@ public class Food {
 	private int x;
 	private int y;
 	private int width;
+	private int size;
 	
 	public Food(){
 		initFood();
@@ -39,9 +40,11 @@ public class Food {
 	}
 
 	private void initFood(){
-		this.x = (int)(Math.random() * RetroSnaker.PANEL_WIDTH);
-		this.y = (int)(Math.random() * RetroSnaker.PANEL_HEIGHT);
-		this.width = (int)((Math.random() * FOOD_LEVEL + 1) * FOOD_WIDTH);
+		this.size = (int)(Math.random() * FOOD_LEVEL + 1);
+		this.width = this.size * FOOD_WIDTH;
+		this.x = (int)(Math.random() * (PlayPanel.PANEL_WIDTH - width));
+		this.y = (int)(Math.random() * (PlayPanel.PANEL_HEIGHT - width));
+		
 	}
 	
 	public void drawFood(Graphics g){
@@ -50,11 +53,19 @@ public class Food {
 		int y = this.y;
 		int width = this.width;
         g.fillOval(x, y, width, width);//画一个实心圆
-        System.out.println("drawFood:" + x + " " + y + " " + width);
+//        System.out.println("drawFood:" + x + " " + y + " " + width);
 	}
 	
 	public void flushFood(){
 		initFood();
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 	

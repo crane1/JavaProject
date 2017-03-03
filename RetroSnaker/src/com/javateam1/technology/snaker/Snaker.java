@@ -4,12 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Snaker {
+	private final static int SNAKER_WIDTH = 18;
 	private SnakerBody[] snaker = new SnakerBody[301];
 	private int snakerLength;
+	private int deep;
+	private int score;
 	
 	public Snaker(){
 		snaker[0] = new SnakerBody(0,0,Direction.RIGHT);
 		snakerLength = 1;
+		deep = 0;
+		setScore(0);
 	}
 
 	public int getSnakerLength() {
@@ -28,6 +33,22 @@ public class Snaker {
 		this.snaker = snaker;
 	}
 	
+	public int getDeep() {
+		return deep;
+	}
+
+	public void setDeep(int deep) {
+		this.deep = deep;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	// 绘制蛇身
 	public void drawSnaker(Graphics g){
 		for (SnakerBody sb : snaker){
@@ -37,7 +58,7 @@ public class Snaker {
 			g.setColor(Color.yellow);//设置画笔颜色  
 			int x = sb.getX();
 			int y = sb.getY();
-			int width = sb.getBODY_WIDTH();
+			int width = SNAKER_WIDTH;
 	        g.fillRect(x, y, width, width);//画一个实心矩形
 		}
 	}
@@ -65,6 +86,16 @@ public class Snaker {
 			snaker[0].setX(diff);
 			break;
 		}
+		
+		if (checkedBorder()){
+			System.out.println("触碰边界");
+			System.exit(0);
+		}
+		
+		if (checkedEatSelf()){
+			System.out.println("吞噬自己");
+			System.exit(0);
+		}
 	}
 	
 	public void moveBody(){
@@ -80,6 +111,42 @@ public class Snaker {
 			snaker[i].setY(snaker[i-1].getY());
 			snaker[i].setDir(snaker[i-1].getDir());
 		}
+	}
+	
+	public boolean checkedBorder(){
+		SnakerBody head = getHeadPoint();
+		int sx = head.getX();
+		int sy = head.getY();
+		System.out.println("sx=" + sx + "xy=" + sy);
+		
+		// 检测左和上边界
+		if (sx < 0 || sy < 0 || sx > PlayPanel.PANEL_WIDTH || 
+				sy > PlayPanel.PANEL_HEIGHT){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean checkedEatSelf(){
+		SnakerBody head = snaker[0];
+		int sx = head.getX();
+		int sy = head.getY();
+		
+		// 检测是否与自身某个元素同坐标
+		for(int i = 1; i < snakerLength; i++){
+			SnakerBody body = snaker[i];
+			if (body.getX() == sx && 
+				body.getY() == sy){
+//				System.out.println("day");
+//				System.out.println("bx=" + body.getX() +  "by=" + body.getY());
+//				System.out.println("sx=" + sx +  "sy=" + sy);
+//				printSnaker();
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public void turnHead(Direction dir){
@@ -103,7 +170,7 @@ public class Snaker {
 			snaker[0].setDir(Direction.LEFT);
 			break;
 		}
-		printSnaker();
+//		printSnaker();
 	}
 	
 	public void eatFood(){
@@ -120,7 +187,7 @@ public class Snaker {
 		}
 	}
 	
-	public void eatFood(Food f){
+	public boolean eatFood(Food f){
 		SnakerBody shead = getHeadPoint();
 		int sX = shead.getX();
 		int sY = shead.getY();
@@ -129,13 +196,21 @@ public class Snaker {
 		int fY = f.getY();
 		int fw = f.getWidth();
 		
+		int fsize = f.getSize();
+		
 		boolean xIsInner = sX >= fX && sX <= fX + fw;
 		boolean yIsInner = sY >= fY && sY <= fY + fw;
 		
 		if(xIsInner && yIsInner){
-			eatFood();
+			for(int i = 0; i < fsize; i++){
+				eatFood();
+			}
 			f.flushFood();
+			DeepUp();
+			this.score += 2 * fsize;
+			return true;
 		}
+		return false;
 	}
 	
 	public SnakerBody getHeadPoint(){
@@ -166,6 +241,21 @@ public class Snaker {
 		return sb;
 	}
 	
+	public void DeepUp(){
+		if(this.score / 10 > this.deep){
+			this.setDeep(this.deep + 1);
+		}
+	}
+	
+	public int getSnakerDeep(){
+		int current_deep = 1000 - this.deep * 100;
+		if (current_deep > 100){
+			return current_deep;
+		} else {
+			return 100;
+		}
+	}
+	
 	public void printSnaker(){
 		System.out.println();
 		for(SnakerBody sb : snaker){
@@ -173,5 +263,4 @@ public class Snaker {
 			System.out.println(sb);
 		}
 	}
-	
 }

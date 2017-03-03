@@ -126,7 +126,7 @@ public class Menu {
 			str = 0;
 			try{
 				str = sc.nextInt();
-				System.out.println("haohaoh");
+//				System.out.println("haohaoh");
 				break;
 			} catch (InputMismatchException e){
 				sc.nextLine();
