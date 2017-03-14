@@ -53,13 +53,14 @@ public class AccountManager {
 		return ad;
 	}
 	
-	public boolean addAccount(Account a){
+	public static boolean addAccount(Account a){
 		Account ad = findAccountById(a.getId());
 		if (ad != null){
 			System.out.println("账户已存在");
 			return false;
 		}else {
 			accounts.add(a);
+			System.out.println("账户添加成功");
 			return true;
 		}
 	}
@@ -77,7 +78,6 @@ public class AccountManager {
 				return ad;
 			}
 		return ad;
-		
 	}
 	
 	public Account signIn(){

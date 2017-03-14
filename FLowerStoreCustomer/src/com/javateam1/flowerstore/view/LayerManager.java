@@ -9,7 +9,7 @@ import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 
 public class LayerManager {
-	private static Map<String, PanelDemo>  layers= new HashMap<String, PanelDemo>();
+	private static Map<String, LayerDemo>  layers= new HashMap<String, LayerDemo>();
 	private static TCPClient client;
 	
 	public LayerManager(){
@@ -21,20 +21,20 @@ public class LayerManager {
 	}
 	
 	public void initLayerManager(){
-		addLayer(DataType.LOGIN, new PanelLogin());
+		addLayer(DataType.LOGIN, new LayerLogin());
 	}
 	
 	public static void showLayer(String name){
-		PanelDemo panel = (PanelDemo) layers.get(name);
+		LayerDemo panel = (LayerDemo) layers.get(name);
 		panel.setVisible(true);
 	}
 	
 	public static void hideLayer(String name){
-		PanelDemo panel = (PanelDemo) layers.get(name);
+		LayerDemo panel = (LayerDemo) layers.get(name);
 		panel.setVisible(true);
 	}
 	
-	public static  void addLayer(String name, PanelDemo panel){
+	public static  void addLayer(String name, LayerDemo panel){
 		System.out.println("dfds" + LayerManager.client);
 		layers.put(name, panel);
 		panel.setClient(LayerManager.getClient());

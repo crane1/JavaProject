@@ -1,59 +1,32 @@
 package com.javateam1.flowerstore.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 
-import com.javateam1.flowerstore.control.TCPClient;
-
-public class PanelDemo extends JFrame{
-	private TCPClient client;
-	private Container con = this.getContentPane();
+public class PanelDemo extends JPanel{
+	private MyLabel title;
+	private JPanel center;
+	private JPanel bottom;
+	private MyButton fore, back;
 	
-	public PanelDemo(){
-		con.setBackground(Color.white);
-		con.setLayout(new BorderLayout(0, 10));
+	public PanelDemo(String name){
+		title = new MyLabel(name,new Font("宋体", Font.BOLD, 20));
+		bottom = new JPanel();
 		
+		fore = new MyButton("上一页");
+		back = new MyButton("下一页");
+		initPanel();
 	}
 	
 	public void initPanel(){
+		this.setLayout(new BorderLayout());
+		this.add("North", title);
 		
-		this.pack();
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
+		bottom.add(fore);
+		bottom.add(back);
+		this.add("South", bottom);
 	}
-	
-
-	public TCPClient getClient() {
-		return client;
-	}
-
-	public void setClient(TCPClient client) {
-		this.client = client;
-	}
-
-	public Container getCon() {
-		return con;
-	}
-
-	public void setCon(Container con) {
-		this.con = con;
-	}
-	
 	
 }
