@@ -17,6 +17,7 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
+import com.javateam1.flowerstore.control.TCPClient;
 
 
 public class LayerMain extends LayerDemo {
@@ -29,8 +30,8 @@ public class LayerMain extends LayerDemo {
 	private MyButton btnNum = new MyButton("支数");
 	private Container con = this.getCon();
 	
-	public LayerMain(){
-		super();
+	public LayerMain(TCPClient client){
+		super(client);
 		this.setTitle("网上呆萌花店");
 		this.setPreferredSize(new Dimension(485,450));
 		JPanel top = new JPanel();
@@ -45,7 +46,9 @@ public class LayerMain extends LayerDemo {
 		top2.add(btnNum);
 		top.add(top2);
 		con.add("North", top);
-		panelManager.addPanel("精品推荐");
+		String[] dataArray = {DataType.MAIN, DataType.FIRST}; 
+		String data = ArrayToString.arrayToString(dataArray);
+		pushData(data);
 		initPanel();
 		
 		btnFirst.getButton().addActionListener(new myButtonListener());
@@ -59,22 +62,17 @@ public class LayerMain extends LayerDemo {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String type = "first";
+			String type = DataType.FIRST;
 			if(e.getSource() == btnFirst.getButton()){
-				type = "first";
-				panelManager.addPanel("精品推荐");
+				type = DataType.FIRST;
 			}else if(e.getSource() == btnMater.getButton()){
-				type = "mater";
-				panelManager.addPanel("花材");
+				type = DataType.MATER;
 			}else if(e.getSource() == btnPrice.getButton()){
-				type = "price";
-				panelManager.addPanel("价格");
+				type = DataType.PRICE;
 			}else if(e.getSource() == btnType.getButton()){
-				type = "type";
-				panelManager.addPanel("类型");
+				type = DataType.TYPE;
 			}else if(e.getSource() == btnNum.getButton()){
-				type = "number";
-				panelManager.addPanel("支数");
+				type = DataType.NUMBER;
 			}
 			System.out.println("加载内容");
 			initPanel();
@@ -91,8 +89,18 @@ public class LayerMain extends LayerDemo {
 		this.getClient().pushData(data);
 	}
 	
+	
+	public MainPanelManager getPanelManager() {
+		return panelManager;
+	}
+
+
+	public void setPanelManager(MainPanelManager panelManager) {
+		this.panelManager = panelManager;
+	}
+
+
 	public static void main(String[] args) {
-		new LayerMain();
 	}
 
 }

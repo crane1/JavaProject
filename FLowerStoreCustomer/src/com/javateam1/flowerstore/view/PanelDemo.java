@@ -15,7 +15,7 @@ public class PanelDemo extends JPanel{
 	private JPanel bottom;
 	private MyButton fore, back;
 	
-	public PanelDemo(String name){
+	public PanelDemo(String name, String[] data){
 		title = new MyLabel(name,new Font("宋体", Font.BOLD, 20));
 		bottom = new JPanel();
 		bottom.setBackground(Color.white);
@@ -24,14 +24,22 @@ public class PanelDemo extends JPanel{
 		center.setLayout(new FlowLayout(0, 40, 20));
 		center.setBackground(Color.white);
 		
-		FlowerInfo flowrInfo1 = new FlowerInfo("img/01adyj.png", "爱到永久", 422);
-		FlowerInfo flowrInfo2 = new FlowerInfo("img/01adyj.png", "爱到永久", 422);
-		FlowerInfo flowrInfo3 = new FlowerInfo("img/01adyj.png", "爱到永久", 422);
-		
-		center.add(flowrInfo1);
-//		flowrInfo1.setPreferredSize(new Dimension(100,212));
-		center.add(flowrInfo2);
-		center.add(flowrInfo3);
+//		list.add(f.getId());
+//		list.add(f.getName());
+//		list.add(String.valueOf(f.getPrice()));
+//		list.add(f.getMaterials());
+//		list.add(f.getPackages());
+//		list.add(String.valueOf(f.getNum()));
+//		list.add(f.getType());
+//		list.add(f.getFlowerWord());
+		for (int i = 2; i < data.length; i+=8){
+			String fpath = "img/"+ data[i] +".jpg";
+			String fname = data[i + 2];
+			double fprice = Double.valueOf(data[i + 2]);
+			FlowerInfo flowrInfo = new FlowerInfo(fpath, fname, fprice);
+			center.add(flowrInfo);
+		}
+
 		fore = new MyButton("上一页");
 		back = new MyButton("下一页");
 		
@@ -49,12 +57,6 @@ public class PanelDemo extends JPanel{
 	}
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		PanelDemo p = new PanelDemo("花材");
-		frame.add(p);
-		frame.setVisible(true);
-		frame.setSize(400, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 }

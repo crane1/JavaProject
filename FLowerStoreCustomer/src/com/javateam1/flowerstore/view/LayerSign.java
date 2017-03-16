@@ -15,6 +15,7 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
+import com.javateam1.flowerstore.control.TCPClient;
 
 
 public class LayerSign extends LayerDemo {
@@ -24,8 +25,8 @@ public class LayerSign extends LayerDemo {
 	private LabelAndTextField ltAddress = new LabelAndTextField("地址",0);
 	private LabelAndTextField ltTel = new LabelAndTextField("电话",0);
 	private MyButton btnSign = new MyButton("注册");
-	public LayerSign(){
-		super();
+	public LayerSign(TCPClient client){
+		super(client);
 		this.setTitle("注册页面");
 		this.setPreferredSize(new Dimension(485,400));
 		this.getCon().setLayout(new GridLayout(6,1));
@@ -74,7 +75,6 @@ public class LayerSign extends LayerDemo {
 	}
 	
 	public static void main(String[] args) {
-		new LayerSign();
 	}
 
 }

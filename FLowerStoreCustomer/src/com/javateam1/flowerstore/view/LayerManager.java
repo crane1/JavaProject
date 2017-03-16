@@ -21,7 +21,7 @@ public class LayerManager {
 	}
 	
 	public void initLayerManager(){
-		addLayer(DataType.LOGIN, new LayerLogin());
+		addLayer(DataType.LOGIN, new LayerLogin(LayerManager.getClient()));
 	}
 	
 	public static void showLayer(String name){
@@ -29,7 +29,7 @@ public class LayerManager {
 		if (layer != null){
 			layer.setVisible(true);
 		} else {
-			addLayer(name, new LayerMain());
+			addLayer(name, new LayerMain(LayerManager.getClient()));
 		}
 		
 	}
@@ -44,6 +44,13 @@ public class LayerManager {
 		layers.put(name, panel);
 		panel.setClient(LayerManager.getClient());
 	}
+	
+	public static LayerDemo getLayer(String name){
+		LayerDemo layer = (LayerDemo) layers.get(name);
+		return layer;
+	}
+	
+
 	public static TCPClient getClient() {
 		return client;
 	}

@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 
 import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
+import com.javateam1.flowerstore.control.TCPClient;
 
 public class LayerLogin extends LayerDemo{
 	private JLabel lbTop = new JLabel();
@@ -27,7 +28,8 @@ public class LayerLogin extends LayerDemo{
 	private JButton btnLogin = new JButton("µÇÂ¼");
 	private JButton btnSign = new JButton("×¢²áÕËºÅ");
 	
-	public LayerLogin(){
+	public LayerLogin(TCPClient client){
+		super(client);
 		this.setTitle("ÍøÉÏ¶©»¨ÏµÍ³µÇÂ¼");
 		
 		lbTop.setIcon(new ImageIcon("img/bg1.png"));
@@ -97,7 +99,7 @@ public class LayerLogin extends LayerDemo{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LayerManager.hideLayer(DataType.LOGIN);
-				LayerSign sign = new LayerSign();
+				LayerSign sign = new LayerSign(LayerManager.getClient());
 				LayerManager.addLayer(DataType.SIGN, sign);
 			}
 			
@@ -116,7 +118,6 @@ public class LayerLogin extends LayerDemo{
 	
 	
 	public static void main(String[] args) {
-		new LayerLogin();
 	}
 
 }

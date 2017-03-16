@@ -24,7 +24,8 @@ public class LayerDemo extends JFrame{
 	private TCPClient client;
 	private Container con = this.getContentPane();
 	
-	public LayerDemo(){
+	public LayerDemo(TCPClient client){
+		this.client = client;
 		con.setBackground(Color.white);
 		con.setLayout(new BorderLayout(0, 10));
 		

@@ -6,17 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.javateam1.flowerstore.model.Flower;
 
 public class FlowerManager {
-	private static List<Flower> flowerList;  // 所有菜组成的一个菜单
+	private static Map<String,Flower> flowerMap;  // 所有花组成的一个菜单
+	private static List<String> recoFlowerId; 
+	
 	
 	static{
-		flowerList = new LinkedList<Flower>();
+		flowerMap = new HashMap<String,Flower>();
+		recoFlowerId = new ArrayList<String>();
 		initFoodList();
 	}
 	
@@ -45,8 +50,11 @@ public class FlowerManager {
 				f.setNum(Integer.parseInt(attrs[5]));
 				f.setType(attrs[6]);
 				f.setFlowerWord(attrs[7]);
+				if (attrs[8].equals("1")){
+					recoFlowerId.add(attrs[0]);
+				}
 				
-				flowerList.add(f);
+				flowerMap.put(attrs[0], f);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -59,14 +67,15 @@ public class FlowerManager {
 	
 	// 打印花单列表
 	public void printList(){
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			System.out.println(f);
 		}
 	}
 	
 	// 添加花
 	public void addFood(Flower f){
-		flowerList.add(f);
+		flowerMap.put(f.getId(), f);
 	}
 	
 	// 删除花
@@ -79,7 +88,8 @@ public class FlowerManager {
 	// 按id查找花
 	public Flower findFoodById(String id){
 		Flower fd = null;
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			if (f.getId().equals(id)){
 				fd = f;
 				break;
@@ -90,7 +100,8 @@ public class FlowerManager {
 	
 	public Flower findFoodByName(String name){
 		Flower fd = null;
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			if (f.getName().equals(name)){
 				fd = f;
 				break;
@@ -101,7 +112,8 @@ public class FlowerManager {
 	
 	public List<Flower> findFoodByMaterials(String materials){
 		List<Flower> fd = new ArrayList<Flower>();
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			if (f.getMaterials().equals(materials)){
 				fd.add(f);
 			}
@@ -111,7 +123,8 @@ public class FlowerManager {
 	
 	public List<Flower> findFoodByPrice(double priceSub, double priceUp){
 		List<Flower> fd = new ArrayList<Flower>();
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			double fprice = f.getPrice();
 			if (fprice > priceSub && fprice < priceUp ){
 				fd.add(f);
@@ -122,7 +135,8 @@ public class FlowerManager {
 	
 	public List<Flower> findFoodByNum(int num){
 		List<Flower> fd = new ArrayList<Flower>();
-		for(Flower f : flowerList){
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
 			if (f.getNum() == num){
 				fd.add(f);
 			}
@@ -144,6 +158,23 @@ public class FlowerManager {
 		f1.setMaterials(f.getMaterials());
 		f1.setPackages(f.getPackages());
 		return true;
+	}
+	
+	public List<String> getRecommendFlower(){
+		Flower f = null;
+		List<String> list = new ArrayList<String>();
+		for(String k : recoFlowerId){
+			f = flowerMap.get(k);
+			list.add(f.getId());
+			list.add(f.getName());
+			list.add(String.valueOf(f.getPrice()));
+			list.add(f.getMaterials());
+			list.add(f.getPackages());
+			list.add(String.valueOf(f.getNum()));
+			list.add(f.getType());
+			list.add(f.getFlowerWord());
+		}
+		return list;
 	}
 	
 	public static void main(String[] args) {

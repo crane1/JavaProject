@@ -2,7 +2,7 @@ package com.javateam1.flowerstore.control;
 
 import javax.swing.JOptionPane;
 
-import com.javateam1.flowerstore.view.LayerManager;
+import com.javateam1.flowerstore.view.*;
 
 public class DataHandle {
 	private TCPClient client;
@@ -14,6 +14,18 @@ public class DataHandle {
 			authenticate(data);
 		}else if(type.equals(DataType.SIGN)){
 			signAccout(data);
+		}else if(type.equals(DataType.MAIN)){
+			getFlowerInfo(data);
+		}
+	}
+	
+	private void authenticate(String[] data){
+		if (data[1].equals("1")){
+			JOptionPane.showMessageDialog(null, "登录成功");
+			LayerManager.hideLayer(DataType.LOGIN);
+			LayerManager.showLayer(DataType.MAIN);
+		}else if(data[1].equals("0")){
+			JOptionPane.showMessageDialog(null, "登录失败");
 		}
 	}
 	
@@ -25,16 +37,20 @@ public class DataHandle {
 		} else{
 			JOptionPane.showMessageDialog(null, "注册失败");
 		}
-		
 	}
-
-	public void authenticate(String[] data){
-		if (data[1].equals("1")){
-			JOptionPane.showMessageDialog(null, "登录成功");
-			LayerManager.hideLayer(DataType.LOGIN);
-			LayerManager.showLayer(DataType.MAIN);
-		}else if(data[1].equals("0")){
-			JOptionPane.showMessageDialog(null, "登录失败");
+	
+	private void getFlowerInfo(String[] data) {
+		LayerMain layer = (LayerMain) LayerManager.getLayer(DataType.MAIN);
+		if(data[1].equals(DataType.FIRST)){
+			layer.getPanelManager().addPanel("精品推荐", data);
+		}else if(data[1].equals(DataType.MATER)){
+			layer.getPanelManager().addPanel("花材", data);
+		}else if(data[1].equals(DataType.PRICE)){
+			layer.getPanelManager().addPanel("价格", data);
+		}else if(data[1].equals(DataType.TYPE)){
+			layer.getPanelManager().addPanel("类型", data);
+		}else if(data[1].equals(DataType.NUMBER)){
+			layer.getPanelManager().addPanel("支数", data);
 		}
 	}
 

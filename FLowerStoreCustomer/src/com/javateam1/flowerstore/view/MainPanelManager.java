@@ -12,12 +12,12 @@ public class MainPanelManager {
 		this.layer = layer;
 	}
 	
-	public void addPanel(String name){
+	public void addPanel(String name, String[] data){
 		hidePanel();
 		if (panelMap.get(name) != null){
 			showPanel(name);
 		} else {
-			PanelDemo panel = new PanelDemo(name);
+			PanelDemo panel = new PanelDemo(name, data);
 			layer.getCon().add("Center",panel);
 			panelMap.put(name, panel);
 			showPanel(name);
