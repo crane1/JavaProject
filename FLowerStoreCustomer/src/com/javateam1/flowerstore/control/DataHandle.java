@@ -31,6 +31,8 @@ public class DataHandle {
 	public void authenticate(String[] data){
 		if (data[1].equals("1")){
 			JOptionPane.showMessageDialog(null, "µÇÂ¼³É¹¦");
+			LayerManager.hideLayer(DataType.LOGIN);
+			LayerManager.showLayer(DataType.MAIN);
 		}else if(data[1].equals("0")){
 			JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü");
 		}

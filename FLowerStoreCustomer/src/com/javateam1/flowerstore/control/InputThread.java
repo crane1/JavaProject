@@ -3,6 +3,7 @@ package com.javateam1.flowerstore.control;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.SocketException;
 
 
 public class InputThread extends Thread{
@@ -24,7 +25,16 @@ public class InputThread extends Thread{
 			try {
 				str = br.readLine();
 				dataHandle.handleData(str);
-			} catch (IOException e) {
+			} catch (SocketException e){
+				System.out.println("¡¥Ω”“Ï≥£÷’÷π");
+				try {
+					br.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

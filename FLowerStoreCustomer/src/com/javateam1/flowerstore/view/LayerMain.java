@@ -20,19 +20,19 @@ import com.javateam1.flowerstore.control.DataType;
 
 
 public class LayerMain extends LayerDemo {
+	private MainPanelManager panelManager = new MainPanelManager(this);
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
 	private MyButton btnFirst = new MyButton("首页");
 	private MyButton btnMater = new MyButton("花材"); 
 	private MyButton btnPrice = new MyButton("价格");
 	private MyButton btnType = new MyButton("类型");
 	private MyButton btnNum = new MyButton("支数");
-	private PanelDemo showArea;
 	private Container con = this.getCon();
 	
 	public LayerMain(){
 		super();
-		this.setTitle("注册页面");
-		this.setPreferredSize(new Dimension(485,400));
+		this.setTitle("网上呆萌花店");
+		this.setPreferredSize(new Dimension(485,450));
 		JPanel top = new JPanel();
 		top.setLayout(new GridLayout(2,1));
 		top.add(lbtitle);
@@ -45,7 +45,7 @@ public class LayerMain extends LayerDemo {
 		top2.add(btnNum);
 		top.add(top2);
 		con.add("North", top);
-		
+		panelManager.addPanel("精品推荐");
 		initPanel();
 		
 		btnFirst.getButton().addActionListener(new myButtonListener());
@@ -59,13 +59,29 @@ public class LayerMain extends LayerDemo {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String type = "first";
 			if(e.getSource() == btnFirst.getButton()){
-				showArea = new PanelDemo("精品推荐");
-				showArea.setVisible(true);
-				con.add("Center",showArea);
-				System.out.println("加载内容");
-				initPanel();
+				type = "first";
+				panelManager.addPanel("精品推荐");
+			}else if(e.getSource() == btnMater.getButton()){
+				type = "mater";
+				panelManager.addPanel("花材");
+			}else if(e.getSource() == btnPrice.getButton()){
+				type = "price";
+				panelManager.addPanel("价格");
+			}else if(e.getSource() == btnType.getButton()){
+				type = "type";
+				panelManager.addPanel("类型");
+			}else if(e.getSource() == btnNum.getButton()){
+				type = "number";
+				panelManager.addPanel("支数");
 			}
+			System.out.println("加载内容");
+			initPanel();
+			
+			String[] dataArray = {DataType.MAIN, type}; 
+			String data = ArrayToString.arrayToString(dataArray);
+			pushData(data);
 		}
 		
 	}

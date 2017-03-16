@@ -25,13 +25,18 @@ public class LayerManager {
 	}
 	
 	public static void showLayer(String name){
-		LayerDemo panel = (LayerDemo) layers.get(name);
-		panel.setVisible(true);
+		LayerDemo layer = (LayerDemo) layers.get(name);
+		if (layer != null){
+			layer.setVisible(true);
+		} else {
+			addLayer(name, new LayerMain());
+		}
+		
 	}
 	
 	public static void hideLayer(String name){
-		LayerDemo panel = (LayerDemo) layers.get(name);
-		panel.setVisible(true);
+		LayerDemo layer = (LayerDemo) layers.get(name);
+		layer.setVisible(false);
 	}
 	
 	public static  void addLayer(String name, LayerDemo panel){

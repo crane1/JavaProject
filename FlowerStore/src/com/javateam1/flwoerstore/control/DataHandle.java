@@ -12,7 +12,23 @@ public class DataHandle {
 			authenticate(data);
 		}else if(type.equals(DataType.SIGN)){
 			signAccount(data);
+		}else if(type.equals(DataType.MAIN)){
+			getFlowerInfo(data);
 		}
+	}
+
+	public void authenticate(String[] data){
+		Account account = AccountManager.authenticate(data[1],data[2]);
+		String[] dataArray =new String[2];
+		dataArray[0] = DataType.LOGIN;
+		if (account != null){
+			dataArray[1] = "1";
+		}else {
+			dataArray[1] = "0";
+			
+		}
+		String datas = ArrayToString.arrayToString(dataArray);
+		server.pushData(datas);
 	}
 	
 	private void signAccount(String[] data) {
@@ -33,19 +49,9 @@ public class DataHandle {
 		String datas = ArrayToString.arrayToString(dataArray);
 		server.pushData(datas);
 	}
-
-	public void authenticate(String[] data){
-		Account account = AccountManager.authenticate(data[1],data[2]);
-		String[] dataArray =new String[2];
-		dataArray[0] = DataType.LOGIN;
-		if (account != null){
-			dataArray[1] = "1";
-		}else {
-			dataArray[1] = "0";
-			
-		}
-		String datas = ArrayToString.arrayToString(dataArray);
-		server.pushData(datas);
+	
+	public void  getFlowerInfo(String[] data){
+		
 	}
 
 	public TCPServer getServer() {
