@@ -1,3 +1,4 @@
+select em.* from employees em;
 
 --1.查询员工表中第6到第12条数据
 select em.* from
@@ -6,13 +7,13 @@ select em.* from
             e.* 
         from employees e) em 
 where rank >= 6 and rank <= 12;
-select em.* from employees em;
+
 
 --2.查询工资最高的第6到第12条员工
 
 select em.* from
        (select 
-            rank() over(order by salary desc) rank, 
+            row_number() over(order by salary desc) rank, 
             e.*
         from employees e) em 
 where rank >= 6 and rank <= 12;

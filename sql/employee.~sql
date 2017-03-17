@@ -41,13 +41,6 @@ insert into  myemp(id, name, job, birth)
 update myemp set salary = 8500 where name = 'rose';
 
 --将员工表中id为1003的员工工资更改为6500，职位更改为‘ANALYST’
-update myemp set salary = 6500, job = 'ANALYST' where id = 1003;
-
-
---删除员工表中职位为空的员工记录
-delete from myemp where job is null; 
-
---删除员工表中名字为‘rose’的员工
-delete from myemp where name = 'rose';
-select * from myemp where name = 'rose';
+update myemp set salary = 8500, job = 'ANALYST' where id = 1003;
 select * from myemp;
+            
