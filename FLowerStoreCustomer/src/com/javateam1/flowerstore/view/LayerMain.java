@@ -21,14 +21,34 @@ import com.javateam1.flowerstore.control.TCPClient;
 
 
 public class LayerMain extends LayerDemo {
+	private final String[] maters = {"红玫瑰","康乃馨","郁金香"}; 
+	private final String[] prices = {"100-200","200-500","500以上"};
+	private final String[] types = {"创意礼盒","精美花束"}; 
+	private final String[] nums = {"19","99"}; 
 	private MainPanelManager panelManager = new MainPanelManager(this);
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
 	private MyButton btnFirst = new MyButton("首页");
-	private MyButton btnMater = new MyButton("花材"); 
-	private MyButton btnPrice = new MyButton("价格");
-	private MyButton btnType = new MyButton("类型");
-	private MyButton btnNum = new MyButton("支数");
+	private MyComboBox btnMater = new MyComboBox("花材"); 
+	private MyComboBox btnPrice = new MyComboBox("价格");
+	private MyComboBox btnType = new MyComboBox("类型");
+	private MyComboBox btnNum = new MyComboBox("支数");
 	private Container con = this.getCon();
+	
+	private void initButton(){
+		for(String s : maters){
+			btnMater.addItem(s);
+		}
+		for(String s : prices){
+			btnPrice.addItem(s);
+		}
+		for(String s : types){
+			btnType.addItem(s);
+		}
+		for(String s : nums){
+			btnNum.addItem(s);
+		}
+	}
+	
 	
 	public LayerMain(TCPClient client){
 		super(client);
@@ -39,6 +59,7 @@ public class LayerMain extends LayerDemo {
 		top.add(lbtitle);
 		JPanel top2 = new JPanel();
 		top2.setLayout(new GridLayout(1,5));
+		initButton();
 		top2.add(btnFirst);
 		top2.add(btnMater);
 		top2.add(btnPrice);
@@ -46,16 +67,17 @@ public class LayerMain extends LayerDemo {
 		top2.add(btnNum);
 		top.add(top2);
 		con.add("North", top);
-		String[] dataArray = {DataType.MAIN, DataType.FIRST}; 
+		String ftype = btnFirst.getButton().getText();
+		String[] dataArray = {DataType.MAIN, DataType.FIRST, ftype}; 
 		String data = ArrayToString.arrayToString(dataArray);
 		pushData(data);
 		initPanel();
 		
 		btnFirst.getButton().addActionListener(new myButtonListener());
-		btnMater.getButton().addActionListener(new myButtonListener());
-		btnPrice.getButton().addActionListener(new myButtonListener());
-		btnType.getButton().addActionListener(new myButtonListener());
-		btnNum.getButton().addActionListener(new myButtonListener());
+		btnMater.getComboBox().addActionListener(new myButtonListener());
+		btnPrice.getComboBox().addActionListener(new myButtonListener());
+		btnType.getComboBox().addActionListener(new myButtonListener());
+		btnNum.getComboBox().addActionListener(new myButtonListener());
 	}
 	
 	class myButtonListener implements ActionListener{
@@ -63,21 +85,32 @@ public class LayerMain extends LayerDemo {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String type = DataType.FIRST;
+			String ftype = null;
 			if(e.getSource() == btnFirst.getButton()){
 				type = DataType.FIRST;
-			}else if(e.getSource() == btnMater.getButton()){
+				ftype = btnFirst.getButton().getText();
+				System.out.println(ftype);
+			}else if(e.getSource() == btnMater.getComboBox()){
 				type = DataType.MATER;
-			}else if(e.getSource() == btnPrice.getButton()){
+				ftype = (String)btnMater.getComboBox().getSelectedItem();
+				System.out.println(ftype);
+			}else if(e.getSource() == btnPrice.getComboBox()){
 				type = DataType.PRICE;
-			}else if(e.getSource() == btnType.getButton()){
+			}else if(e.getSource() == btnType.getComboBox()){
 				type = DataType.TYPE;
-			}else if(e.getSource() == btnNum.getButton()){
+			}else if(e.getSource() == btnNum.getComboBox()){
 				type = DataType.NUMBER;
 			}
 			System.out.println("加载内容");
 			initPanel();
 			
-			String[] dataArray = {DataType.MAIN, type}; 
+			String[] dataArray = null; 
+			if (ftype != null){
+				dataArray =new String[]{DataType.MAIN, type, ftype};
+			} else{
+				dataArray =new String[]{DataType.MAIN, type};
+			}
+			
 			String data = ArrayToString.arrayToString(dataArray);
 			pushData(data);
 		}

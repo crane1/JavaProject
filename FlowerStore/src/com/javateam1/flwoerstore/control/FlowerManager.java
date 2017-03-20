@@ -110,7 +110,7 @@ public class FlowerManager {
 		return fd;
 	}
 	
-	public List<Flower> findFoodByMaterials(String materials){
+	public List<Flower> findFlowerByMaterials(String materials){
 		List<Flower> fd = new ArrayList<Flower>();
 		for(String k : flowerMap.keySet()){
 			Flower f = flowerMap.get(k);
@@ -165,6 +165,22 @@ public class FlowerManager {
 		List<String> list = new ArrayList<String>();
 		for(String k : recoFlowerId){
 			f = flowerMap.get(k);
+			list.add(f.getId());
+			list.add(f.getName());
+			list.add(String.valueOf(f.getPrice()));
+			list.add(f.getMaterials());
+			list.add(f.getPackages());
+			list.add(String.valueOf(f.getNum()));
+			list.add(f.getType());
+			list.add(f.getFlowerWord());
+		}
+		return list;
+	}
+	
+	public List<String> getMaterFlower(String type){
+		List<String> list = new ArrayList<String>();
+		List<Flower> flist = this.findFlowerByMaterials(type);
+		for(Flower f : flist){
 			list.add(f.getId());
 			list.add(f.getName());
 			list.add(String.valueOf(f.getPrice()));

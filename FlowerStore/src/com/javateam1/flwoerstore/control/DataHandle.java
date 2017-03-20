@@ -60,7 +60,7 @@ public class DataHandle {
 		if (data[1].equals(DataType.FIRST)){
 			list = manager.getRecommendFlower();
 		} else if(data[1].equals(DataType.MATER)){
-			
+			list = manager.getMaterFlower(data[2]);
 		}else if(data[1].equals(DataType.PRICE)){
 			
 		}else if(data[1].equals(DataType.TYPE)){
@@ -69,13 +69,14 @@ public class DataHandle {
 			
 		}
 		
-		int size = list.size() + 2;
+		int size = list.size() + 3;
 		String[] dataArray = new String[size];
 		dataArray[0] = DataType.MAIN;
-		dataArray[1] = DataType.FIRST;
+		dataArray[1] = data[1];
+		dataArray[2] = data[2];
 		
 		for (int i = 0; i < list.size(); i++){
-			dataArray[i+2] = list.get(i);
+			dataArray[i+3] = list.get(i);
 		}
 		
 		String datas = ArrayToString.arrayToString(dataArray);

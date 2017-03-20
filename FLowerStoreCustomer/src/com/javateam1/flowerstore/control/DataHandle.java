@@ -44,7 +44,7 @@ public class DataHandle {
 		if(data[1].equals(DataType.FIRST)){
 			layer.getPanelManager().addPanel("精品推荐", data);
 		}else if(data[1].equals(DataType.MATER)){
-			layer.getPanelManager().addPanel("花材", data);
+			layer.getPanelManager().addPanel(data[2], data);
 		}else if(data[1].equals(DataType.PRICE)){
 			layer.getPanelManager().addPanel("价格", data);
 		}else if(data[1].equals(DataType.TYPE)){

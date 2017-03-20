@@ -38,6 +38,13 @@ public class FlowerInfo extends JPanel {
 		this.setPreferredSize(new Dimension(100,212));
 	}
 	
+	public void changeFlowerInfo(String picPath, String name, double price){
+		this.pic.setIcon(new ImageIcon(picPath));
+		this.name.getLabel().setText(name);
+		this.name.getLabel().setText(name);
+		this.price.setText(String.valueOf(price));
+	}
+	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		FlowerInfo p = new FlowerInfo("img/01adyj.png", "∞ÆµΩ”¿æ√", 422);
