@@ -3,9 +3,11 @@ package com.javateam1.flwoerstore.control;
 import java.util.List;
 
 import com.javateam1.flowerstore.model.Account;
+import com.javateam1.flowerstore.model.Flower;
 
 public class DataHandle {
 	private TCPServer server;
+	private Account account;
 	private FlowerManager manager = new FlowerManager();
 	
 	public void handleData(String str){
@@ -18,12 +20,14 @@ public class DataHandle {
 				signAccount(data);
 			}else if(type.equals(DataType.MAIN)){
 				getFlowerInfo(data);
+			}else if(type.equals(DataType.SHOP)){
+				addShoppingCart(data);
 			}
 		}
 	}
 
 	public void authenticate(String[] data){
-		Account account = AccountManager.authenticate(data[1],data[2]);
+		account = AccountManager.authenticate(data[1],data[2]);
 		String[] dataArray =new String[2];
 		dataArray[0] = DataType.LOGIN;
 		if (account != null){
@@ -87,7 +91,29 @@ public class DataHandle {
 		
 		String datas = ArrayToString.arrayToString(dataArray);
 		server.pushData(datas);
+	}
+	
+	public void addShoppingCart(String[] data){
+		Flower flower = null;
+		if (data.length == 2 && !data[1].equals("")){
+			flower = manager.findFoodById(data[1]);
+		}
 		
+		boolean isAddSucceed = false;
+		if (flower != null){
+			System.out.println("account+" + account);
+			isAddSucceed = account.getShoppingCart().addFlower(flower);
+		}
+		
+		String[] dataArray =new String[2];
+		dataArray[0] = DataType.SHOP;
+		if (isAddSucceed){
+			dataArray[1] = "1";
+		}else {
+			dataArray[1] = "0";
+		}
+		String datas = ArrayToString.arrayToString(dataArray);
+		server.pushData(datas);
 	}
 
 	public TCPServer getServer() {

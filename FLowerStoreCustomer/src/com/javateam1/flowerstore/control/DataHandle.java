@@ -16,6 +16,8 @@ public class DataHandle {
 			signAccout(data);
 		}else if(type.equals(DataType.MAIN)){
 			getFlowerInfo(data);
+		}else if(type.equals(DataType.SHOP)){
+			addShoppingCart(data);
 		}
 	}
 	
@@ -54,6 +56,14 @@ public class DataHandle {
 		}
 		// 在完成加载后对页面进行刷新
 		layer.initPanel();
+	}
+	
+	private void addShoppingCart(String[] data){
+		if (data[1].equals("1")){
+			JOptionPane.showMessageDialog(null, "添加购物车成功");
+		}else if(data[1].equals("0")){
+			JOptionPane.showMessageDialog(null, "添加购物车失败");
+		}
 	}
 
 	public TCPClient getClient() {

@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.javateam1.flowerstore.control.ArrayToString;
+import com.javateam1.flowerstore.control.DataType;
+
 public class FlowerInfo extends JPanel {
 	private JLabel pic = new JLabel(); 
 	private MyLabel name = new MyLabel("",null);
@@ -49,27 +52,26 @@ public class FlowerInfo extends JPanel {
 		this.add(viewDetails);
 		this.setPreferredSize(new Dimension(100,320));
 		
-		addShoppingCart.getButton().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		viewDetails.getButton().addActionListener(new myActionListener());
+		addShoppingCart.getButton().addActionListener(new addShopListener());
+		viewDetails.getButton().addActionListener(new viewListener());
 	}
 	
-	class myActionListener implements ActionListener{
+	class viewListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(data[0]);
 			LayerFlowerDetail.showFlowerInfo(data);
-			
 		}
-		
+	}
+	
+	class addShopListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String[] dataArray = {DataType.SHOP,data[0]}; 
+			String data = ArrayToString.arrayToString(dataArray);
+			LayerManager.pushData(data);
+		}
 	}
 	
 	public void changeFlowerInfo(String picPath, String name, double price, final String[] data){
@@ -78,16 +80,8 @@ public class FlowerInfo extends JPanel {
 		this.name.getLabel().setText(name);
 		this.name.getLabel().setText(name);
 		this.price.setText(String.valueOf(price));
-		addShoppingCart.getButton().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		viewDetails.getButton().addActionListener(new myActionListener());
+		addShoppingCart.getButton().addActionListener(new addShopListener());
+		viewDetails.getButton().addActionListener(new viewListener());
 	}
 	
 	

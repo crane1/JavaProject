@@ -14,6 +14,7 @@ public class Account {
 	private String address;
 	private String telephone;
 	private Balance balance;
+	private ShoppingCart shoppingCart;
 	private OrderManager orderlist;
 	private int type; // 0 普通账户  1 管理员
 	
@@ -22,6 +23,7 @@ public class Account {
 		pwd = id;
 		balance = new Balance();
 		orderlist = new OrderManager();
+		shoppingCart = new ShoppingCart();
 		setType(0);
 	}
 	
@@ -100,6 +102,14 @@ public class Account {
 		return "Account [id=" + id + ", pwd=" + pwd + ", name=" + name
 				+ ", address=" + address + ", telephone=" + telephone
 				+ ", balance=" + balance + ", type=" + type + "]";
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 	
 }

@@ -57,4 +57,8 @@ public class LayerManager {
 	public static void setClient(TCPClient client) {
 		LayerManager.client = client;
 	}
+	
+	public static void pushData(String data) {
+		getClient().pushData(data);
+	}
 }

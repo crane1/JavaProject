@@ -70,7 +70,7 @@ public class LayerMain extends LayerDemo {
 		String ftype = btnFirst.getButton().getText();
 		String[] dataArray = {DataType.MAIN, DataType.FIRST, ftype}; 
 		String data = ArrayToString.arrayToString(dataArray);
-		pushData(data);
+		LayerManager.pushData(data);
 		initPanel();
 		
 		btnFirst.getButton().addActionListener(new myButtonListener());
@@ -118,16 +118,10 @@ public class LayerMain extends LayerDemo {
 			}
 			
 			String data = ArrayToString.arrayToString(dataArray);
-			pushData(data);
+			LayerManager.pushData(data);
 		}
 		
 	}
-	
-	private void pushData(String data) {
-		System.out.println(this.getClient());
-		this.getClient().pushData(data);
-	}
-	
 	
 	public MainPanelManager getPanelManager() {
 		return panelManager;
