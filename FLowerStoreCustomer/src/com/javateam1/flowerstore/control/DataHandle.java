@@ -46,12 +46,14 @@ public class DataHandle {
 		}else if(data[1].equals(DataType.MATER)){
 			layer.getPanelManager().addPanel(data[2], data);
 		}else if(data[1].equals(DataType.PRICE)){
-			layer.getPanelManager().addPanel("价格", data);
+			layer.getPanelManager().addPanel(data[2]+"元", data);
 		}else if(data[1].equals(DataType.TYPE)){
-			layer.getPanelManager().addPanel("类型", data);
+			layer.getPanelManager().addPanel(data[2], data);
 		}else if(data[1].equals(DataType.NUMBER)){
-			layer.getPanelManager().addPanel("支数", data);
+			layer.getPanelManager().addPanel(data[2]+"支", data);
 		}
+		// 在完成加载后对页面进行刷新
+		layer.initPanel();
 	}
 
 	public TCPClient getClient() {

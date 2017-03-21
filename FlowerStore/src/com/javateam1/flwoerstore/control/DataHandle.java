@@ -62,11 +62,17 @@ public class DataHandle {
 		} else if(data[1].equals(DataType.MATER)){
 			list = manager.getMaterFlower(data[2]);
 		}else if(data[1].equals(DataType.PRICE)){
-			
+			String prices[] = data[2].split("-");
+			double price1 = Double.parseDouble(prices[0]);
+			double price2 = Double.parseDouble(prices[1]);
+			list = manager.getPriceFlower(price1, price2);
+			System.out.println(list.size());
 		}else if(data[1].equals(DataType.TYPE)){
-			
+			list = manager.getTypeFlower(data[2]);
+			System.out.println(list.size());
 		}else if(data[1].equals(DataType.NUMBER)){
-			
+			list = manager.getNumFlower(Integer.parseInt(data[2]));
+			System.out.println(list.size());
 		}
 		
 		int size = list.size() + 3;

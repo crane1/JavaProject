@@ -22,16 +22,16 @@ import com.javateam1.flowerstore.control.TCPClient;
 
 public class LayerMain extends LayerDemo {
 	private final String[] maters = {"红玫瑰","康乃馨","郁金香"}; 
-	private final String[] prices = {"100-200","200-500","500以上"};
+	private final String[] prices = {"0-100","100-200","200-500","500-1000"};
 	private final String[] types = {"创意礼盒","精美花束"}; 
 	private final String[] nums = {"19","99"}; 
 	private MainPanelManager panelManager = new MainPanelManager(this);
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
 	private MyButton btnFirst = new MyButton("首页");
-	private MyComboBox btnMater = new MyComboBox("花材"); 
-	private MyComboBox btnPrice = new MyComboBox("价格");
-	private MyComboBox btnType = new MyComboBox("类型");
-	private MyComboBox btnNum = new MyComboBox("支数");
+	private MyComboBox btnMater = new MyComboBox(); 
+	private MyComboBox btnPrice = new MyComboBox();
+	private MyComboBox btnType = new MyComboBox();
+	private MyComboBox btnNum = new MyComboBox();
 	private Container con = this.getCon();
 	
 	private void initButton(){
@@ -53,7 +53,7 @@ public class LayerMain extends LayerDemo {
 	public LayerMain(TCPClient client){
 		super(client);
 		this.setTitle("网上呆萌花店");
-		this.setPreferredSize(new Dimension(485,450));
+		this.setPreferredSize(new Dimension(485,550));
 		JPanel top = new JPanel();
 		top.setLayout(new GridLayout(2,1));
 		top.add(lbtitle);
@@ -96,13 +96,19 @@ public class LayerMain extends LayerDemo {
 				System.out.println(ftype);
 			}else if(e.getSource() == btnPrice.getComboBox()){
 				type = DataType.PRICE;
+				ftype = (String)btnPrice.getComboBox().getSelectedItem();
+				System.out.println(ftype);
 			}else if(e.getSource() == btnType.getComboBox()){
 				type = DataType.TYPE;
+				ftype = (String)btnType.getComboBox().getSelectedItem();
+				System.out.println(ftype);
 			}else if(e.getSource() == btnNum.getComboBox()){
 				type = DataType.NUMBER;
+				ftype = (String)btnNum.getComboBox().getSelectedItem();
+				System.out.println(ftype);
 			}
 			System.out.println("加载内容");
-			initPanel();
+			
 			
 			String[] dataArray = null; 
 			if (ftype != null){

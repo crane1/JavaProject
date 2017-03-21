@@ -121,7 +121,7 @@ public class FlowerManager {
 		return fd;
 	}
 	
-	public List<Flower> findFoodByPrice(double priceSub, double priceUp){
+	public List<Flower> findFlowerByPrice(double priceSub, double priceUp){
 		List<Flower> fd = new ArrayList<Flower>();
 		for(String k : flowerMap.keySet()){
 			Flower f = flowerMap.get(k);
@@ -133,7 +133,18 @@ public class FlowerManager {
 		return fd;
 	}
 	
-	public List<Flower> findFoodByNum(int num){
+	public List<Flower> findFlowerByType(String type){
+		List<Flower> fd = new ArrayList<Flower>();
+		for(String k : flowerMap.keySet()){
+			Flower f = flowerMap.get(k);
+			if (f.getType().equals(type)){
+				fd.add(f);
+			}
+		}
+		return fd;
+	}
+	
+	public List<Flower> findFlowerByNum(int num){
 		List<Flower> fd = new ArrayList<Flower>();
 		for(String k : flowerMap.keySet()){
 			Flower f = flowerMap.get(k);
@@ -165,14 +176,7 @@ public class FlowerManager {
 		List<String> list = new ArrayList<String>();
 		for(String k : recoFlowerId){
 			f = flowerMap.get(k);
-			list.add(f.getId());
-			list.add(f.getName());
-			list.add(String.valueOf(f.getPrice()));
-			list.add(f.getMaterials());
-			list.add(f.getPackages());
-			list.add(String.valueOf(f.getNum()));
-			list.add(f.getType());
-			list.add(f.getFlowerWord());
+			addString(list, f);
 		}
 		return list;
 	}
@@ -181,16 +185,47 @@ public class FlowerManager {
 		List<String> list = new ArrayList<String>();
 		List<Flower> flist = this.findFlowerByMaterials(type);
 		for(Flower f : flist){
-			list.add(f.getId());
-			list.add(f.getName());
-			list.add(String.valueOf(f.getPrice()));
-			list.add(f.getMaterials());
-			list.add(f.getPackages());
-			list.add(String.valueOf(f.getNum()));
-			list.add(f.getType());
-			list.add(f.getFlowerWord());
+			addString(list, f);
 		}
 		return list;
+	}
+	
+	public List<String> getTypeFlower(String type){
+		List<String> list = new ArrayList<String>();
+		List<Flower> flist = this.findFlowerByType(type);
+		for(Flower f : flist){
+			addString(list, f);
+		}
+		return list;
+	}
+	
+	public List<String> getNumFlower(int num){
+		List<String> list = new ArrayList<String>();
+		List<Flower> flist = this.findFlowerByNum(num);
+		for(Flower f : flist){
+			addString(list, f);
+		}
+		return list;
+	}
+	
+	public List<String> getPriceFlower(double beg, double end){
+		List<String> list = new ArrayList<String>();
+		List<Flower> flist = this.findFlowerByPrice(beg, end);
+		for(Flower f : flist){
+			addString(list, f);
+		}
+		return list;
+	}
+	
+	public void addString(List<String> list, Flower f){
+		list.add(f.getId());
+		list.add(f.getName());
+		list.add(String.valueOf(f.getPrice()));
+		list.add(f.getMaterials());
+		list.add(f.getPackages());
+		list.add(String.valueOf(f.getNum()));
+		list.add(f.getType());
+		list.add(f.getFlowerWord());
 	}
 	
 	public static void main(String[] args) {

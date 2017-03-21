@@ -17,5 +17,4 @@ public class StartSystemClient {
 		LayerManager layerManager = new LayerManager(client);
 		LayerManager.setClient(client);
 	}
-
 }

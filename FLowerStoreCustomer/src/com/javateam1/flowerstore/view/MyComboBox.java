@@ -11,9 +11,8 @@ import javax.swing.JPanel;
 public class MyComboBox extends JPanel{
 	private JComboBox<String> comboBox = new JComboBox<String>();
 	
-	public MyComboBox(String item){
+	public MyComboBox(){
 		this.setBackground(Color.white);
-		comboBox.addItem(item);
 		this.add(comboBox);
 	}
 
