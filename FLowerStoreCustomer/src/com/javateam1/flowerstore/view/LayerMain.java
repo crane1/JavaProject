@@ -1,5 +1,6 @@
 package com.javateam1.flowerstore.view;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -7,6 +8,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,6 +30,8 @@ public class LayerMain extends LayerDemo {
 	private final String[] nums = {"19","99"}; 
 	private MainPanelManager panelManager = new MainPanelManager(this);
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
+	private MyLabel lbAccount = new MyLabel("", new Font("宋体", Font.BOLD, 20));
+	private MyButton btnShoppingCart = new MyButton("我的购物车");
 	private MyButton btnFirst = new MyButton("首页");
 	private MyComboBox btnMater = new MyComboBox(); 
 	private MyComboBox btnPrice = new MyComboBox();
@@ -56,7 +61,13 @@ public class LayerMain extends LayerDemo {
 		this.setPreferredSize(new Dimension(485,550));
 		JPanel top = new JPanel();
 		top.setLayout(new GridLayout(2,1));
-		top.add(lbtitle);
+		JPanel top1 = new JPanel();
+		top1.setBackground(Color.white);
+		top1.add(lbtitle);
+		top1.add(lbAccount);
+		top1.add(btnShoppingCart);
+		
+		top.add(top1);
 		JPanel top2 = new JPanel();
 		top2.setLayout(new GridLayout(1,5));
 		initButton();
@@ -78,6 +89,14 @@ public class LayerMain extends LayerDemo {
 		btnPrice.getComboBox().addActionListener(new myButtonListener());
 		btnType.getComboBox().addActionListener(new myButtonListener());
 		btnNum.getComboBox().addActionListener(new myButtonListener());
+		btnShoppingCart.getButton().addActionListener(new myButtonListener());
+		
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent w){
+				LayerManager.hideLayer(DataType.MAIN);
+				System.exit(0);
+			}
+		});
 	}
 	
 	class myButtonListener implements ActionListener{
@@ -106,18 +125,24 @@ public class LayerMain extends LayerDemo {
 				type = DataType.NUMBER;
 				ftype = (String)btnNum.getComboBox().getSelectedItem();
 				System.out.println(ftype);
+			}else if(e.getSource() == btnShoppingCart.getButton()){
+				type = DataType.VIEW_SHOP;
 			}
 			System.out.println("加载内容");
 			
 			
 			String[] dataArray = null; 
-			if (ftype != null){
+			if (type.equals(DataType.VIEW_SHOP) ){
+				System.out.println("-------------------");
+				dataArray =new String[]{type};
+			}else if (ftype != null){
 				dataArray =new String[]{DataType.MAIN, type, ftype};
 			} else{
 				dataArray =new String[]{DataType.MAIN, type};
 			}
 			
 			String data = ArrayToString.arrayToString(dataArray);
+			System.out.println(data);
 			LayerManager.pushData(data);
 		}
 		
@@ -130,6 +155,17 @@ public class LayerMain extends LayerDemo {
 
 	public void setPanelManager(MainPanelManager panelManager) {
 		this.panelManager = panelManager;
+	}
+
+	
+
+	public MyLabel getLbAccount() {
+		return lbAccount;
+	}
+
+
+	public void setLbAccount(MyLabel lbAccount) {
+		this.lbAccount = lbAccount;
 	}
 
 

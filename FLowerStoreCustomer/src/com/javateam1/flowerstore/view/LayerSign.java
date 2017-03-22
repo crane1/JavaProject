@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -65,6 +67,12 @@ public class LayerSign extends LayerDemo {
 					pushData(data);
 				}
 				
+			}
+		});
+		
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent w){
+				LayerManager.hideLayer(DataType.SIGN);
 			}
 		});
 	}

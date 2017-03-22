@@ -48,20 +48,12 @@ public class LayerFlowerDetail{
 	private static int isshow = 0;
 	public LayerFlowerDetail(){
 		con.setBackground(Color.white);
-		
-		
 	}
 	
 	public static void initPanel(){
 		panel.pack();
 		panel.setVisible(true);
 		panel.setLocationRelativeTo(null);
-		panel.addWindowListener(new WindowAdapter(){
-			public void windowclosingn(WindowEvent w){
-//				panel.setVisible(false);
-				System.out.println("关闭");
-			}
-		});
 	}
 	
 	public static void showFlowerInfo(String[] data){
@@ -88,8 +80,6 @@ public class LayerFlowerDetail{
 		nums.getLabel().setText("支数：" + data[5]);
 		type.getLabel().setText("类型：" + data[6]);
 		flowerWord.getLabel().setText("花语：" + data[7]);
-		
-		
 		initPanel();
 	}
 }

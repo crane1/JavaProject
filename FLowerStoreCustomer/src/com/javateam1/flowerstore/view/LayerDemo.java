@@ -34,7 +34,7 @@ public class LayerDemo extends JFrame{
 	public void initPanel(){
 		
 		this.pack();
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}

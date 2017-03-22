@@ -3,6 +3,8 @@ package com.javateam1.flwoerstore.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javateam1.flowerstore.model.Account;
+import com.javateam1.flowerstore.model.FlowerInfo;
 import com.javateam1.flowerstore.model.Order;
 
 public class OrderManager {
@@ -43,5 +45,25 @@ public class OrderManager {
 			}
 		}
 		return list;
+	}
+	
+	public  Order buildOrder(List<FlowerInfo> list){
+		Order order = new Order();
+		for(FlowerInfo fi : list){
+			//将获取到的花对象传递给订单中的花列表
+			order.getFlowerList().add(fi);
+			order.addSumMoney(fi.getTotal_price());
+		}
+		
+		return order;
+	}
+	
+	public static boolean payOrder(Account a, Order order){
+		double total_money = order.getSumMoney();
+		if(AccountManager.pay(a, total_money)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

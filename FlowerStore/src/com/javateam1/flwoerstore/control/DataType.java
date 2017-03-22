@@ -4,7 +4,9 @@ public class DataType {
 	public final static String LOGIN = "Login";
 	public final static String SIGN = "Sign";
 	public final static String MAIN = "Main";
-	public final static String SHOP = "Shop";
+	public final static String ADD_SHOP = "AddShop";
+	public final static String VIEW_SHOP = "ViewShop";
+	public final static String PAY = "Pay";
 	
 	public final static String FIRST = "First";
 	public final static String MATER = "Mater";

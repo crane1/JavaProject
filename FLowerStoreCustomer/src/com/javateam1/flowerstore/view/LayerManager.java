@@ -24,13 +24,16 @@ public class LayerManager {
 		addLayer(DataType.LOGIN, new LayerLogin(LayerManager.getClient()));
 	}
 	
-	public static void showLayer(String name){
+	public static LayerDemo showLayer(String name){
 		LayerDemo layer = (LayerDemo) layers.get(name);
 		if (layer != null){
 			layer.setVisible(true);
-		} else {
-			addLayer(name, new LayerMain(LayerManager.getClient()));
+		} else if(name.equals(DataType.MAIN)){
+			layer = addLayer(name, new LayerMain(LayerManager.getClient()));
+		}else if(name.equals(DataType.VIEW_SHOP)){
+			layer = addLayer(name, new LayerShoppingCart(LayerManager.getClient()));
 		}
+		return layer;
 		
 	}
 	
@@ -39,10 +42,11 @@ public class LayerManager {
 		layer.setVisible(false);
 	}
 	
-	public static  void addLayer(String name, LayerDemo panel){
+	public static  LayerDemo addLayer(String name, LayerDemo panel){
 		System.out.println("dfds" + LayerManager.client);
 		layers.put(name, panel);
 		panel.setClient(LayerManager.getClient());
+		return panel;
 	}
 	
 	public static LayerDemo getLayer(String name){

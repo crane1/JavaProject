@@ -68,7 +68,7 @@ public class FlowerInfo extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String[] dataArray = {DataType.SHOP,data[0]}; 
+			String[] dataArray = {DataType.ADD_SHOP,data[0]}; 
 			String data = ArrayToString.arrayToString(dataArray);
 			LayerManager.pushData(data);
 		}

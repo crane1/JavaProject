@@ -96,10 +96,6 @@ public class AccountManager {
 		}
 	}
 	
-	public static void payOrder(Account a){
-		OrderManager orderList = a.getOrderlist();
-		List<Order> list = orderList.getOrderNoPayList();
-	}
 	
 	public static void recharge(Account a, double num){
 		if (num > 0){

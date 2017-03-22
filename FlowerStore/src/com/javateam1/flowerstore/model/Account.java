@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.javateam1.flwoerstore.control.FlowerManager;
 import com.javateam1.flwoerstore.control.OrderManager;
+import com.javateam1.flwoerstore.control.ShoppingCart;
 
 public class Account {
 //	 Ù–‘£∫id£¨pwd£¨name£¨address£¨telephone£¨orderList, balance, type

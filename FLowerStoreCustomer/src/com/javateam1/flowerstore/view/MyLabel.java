@@ -13,6 +13,7 @@ public class MyLabel extends JPanel{
 	public MyLabel(String name, Font f){
 		this.setBackground(Color.white);
 		label = new JLabel(name);
+		label.setAlignmentX(0);
 		label.setFont(f);
 		this.add(label);
 	}
@@ -23,6 +24,14 @@ public class MyLabel extends JPanel{
 
 	public void setLabel(JLabel label) {
 		this.label = label;
+	}
+	
+	public void setTextColor(Color c){
+		label.setForeground(c);
+	}
+	
+	public void setText(String s){
+		label.setText(s);
 	}
 	
 }

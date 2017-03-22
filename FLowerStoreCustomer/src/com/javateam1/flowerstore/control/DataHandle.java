@@ -1,5 +1,7 @@
 package com.javateam1.flowerstore.control;
 
+import java.awt.Color;
+
 import javax.swing.JOptionPane;
 
 import com.javateam1.flowerstore.view.*;
@@ -16,8 +18,14 @@ public class DataHandle {
 			signAccout(data);
 		}else if(type.equals(DataType.MAIN)){
 			getFlowerInfo(data);
-		}else if(type.equals(DataType.SHOP)){
+		}else if(type.equals(DataType.ADD_SHOP)){
 			addShoppingCart(data);
+		}else if(type.equals(DataType.VIEW_SHOP)){
+			System.out.println(type);
+			viewShoppingCart(data);
+		}else if(type.equals(DataType.PAY)){
+			System.out.println(type);
+			payOrder(data);
 		}
 	}
 	
@@ -25,7 +33,9 @@ public class DataHandle {
 		if (data[1].equals("1")){
 			JOptionPane.showMessageDialog(null, "登录成功");
 			LayerManager.hideLayer(DataType.LOGIN);
-			LayerManager.showLayer(DataType.MAIN);
+			LayerMain layer = (LayerMain)LayerManager.showLayer(DataType.MAIN);
+			layer.getLbAccount().getLabel().setText(data[2]);
+			layer.getLbAccount().setTextColor(Color.blue);
 		}else if(data[1].equals("0")){
 			JOptionPane.showMessageDialog(null, "登录失败");
 		}
@@ -63,6 +73,20 @@ public class DataHandle {
 			JOptionPane.showMessageDialog(null, "添加购物车成功");
 		}else if(data[1].equals("0")){
 			JOptionPane.showMessageDialog(null, "添加购物车失败");
+		}
+	}
+	
+	private void viewShoppingCart(String[] data){
+		LayerShoppingCart cart = (LayerShoppingCart) LayerManager.showLayer(DataType.VIEW_SHOP);
+		cart.addFlowerInfoList(data);
+		LayerManager.showLayer(DataType.VIEW_SHOP);
+	}
+	
+	private void payOrder(String[] data){
+		if (data[1].equals("1")){
+			JOptionPane.showMessageDialog(null, "支付成功");
+		}else if(data[1].equals("0")){
+			JOptionPane.showMessageDialog(null, "支付失败");
 		}
 	}
 

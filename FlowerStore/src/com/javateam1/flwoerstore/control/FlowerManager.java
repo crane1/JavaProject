@@ -86,7 +86,7 @@ public class FlowerManager {
 	}
 	
 	// ∞¥id≤È’“ª®
-	public Flower findFoodById(String id){
+	public static Flower findFoodById(String id){
 		Flower fd = null;
 		for(String k : flowerMap.keySet()){
 			Flower f = flowerMap.get(k);
@@ -98,7 +98,7 @@ public class FlowerManager {
 		return fd;
 	}
 	
-	public Flower findFoodByName(String name){
+	public static Flower findFoodByName(String name){
 		Flower fd = null;
 		for(String k : flowerMap.keySet()){
 			Flower f = flowerMap.get(k);

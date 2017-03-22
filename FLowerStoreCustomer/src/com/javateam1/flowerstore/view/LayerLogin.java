@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -103,6 +105,13 @@ public class LayerLogin extends LayerDemo{
 				LayerManager.addLayer(DataType.SIGN, sign);
 			}
 			
+		});
+		
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent w){
+				LayerManager.hideLayer(DataType.LOGIN);
+				System.exit(0);
+			}
 		});
 	}
 	
