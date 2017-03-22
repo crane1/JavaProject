@@ -30,7 +30,6 @@ public class ShoppingCart {
 	public List<String> viewCart(){
 		List<String> flist = new ArrayList<String>();
 		for(FlowerInfo f : list){
-			System.out.println(f);
 			flist.add(f.getId());
 			flist.add(f.getName());
 			flist.add(String.valueOf(f.getPrice()));

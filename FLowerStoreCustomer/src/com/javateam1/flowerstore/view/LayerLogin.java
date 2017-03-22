@@ -85,7 +85,7 @@ public class LayerLogin extends LayerDemo{
 					if(!curPwd.equals("")){
 						String[] dataArray = {DataType.LOGIN, curId, curPwd}; 
 						String data = ArrayToString.arrayToString(dataArray);
-						pushData(data);
+						LayerManager.pushData(data);
 					}else{
 						JOptionPane.showMessageDialog(null, "ÃÜÂë²»ÄÜÎª¿Õ");
 					}
@@ -114,16 +114,6 @@ public class LayerLogin extends LayerDemo{
 			}
 		});
 	}
-	
-	private void pushData(String data) {
-		this.getClient().pushData(data);
-	}
-	
-	public void hidePanel(){
-		this.setVisible(false);
-	}
-	
-	
 	
 	public static void main(String[] args) {
 	}

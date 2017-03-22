@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javateam1.flowerstore.model.Account;
-import com.javateam1.flowerstore.model.Flower;
 import com.javateam1.flowerstore.model.FlowerInfo;
 import com.javateam1.flowerstore.model.Order;
 
@@ -26,19 +25,14 @@ public class DataHandle {
 			}else if(type.equals(DataType.ADD_SHOP)){
 				addShoppingCart(data);
 			}else if(type.equals(DataType.VIEW_SHOP)){
-				System.out.println(type);
 				viewShoppingCart(data);
 			}else if(type.equals(DataType.PAY)){
-				System.out.println(type);
 				buildAndPayOrder(data);
 			}else if(type.equals(DataType.VIEW_ACCOUNT)){
-				System.out.println(type);
 				getAccountInfo(data);
 			}else if(type.equals(DataType.CHARGE)){
-				System.out.println(type);
 				chargeMoney(data);
 			}else if(type.equals(DataType.VIEW_ORDER)){
-				System.out.println(type);
 				viewOrder(data);
 			}
 		}
@@ -89,13 +83,10 @@ public class DataHandle {
 			double price1 = Double.parseDouble(prices[0]);
 			double price2 = Double.parseDouble(prices[1]);
 			list = manager.getPriceFlower(price1, price2);
-			System.out.println(list.size());
 		}else if(data[1].equals(DataType.TYPE)){
 			list = manager.getTypeFlower(data[2]);
-			System.out.println(list.size());
 		}else if(data[1].equals(DataType.NUMBER)){
 			list = manager.getNumFlower(Integer.parseInt(data[2]));
-			System.out.println(list.size());
 		}
 		
 		int size = list.size() + 3;
@@ -120,7 +111,6 @@ public class DataHandle {
 		
 		boolean isAddSucceed = false;
 		if (flower != null){
-//			System.out.println("account+" + account);
 			isAddSucceed = account.getShoppingCart().addFlower(flower);
 		}
 		
@@ -205,10 +195,11 @@ public class DataHandle {
 	}
 	
 	public void viewOrder(String[] data){
-		List<String> list = AccountManager.getAccountInfo(account);
+		account.getOrderlist();
+		List<String> list = OrderManager.getOrderList(account);
 		int size = list.size()+1;
 		String[] dataArray = new String[size];
-		dataArray[0] = DataType.VIEW_ACCOUNT;
+		dataArray[0] = DataType.VIEW_ORDER;
 		
 		for (int i = 0; i < list.size(); i++){
 			dataArray[i+1] = list.get(i);

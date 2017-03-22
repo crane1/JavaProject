@@ -24,33 +24,30 @@ import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 
-public class LayerShoppingCart extends LayerDemo{
-	private List<FlowerinfoInCart> list = new ArrayList<FlowerinfoInCart>();
+public class LayerOrders extends LayerDemo{
+	private List<OrderinfoInCart> list = new ArrayList<OrderinfoInCart>();
 	private JPanel panel = new JPanel();
 	private JScrollPane scroll = new JScrollPane(panel);
-	private JPanel bottom = new JPanel();
-	private MyLabel pay_num = new MyLabel("总付款：0元", null);
-	private MyButton btnPay = new MyButton("结账");
-	private double pay_total_money = 0;
+	private MyButton btnDel = new MyButton("删除");
 	private Set<String> select_num = new HashSet<String>();
 	
-	public LayerShoppingCart(TCPClient client){
+	public LayerOrders(TCPClient client){
 		super(client);
 		scroll.setPreferredSize(new Dimension(280, 400));
 		getCon().add(scroll);
 		
-		bottom.add(pay_num);
-		bottom.add(btnPay);
+		JPanel bottom = new JPanel();
+		bottom.add(btnDel);
 		getCon().add("South",bottom);
 		
-		btnPay.getButton().addActionListener(new ActionListener() {
+		btnDel.getButton().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int size = select_num.size() + 1;
 				
 				String[] dataArray = new String[size];
-				dataArray[0] = DataType.PAY;
+				dataArray[0] = DataType.DELETE_ORDER;
 				Iterator<String> it = select_num.iterator();
 				for(int i = 0; i < select_num.size(); i++){
 					if(it.hasNext()){
@@ -68,60 +65,55 @@ public class LayerShoppingCart extends LayerDemo{
 		
 		this.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent w){
-				LayerManager.hideLayer(DataType.VIEW_SHOP);
+				LayerManager.hideLayer(DataType.VIEW_ORDER);
 			}
 		});
 	}
 	
-	public void addFlowerInfoList(String[] data){
+	public void addOrderInfoList(String[] data){
 		panel.removeAll();
-		pay_total_money = 0;
-		pay_num.setText("总付款：" + pay_total_money + "元");
-		int size = (data.length - 1) / 5;
-		panel.setLayout(new GridLayout(size, 1, 0, 10));
-		for(int i = 1; i < data.length; i=i+5){
-			FlowerinfoInCart f = new FlowerinfoInCart(data[i], data[i+1], data[i+2], data[i+3], data[i+4]);
+		int size = (data.length - 1) / 4;
+		panel.setLayout(new GridLayout(size, 1, 0, 0));
+		for(int i = 1; i < data.length; i=i+4){
+			OrderinfoInCart f = new OrderinfoInCart(data[i], data[i+1], data[i+2], data[i+3]);
 			list.add(f);
 			panel.add(f);
 		}
 		initPanel();
 	}
 	
-	class FlowerinfoInCart extends JPanel{
+	class OrderinfoInCart extends JPanel{
 		private JPanel left = new JPanel();
 		private JCheckBox select = new JCheckBox();
-		private JLabel pic = new JLabel(); 
 		private JPanel right = new JPanel();
-		private MyLabel name = new MyLabel("",null);
-		private MyLabel price = new MyLabel("价格:",null);
-		private MyLabel num = new MyLabel("数量:",null);
+		private MyLabel id = new MyLabel("",null);
+		private MyLabel info = new MyLabel("",null); // 物品信息
 		private MyLabel total_price = new MyLabel("总价:",null);
-		private double total_money = 0;
+		private MyLabel time = new MyLabel("",null);
+		private JPanel mainPanel = new JPanel();
 		
-		public FlowerinfoInCart(){}
-		public FlowerinfoInCart(final String id, String name, String price, String num, String total_price){
-			this.total_money = Double.parseDouble(total_price);
-			this.pic.setIcon(new ImageIcon("img/" + id + ".jpg"));
-			this.name.getLabel().setText(name);
-			this.price.getLabel().setText("单价：" + price);
-			this.num.getLabel().setText("数量：" + num);
+		public OrderinfoInCart(){}
+		public OrderinfoInCart(final String id, String info, String total_price, String time){
+			this.id.getLabel().setText("订单编号：" + id);
+			this.info.getLabel().setText(info);
 			this.total_price.getLabel().setText("总价：" + total_price);
+			this.time.getLabel().setText("时间：" + time);
 			
 			select.setBackground(Color.white);
 			left.add(select);
-			left.add(this.pic);
 			left.setBackground(Color.white);
 			
 			right.setLayout(new GridLayout(4,1));
-			right.add(this.name);
-			right.add(this.price);
-			right.add(this.num);
+			right.add(this.id);
+			right.add(this.info);
 			right.add(this.total_price);
+			right.add(this.time);
 			
-			this.setBackground(Color.white);
-			this.setLayout(new GridLayout(1,2));
-			this.add(left);
-			this.add(right);
+			mainPanel.setBackground(Color.white);
+			mainPanel.setLayout(new GridLayout(1,2));
+			mainPanel.add(left);
+			mainPanel.add(right);
+			this.add(mainPanel);
 			
 			select.addActionListener(new ActionListener() {
 				
@@ -129,17 +121,11 @@ public class LayerShoppingCart extends LayerDemo{
 				public void actionPerformed(ActionEvent e) {
 					if(e.getSource() == select){
 						if(select.isSelected()){
-							pay_total_money += total_money;
 							select_num.add(id);
 						}else{
-							pay_total_money -= total_money;
 							select_num.remove(id);
 						}
 					}
-//					for(String s : select_num){
-//						System.out.println(s);
-//					}
-					pay_num.setText("总付款：" + pay_total_money + "元");
 				}
 			});
 		}

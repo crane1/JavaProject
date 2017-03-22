@@ -77,7 +77,8 @@ public class OrderManager {
 			ordersStr.add(o.getId());
 			StringBuffer s = new StringBuffer();
 			for(FlowerInfo fi : o.getFlowerList()){
-				s.append(fi.getName()+";");
+				s.append(fi.getName()+":");
+				s.append(fi.getNum() + " ");
 			}
 			ordersStr.add(s.toString());
 			ordersStr.add(String.valueOf(o.getSumMoney()));

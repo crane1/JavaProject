@@ -17,7 +17,6 @@ public class MainPanelManager {
 		if (panelMap.get(name) != null){
 			showPanel(name);
 		} else {
-			System.out.println("addpanel_____________");
 			PanelDemo panel = new PanelDemo(name, data);
 			layer.getCon().add("Center",panel);
 			panelMap.put(name, panel);
@@ -29,7 +28,6 @@ public class MainPanelManager {
 	
 	public void showPanel(String name){
 		if (name != null && !name.equals("")){
-			System.out.println("showpanel________________");
 			panelMap.get(name).setVisible(true);
 		}
 	}

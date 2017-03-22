@@ -16,7 +16,7 @@ public class LayerManager {
 		initLayerManager();
 	}
 	public LayerManager(TCPClient client){
-		this.client = client;
+		LayerManager.client = client;
 		initLayerManager();
 	}
 	
@@ -34,6 +34,8 @@ public class LayerManager {
 			layer = addLayer(name, new LayerShoppingCart(LayerManager.getClient()));
 		}else if(name.equals(DataType.VIEW_ACCOUNT)){
 			layer = addLayer(name, new LayerAccountInfo(LayerManager.getClient()));
+		}else if(name.equals(DataType.VIEW_ORDER)){
+			layer = addLayer(name, new LayerOrders(LayerManager.getClient()));
 		}
 		return layer;
 		
@@ -45,7 +47,6 @@ public class LayerManager {
 	}
 	
 	public static  LayerDemo addLayer(String name, LayerDemo panel){
-		System.out.println("dfds" + LayerManager.client);
 		layers.put(name, panel);
 		panel.setClient(LayerManager.getClient());
 		return panel;

@@ -29,7 +29,7 @@ public class LayerMain extends LayerDemo {
 	private final String[] types = {"创意礼盒","精美花束"}; 
 	private final String[] nums = {"19","99"}; 
 	private MainPanelManager panelManager = new MainPanelManager(this);
-	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
+	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 22));
 	private MyButton btnAccount = new MyButton("登录");
 	private MyButton btnShoppingCart = new MyButton("我的购物车");
 	private MyButton btnOrders = new MyButton("我的订单");
@@ -67,6 +67,7 @@ public class LayerMain extends LayerDemo {
 		top1.add(lbtitle);
 		top1.add(btnAccount);
 		top1.add(btnShoppingCart);
+		top1.add(btnOrders);
 		
 		top.add(top1);
 		JPanel top2 = new JPanel();

@@ -22,17 +22,15 @@ public class DataHandle {
 		}else if(type.equals(DataType.ADD_SHOP)){
 			addShoppingCart(data);
 		}else if(type.equals(DataType.VIEW_SHOP)){
-			System.out.println(type);
 			viewShoppingCart(data);
 		}else if(type.equals(DataType.PAY)){
-			System.out.println(type);
 			payOrder(data);
 		}else if(type.equals(DataType.VIEW_ACCOUNT)){
-			System.out.println(type);
 			showAccountInfo(data);
 		}else if(type.equals(DataType.CHARGE)){
-			System.out.println(type);
 			showChargeResult(data);
+		}else if(type.equals(DataType.VIEW_ORDER)){
+			showOrderInfo(data);
 		}
 	}
 	
@@ -111,7 +109,11 @@ public class DataHandle {
 		if(data.length == 3){
 			accountInfo.getLbbanl().setText("ø…”√”‡∂Ó£∫" + data[2]);
 		}
-		
+	}
+	
+	private void showOrderInfo(String[] data){
+		LayerOrders cart = (LayerOrders) LayerManager.showLayer(DataType.VIEW_ORDER);
+		cart.addOrderInfoList(data);
 	}
 
 	public TCPClient getClient() {
