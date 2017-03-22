@@ -50,6 +50,7 @@ public class FlowerInfo {
 	
 	public void addNum(){
 		num++;
+		this.total_price = price * num;
 	}
 	
 	

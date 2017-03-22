@@ -1,6 +1,7 @@
 package com.javateam1.flowerstore.control;
 
 import java.awt.Color;
+import java.util.InputMismatchException;
 
 import javax.swing.JOptionPane;
 
@@ -26,6 +27,12 @@ public class DataHandle {
 		}else if(type.equals(DataType.PAY)){
 			System.out.println(type);
 			payOrder(data);
+		}else if(type.equals(DataType.VIEW_ACCOUNT)){
+			System.out.println(type);
+			showAccountInfo(data);
+		}else if(type.equals(DataType.CHARGE)){
+			System.out.println(type);
+			showChargeResult(data);
 		}
 	}
 	
@@ -34,8 +41,8 @@ public class DataHandle {
 			JOptionPane.showMessageDialog(null, "µ«¬º≥…π¶");
 			LayerManager.hideLayer(DataType.LOGIN);
 			LayerMain layer = (LayerMain)LayerManager.showLayer(DataType.MAIN);
-			layer.getLbAccount().getLabel().setText(data[2]);
-			layer.getLbAccount().setTextColor(Color.blue);
+			layer.getLbAccount().getButton().setText(data[2]);
+			layer.getLbAccount().getButton().setForeground(Color.blue);
 		}else if(data[1].equals("0")){
 			JOptionPane.showMessageDialog(null, "µ«¬º ß∞‹");
 		}
@@ -79,7 +86,6 @@ public class DataHandle {
 	private void viewShoppingCart(String[] data){
 		LayerShoppingCart cart = (LayerShoppingCart) LayerManager.showLayer(DataType.VIEW_SHOP);
 		cart.addFlowerInfoList(data);
-		LayerManager.showLayer(DataType.VIEW_SHOP);
 	}
 	
 	private void payOrder(String[] data){
@@ -89,6 +95,24 @@ public class DataHandle {
 			JOptionPane.showMessageDialog(null, "÷ß∏∂ ß∞‹");
 		}
 	}
+	
+	private void showAccountInfo(String[] data){
+		LayerAccountInfo accountInfo = (LayerAccountInfo) LayerManager.showLayer(DataType.VIEW_ACCOUNT);
+		accountInfo.initAccountInfo(data);
+	}
+	
+	private void showChargeResult(String[] data){
+		if (data[1].equals("1")){
+			JOptionPane.showMessageDialog(null, "≥‰÷µ≥…π¶");
+		}else if(data[1].equals("0")){
+			JOptionPane.showMessageDialog(null, "≥‰÷µ ß∞‹");
+		}
+		LayerAccountInfo accountInfo = (LayerAccountInfo) LayerManager.getLayer(DataType.VIEW_ACCOUNT);
+		if(data.length == 3){
+			accountInfo.getLbbanl().setText("ø…”√”‡∂Ó£∫" + data[2]);
+		}
+		
+	}
 
 	public TCPClient getClient() {
 		return client;
@@ -97,6 +121,4 @@ public class DataHandle {
 	public void setClient(TCPClient client) {
 		this.client = client;
 	}
-
-	
 }

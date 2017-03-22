@@ -30,7 +30,7 @@ public class LayerMain extends LayerDemo {
 	private final String[] nums = {"19","99"}; 
 	private MainPanelManager panelManager = new MainPanelManager(this);
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
-	private MyLabel lbAccount = new MyLabel("", new Font("宋体", Font.BOLD, 20));
+	private MyButton btnAccount = new MyButton("登录");
 	private MyButton btnShoppingCart = new MyButton("我的购物车");
 	private MyButton btnFirst = new MyButton("首页");
 	private MyComboBox btnMater = new MyComboBox(); 
@@ -64,7 +64,7 @@ public class LayerMain extends LayerDemo {
 		JPanel top1 = new JPanel();
 		top1.setBackground(Color.white);
 		top1.add(lbtitle);
-		top1.add(lbAccount);
+		top1.add(btnAccount);
 		top1.add(btnShoppingCart);
 		
 		top.add(top1);
@@ -90,6 +90,7 @@ public class LayerMain extends LayerDemo {
 		btnType.getComboBox().addActionListener(new myButtonListener());
 		btnNum.getComboBox().addActionListener(new myButtonListener());
 		btnShoppingCart.getButton().addActionListener(new myButtonListener());
+		btnAccount.getButton().addActionListener(new myButtonListener());
 		
 		this.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent w){
@@ -127,12 +128,14 @@ public class LayerMain extends LayerDemo {
 				System.out.println(ftype);
 			}else if(e.getSource() == btnShoppingCart.getButton()){
 				type = DataType.VIEW_SHOP;
+			}else if(e.getSource() == btnAccount.getButton()){
+				type = DataType.VIEW_ACCOUNT;
 			}
 			System.out.println("加载内容");
 			
 			
 			String[] dataArray = null; 
-			if (type.equals(DataType.VIEW_SHOP) ){
+			if (!type.equals(DataType.MAIN)){
 				System.out.println("-------------------");
 				dataArray =new String[]{type};
 			}else if (ftype != null){
@@ -159,13 +162,13 @@ public class LayerMain extends LayerDemo {
 
 	
 
-	public MyLabel getLbAccount() {
-		return lbAccount;
+	public MyButton getLbAccount() {
+		return btnAccount;
 	}
 
 
-	public void setLbAccount(MyLabel lbAccount) {
-		this.lbAccount = lbAccount;
+	public void setLbAccount(MyButton lbAccount) {
+		this.btnAccount = lbAccount;
 	}
 
 

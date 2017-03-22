@@ -31,6 +31,12 @@ public class DataHandle {
 			}else if(type.equals(DataType.PAY)){
 				System.out.println(type);
 				buildAndPayOrder(data);
+			}else if(type.equals(DataType.VIEW_ACCOUNT)){
+				System.out.println(type);
+				getAccountInfo(data);
+			}else if(type.equals(DataType.CHARGE)){
+				System.out.println(type);
+				chargeMoney(data);
 			}
 		}
 	}
@@ -150,15 +156,47 @@ public class DataHandle {
 		}
 		Order order = account.getOrderlist().buildOrder(filist);
 		account.getOrderlist().addOrder(order);
-		boolean ispaySucceed = account.getOrderlist().payOrder(account, order);
+		boolean ispaySucceed = OrderManager.payOrder(account, order);
 		
 		String[] dataArray =new String[2];
 		dataArray[0] = DataType.PAY;
 		if (ispaySucceed){
 			dataArray[1] = "1";
+			for(FlowerInfo f : filist){
+				account.getShoppingCart().getList().remove(f);
+			}
 		}else {
 			dataArray[1] = "0";
 		}
+		String datas = ArrayToString.arrayToString(dataArray);
+		server.pushData(datas);
+	}
+	
+	public void getAccountInfo(String[] data){
+		List<String> list = AccountManager.getAccountInfo(account);
+		int size = list.size()+1;
+		String[] dataArray = new String[size];
+		dataArray[0] = DataType.VIEW_ACCOUNT;
+		
+		for (int i = 0; i < list.size(); i++){
+			dataArray[i+1] = list.get(i);
+		}
+		
+		String datas = ArrayToString.arrayToString(dataArray);
+		server.pushData(datas);
+	}
+	
+	public void chargeMoney(String[] data){
+		boolean isCharge = AccountManager.recharge(account, Double.valueOf(data[1]));
+		
+		String[] dataArray =new String[3];
+		dataArray[0] = DataType.CHARGE;
+		if (isCharge){
+			dataArray[1] = "1";
+		}else {
+			dataArray[1] = "0";
+		}
+		dataArray[2] = String.valueOf(account.getBalance().getBalance());
 		String datas = ArrayToString.arrayToString(dataArray);
 		server.pushData(datas);
 	}

@@ -101,9 +101,13 @@ public class AccountManager {
 		List<Order> list = orderList.getOrderNoPayList();
 	}
 	
-	public static void recharge(Account a, double num){
+	public static boolean recharge(Account a, double num){
 		if (num > 0){
 			a.getBalance().deposite(num);
+			return true;
+		}else{
+			System.out.println("³äÖµ½ğ¶îÓĞÎó£º" + num);
+			return false;
 		}
 	}
 	

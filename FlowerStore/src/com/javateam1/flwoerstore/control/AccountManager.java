@@ -97,9 +97,12 @@ public class AccountManager {
 	}
 	
 	
-	public static void recharge(Account a, double num){
+	public static boolean recharge(Account a, double num){
 		if (num > 0){
 			a.getBalance().deposite(num);
+			return true;
+		}else {
+			return false;
 		}
 	}
 	
@@ -124,6 +127,24 @@ public class AccountManager {
 	
 	public void deletOrder(Order o){
 		
+	}
+	
+	public static List<String> getAccountInfo(Account a){
+		List<String> accountInfo = new ArrayList<String>();
+		accountInfo.add(getString(a.getId()));
+		accountInfo.add(getString(a.getName()));
+		accountInfo.add(getString(a.getTelephone()));
+		accountInfo.add(getString(String.valueOf(a.getBalance().getBalance())));
+		accountInfo.add(getString(a.getAddress()));
+		return accountInfo;
+	}
+	
+	public static String getString(String s){
+		if(s==null){
+			return "нч";
+		}else{
+			return s;
+		}
 	}
 
 	public static void main(String[] args) {

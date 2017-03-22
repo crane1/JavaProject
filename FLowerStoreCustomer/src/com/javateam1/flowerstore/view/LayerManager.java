@@ -32,6 +32,8 @@ public class LayerManager {
 			layer = addLayer(name, new LayerMain(LayerManager.getClient()));
 		}else if(name.equals(DataType.VIEW_SHOP)){
 			layer = addLayer(name, new LayerShoppingCart(LayerManager.getClient()));
+		}else if(name.equals(DataType.VIEW_ACCOUNT)){
+			layer = addLayer(name, new LayerAccountInfo(LayerManager.getClient()));
 		}
 		return layer;
 		
