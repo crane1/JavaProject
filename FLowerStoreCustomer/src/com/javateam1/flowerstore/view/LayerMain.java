@@ -32,6 +32,7 @@ public class LayerMain extends LayerDemo {
 	private MyLabel lbtitle = new MyLabel("网上呆萌花店",new Font("宋体", Font.BOLD, 30));
 	private MyButton btnAccount = new MyButton("登录");
 	private MyButton btnShoppingCart = new MyButton("我的购物车");
+	private MyButton btnOrders = new MyButton("我的订单");
 	private MyButton btnFirst = new MyButton("首页");
 	private MyComboBox btnMater = new MyComboBox(); 
 	private MyComboBox btnPrice = new MyComboBox();
@@ -91,6 +92,7 @@ public class LayerMain extends LayerDemo {
 		btnNum.getComboBox().addActionListener(new myButtonListener());
 		btnShoppingCart.getButton().addActionListener(new myButtonListener());
 		btnAccount.getButton().addActionListener(new myButtonListener());
+		btnOrders.getButton().addActionListener(new myButtonListener());
 		
 		this.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent w){
@@ -130,13 +132,14 @@ public class LayerMain extends LayerDemo {
 				type = DataType.VIEW_SHOP;
 			}else if(e.getSource() == btnAccount.getButton()){
 				type = DataType.VIEW_ACCOUNT;
+			}else if(e.getSource() == btnOrders.getButton()){
+				type = DataType.VIEW_ORDER;
 			}
 			System.out.println("加载内容");
 			
 			
 			String[] dataArray = null; 
 			if (!type.equals(DataType.MAIN)){
-				System.out.println("-------------------");
 				dataArray =new String[]{type};
 			}else if (ftype != null){
 				dataArray =new String[]{DataType.MAIN, type, ftype};

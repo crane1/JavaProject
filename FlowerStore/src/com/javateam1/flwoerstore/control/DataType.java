@@ -9,6 +9,7 @@ public class DataType {
 	public final static String PAY = "Pay";
 	public static final String VIEW_ACCOUNT = "ViewAccount";
 	public static final String CHARGE = "Charge";
+	public static final String VIEW_ORDER = "ViewOrder";
 	
 	public final static String FIRST = "First";
 	public final static String MATER = "Mater";

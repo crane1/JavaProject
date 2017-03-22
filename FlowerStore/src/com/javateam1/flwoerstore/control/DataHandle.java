@@ -37,6 +37,9 @@ public class DataHandle {
 			}else if(type.equals(DataType.CHARGE)){
 				System.out.println(type);
 				chargeMoney(data);
+			}else if(type.equals(DataType.VIEW_ORDER)){
+				System.out.println(type);
+				viewOrder(data);
 			}
 		}
 	}
@@ -197,6 +200,20 @@ public class DataHandle {
 			dataArray[1] = "0";
 		}
 		dataArray[2] = String.valueOf(account.getBalance().getBalance());
+		String datas = ArrayToString.arrayToString(dataArray);
+		server.pushData(datas);
+	}
+	
+	public void viewOrder(String[] data){
+		List<String> list = AccountManager.getAccountInfo(account);
+		int size = list.size()+1;
+		String[] dataArray = new String[size];
+		dataArray[0] = DataType.VIEW_ACCOUNT;
+		
+		for (int i = 0; i < list.size(); i++){
+			dataArray[i+1] = list.get(i);
+		}
+		
 		String datas = ArrayToString.arrayToString(dataArray);
 		server.pushData(datas);
 	}

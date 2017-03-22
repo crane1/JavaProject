@@ -116,7 +116,6 @@ public class LayerLogin extends LayerDemo{
 	}
 	
 	private void pushData(String data) {
-		System.out.println(this.getClient());
 		this.getClient().pushData(data);
 	}
 	

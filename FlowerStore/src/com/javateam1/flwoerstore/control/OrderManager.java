@@ -1,5 +1,6 @@
 package com.javateam1.flwoerstore.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.javateam1.flowerstore.model.Order;
 
 public class OrderManager {
 	private List<Order> orders = new ArrayList<Order>();
+	private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public OrderManager(){
 	}
@@ -65,5 +67,22 @@ public class OrderManager {
 		}else{
 			return false;
 		}
+	}
+	
+	public static List<String> getOrderList(Account a){
+		List<Order> list = a.getOrderlist().getOrders();
+		List<String> ordersStr = new ArrayList<String>();
+		
+		for(Order o : list){
+			ordersStr.add(o.getId());
+			StringBuffer s = new StringBuffer();
+			for(FlowerInfo fi : o.getFlowerList()){
+				s.append(fi.getName()+";");
+			}
+			ordersStr.add(s.toString());
+			ordersStr.add(String.valueOf(o.getSumMoney()));
+			ordersStr.add(formater.format(o.getTime()));
+		}
+		return ordersStr;
 	}
 }
