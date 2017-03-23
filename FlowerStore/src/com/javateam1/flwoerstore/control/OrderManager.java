@@ -74,16 +74,31 @@ public class OrderManager {
 		List<String> ordersStr = new ArrayList<String>();
 		
 		for(Order o : list){
-			ordersStr.add(o.getId());
-			StringBuffer s = new StringBuffer();
-			for(FlowerInfo fi : o.getFlowerList()){
-				s.append(fi.getName()+":");
-				s.append(fi.getNum() + " ");
+			// 返回没有删除的订单
+			if(o.isDelete()){
+				ordersStr.add(o.getId());
+				StringBuffer s = new StringBuffer();
+				for(FlowerInfo fi : o.getFlowerList()){
+					s.append(fi.getName()+":");
+					s.append(fi.getNum() + " ");
+				}
+				ordersStr.add(s.toString());
+				ordersStr.add(String.valueOf(o.getSumMoney()));
+				ordersStr.add(formater.format(o.getTime()));
+				ordersStr.add(String.valueOf(o.isPay()));
 			}
-			ordersStr.add(s.toString());
-			ordersStr.add(String.valueOf(o.getSumMoney()));
-			ordersStr.add(formater.format(o.getTime()));
 		}
 		return ordersStr;
+	}
+	
+	public static void deleteOrder(Account a, String[] data){
+		List<Order> list = a.getOrderlist().getOrders();
+		for(int i = 1; i < data.length; i++){
+			for(Order o : list){
+				if (o.getId().equals(data[i])){
+					o.setDelete(false);
+				}
+			}
+		}
 	}
 }

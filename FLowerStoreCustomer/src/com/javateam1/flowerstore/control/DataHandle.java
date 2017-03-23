@@ -87,11 +87,17 @@ public class DataHandle {
 	}
 	
 	private void payOrder(String[] data){
+		int result = 0;
 		if (data[1].equals("1")){
 			JOptionPane.showMessageDialog(null, "支付成功");
 		}else if(data[1].equals("0")){
 			JOptionPane.showMessageDialog(null, "支付失败");
 		}
+		
+		String[] dataArray =new String[]{DataType.VIEW_SHOP};
+		String datas = ArrayToString.arrayToString(dataArray);
+		LayerManager.pushData(datas);
+		
 	}
 	
 	private void showAccountInfo(String[] data){

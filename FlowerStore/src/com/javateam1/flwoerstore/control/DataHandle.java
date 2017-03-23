@@ -34,6 +34,8 @@ public class DataHandle {
 				chargeMoney(data);
 			}else if(type.equals(DataType.VIEW_ORDER)){
 				viewOrder(data);
+			}else if(type.equals(DataType.DELETE_ORDER)){
+				deleteOrder(data);
 			}
 		}
 	}
@@ -147,17 +149,23 @@ public class DataHandle {
 			FlowerInfo f = account.getShoppingCart().getFlowerById(data[i]);
 			filist.add(f);
 		}
+		
+		// 生成订单
 		Order order = account.getOrderlist().buildOrder(filist);
+		// 给账户添加订单
 		account.getOrderlist().addOrder(order);
+		// 删除购物车中对于内容
+		for(FlowerInfo f : filist){
+			account.getShoppingCart().getList().remove(f);
+		}
+		
+		// 支付
 		boolean ispaySucceed = OrderManager.payOrder(account, order);
 		
 		String[] dataArray =new String[2];
 		dataArray[0] = DataType.PAY;
 		if (ispaySucceed){
 			dataArray[1] = "1";
-			for(FlowerInfo f : filist){
-				account.getShoppingCart().getList().remove(f);
-			}
 		}else {
 			dataArray[1] = "0";
 		}
@@ -195,7 +203,6 @@ public class DataHandle {
 	}
 	
 	public void viewOrder(String[] data){
-		account.getOrderlist();
 		List<String> list = OrderManager.getOrderList(account);
 		int size = list.size()+1;
 		String[] dataArray = new String[size];
@@ -207,6 +214,11 @@ public class DataHandle {
 		
 		String datas = ArrayToString.arrayToString(dataArray);
 		server.pushData(datas);
+	}
+	
+	public void deleteOrder(String[] data){
+		OrderManager.deleteOrder(account, data);
+		viewOrder(null);
 	}
 	
 	public TCPServer getServer() {

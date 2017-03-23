@@ -149,7 +149,6 @@ public class LayerMain extends LayerDemo {
 			}
 			
 			String data = ArrayToString.arrayToString(dataArray);
-			System.out.println(data);
 			LayerManager.pushData(data);
 		}
 		

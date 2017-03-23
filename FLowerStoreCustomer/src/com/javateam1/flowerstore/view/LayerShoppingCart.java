@@ -24,6 +24,12 @@ import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 
+/**
+ * 
+ * @author 李泽明
+ *  购物车页面类
+ *
+ */
 public class LayerShoppingCart extends LayerDemo{
 	private List<FlowerinfoInCart> list = new ArrayList<FlowerinfoInCart>();
 	private JPanel panel = new JPanel();
@@ -74,7 +80,11 @@ public class LayerShoppingCart extends LayerDemo{
 	}
 	
 	public void addFlowerInfoList(String[] data){
+		if(data.length == 1){
+			panel.setVisible(false);
+		}
 		panel.removeAll();
+		select_num.clear();
 		pay_total_money = 0;
 		pay_num.setText("总付款：" + pay_total_money + "元");
 		int size = (data.length - 1) / 5;
@@ -97,6 +107,7 @@ public class LayerShoppingCart extends LayerDemo{
 		private MyLabel num = new MyLabel("数量:",null);
 		private MyLabel total_price = new MyLabel("总价:",null);
 		private double total_money = 0;
+		private JPanel mainPanel = new JPanel();
 		
 		public FlowerinfoInCart(){}
 		public FlowerinfoInCart(final String id, String name, String price, String num, String total_price){
@@ -120,8 +131,11 @@ public class LayerShoppingCart extends LayerDemo{
 			
 			this.setBackground(Color.white);
 			this.setLayout(new GridLayout(1,2));
-			this.add(left);
-			this.add(right);
+			
+			mainPanel.add(left);
+			mainPanel.add(right);
+			this.add(mainPanel);
+			mainPanel.setBackground(Color.white);
 			
 			select.addActionListener(new ActionListener() {
 				
