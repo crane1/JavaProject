@@ -24,6 +24,7 @@ public class LayerSign extends LayerDemo {
 	private MyLabel lbtitle = new MyLabel("注册用户",new Font("宋体", Font.BOLD, 30));
 	private LabelAndTextField ltId = new LabelAndTextField("账号",0);
 	private LabelAndTextField ltPwd = new LabelAndTextField("密码",1);
+	private LabelAndTextField ltName = new LabelAndTextField("昵称",0);
 	private LabelAndTextField ltAddress = new LabelAndTextField("地址",0);
 	private LabelAndTextField ltTel = new LabelAndTextField("电话",0);
 	private MyButton btnSign = new MyButton("注册");
@@ -31,7 +32,7 @@ public class LayerSign extends LayerDemo {
 		super(client);
 		this.setTitle("注册页面");
 		this.setPreferredSize(new Dimension(485,400));
-		this.getCon().setLayout(new GridLayout(6,1));
+		this.getCon().setLayout(new GridLayout(7,1));
 		
 		
 //		属性：id，pwd，name，address，telephone，orderList, balance, type
@@ -40,6 +41,7 @@ public class LayerSign extends LayerDemo {
 		
 		this.getCon().add(ltId);
 		this.getCon().add(ltPwd);
+		this.getCon().add(ltName);
 		this.getCon().add(ltAddress);
 		this.getCon().add(ltTel);
 		this.getCon().add(btnSign);
@@ -53,6 +55,7 @@ public class LayerSign extends LayerDemo {
 				String curPwd = String.valueOf(((JPasswordField) ltPwd.getTextField()).getPassword());
 				String curAddr = ltAddress.getTextField().getText();
 				String curTel = ltTel.getTextField().getText();
+				String curName = ltName.getTextField().getText();
 				if ( ltId.getTextField()== null || curId.equals("")){
 					JOptionPane.showMessageDialog(null, "账号不能为空");
 				}else if(ltPwd.getTextField() == null || curPwd.equals("")){
@@ -61,8 +64,10 @@ public class LayerSign extends LayerDemo {
 					JOptionPane.showMessageDialog(null, "地址不能为空");
 				}else if(ltTel.getTextField() == null || curTel.equals("")){
 					JOptionPane.showMessageDialog(null, "电话不能为空");
+				}else if(ltName.getTextField() == null || curTel.equals("")){
+					JOptionPane.showMessageDialog(null, "姓名不能为空");
 				}else {
-					String[] dataArray = {DataType.SIGN, curId, curPwd, curAddr, curTel}; 
+					String[] dataArray = {DataType.SIGN, curId, curPwd, curName, curAddr, curTel}; 
 					String data = ArrayToString.arrayToString(dataArray);
 					pushData(data);
 				}

@@ -7,7 +7,7 @@ import com.javateam1.flwoerstore.control.OrderManager;
 import com.javateam1.flwoerstore.control.ShoppingCart;
 
 public class Account {
-//	 Ù–‘£∫id£¨pwd£¨name£¨address£¨telephone£¨orderList, balance, type
+//	 Ù–‘£∫id£¨pwd£¨name£¨address£¨telephone, balance, type
 	private static int i = 1; 
 	private String id;
 	private String pwd;

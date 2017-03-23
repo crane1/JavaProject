@@ -63,6 +63,7 @@ public class OrderManager {
 	public static boolean payOrder(Account a, Order order){
 		double total_money = order.getSumMoney();
 		if(AccountManager.pay(a, total_money)){
+			order.setPay(true);
 			return true;
 		}else{
 			return false;

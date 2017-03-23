@@ -82,6 +82,8 @@ public class LayerShoppingCart extends LayerDemo{
 	public void addFlowerInfoList(String[] data){
 		if(data.length == 1){
 			panel.setVisible(false);
+		}else{
+			panel.setVisible(true);
 		}
 		panel.removeAll();
 		select_num.clear();

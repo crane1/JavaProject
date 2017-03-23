@@ -59,8 +59,9 @@ public class DataHandle {
 		Account account = new Account();
 		account.setId(data[1]);
 		account.setPwd(data[2]);
-		account.setAddress(data[3]);
+		account.setName(data[3]);
 		account.setAddress(data[4]);
+		account.setTelephone(data[5]);
 		boolean isSucceed = AccountManager.addAccount(account);
 		String[] dataArray =new String[2];
 		

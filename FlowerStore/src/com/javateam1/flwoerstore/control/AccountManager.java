@@ -1,10 +1,18 @@
 package com.javateam1.flwoerstore.control;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.javateam1.flowerstore.model.Account;
+import com.javateam1.flowerstore.model.Flower;
 import com.javateam1.flowerstore.model.Order;
 
 public class AccountManager {
@@ -13,16 +21,51 @@ public class AccountManager {
 		initAccountArray();
 	}
 	
+	// 读取用户表配置文件
 	private void initAccountArray() {
-		// 初始化管理员账户
-		Account manager = new RestaurantManager();
-		manager.setId("admin");
-		manager.setPwd("admin");
-		manager.setType(1);
-		accounts.add(manager);
-		
-		Account account = new Account();
-		accounts.add(account);
+		try {
+			BufferedReader bf = new BufferedReader(new FileReader(new File("config/accountlist.csv")));
+			String line = "";
+			// 按行读取配置文件
+			while((line = bf.readLine()) != null){
+				// 注释行省略
+				if(line.charAt(0) == '#'){
+					continue;
+				}
+				
+				//将读取到的属性按，划分开，分别存储
+				String[] attrs = line.split(",");
+				Account account = new Account();
+				account.setId(attrs[0]);
+				account.setPwd(attrs[1]);
+				account.setName(attrs[2]);
+				account.setAddress(attrs[3]);
+				account.setTelephone(attrs[4]);
+				account.setType(Integer.valueOf(attrs[5]));
+				accounts.add(account);
+			}
+			bf.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void saveAccountInfo(Account a){
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("config/accountlist.csv"), true));
+			String s = '\n' + a.getId() + "," + a.getPwd() + "," + a.getName() + "," + a.getTelephone() + "," + a.getType();
+			bw.write(s);
+			bw.flush();
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void printAccountArray(){
@@ -60,6 +103,7 @@ public class AccountManager {
 			return false;
 		}else {
 			accounts.add(a);
+			saveAccountInfo(a);
 			System.out.println("账户添加成功");
 			return true;
 		}
