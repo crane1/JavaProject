@@ -1,0 +1,11 @@
+select * from user_tables;
+select * from student;
+alter table student drop (name, sex);
+rollback;
+comment on table student is '这是一个修改后的心机婊';
+select * from recyclebin;
+
+/*查询每个部门编号名称，员工人数，员工工资总和*/
+create or replace view u 
+as 
+select department_id,count(employee_id),sum(salary) from employees group by department_id;

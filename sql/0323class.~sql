@@ -1,0 +1,219 @@
+declare
+  v_id number(20):=101;
+  v_name varchar(25):='倩倩';
+  v_sex char(5):='女';
+  v_date date:=to_date('10:08:20,03 23,2017,', 'HH:MI:SS,MM DD,YYYY,');
+begin
+  dbms_output.put_line('hello ');
+  dbms_output.put_line(v_name);
+  dbms_output.put_line('出生日期' || to_char(v_date,'HH:MI:SS,MM DD,YYYY,'));
+end;
+
+select to_date('03 23,2017', 'MM DD,YYYY') from dual;
+
+declare
+    v_a number(5):=100;
+    v_b number(5):=200;
+    v_sum number(6):= v_a + v_b;
+    v_multiply number(10):= v_a * v_b;
+    v_divide number(7,2):= v_a / v_b;
+begin
+    dbms_output.put_line('a=' || v_a);
+    dbms_output.put_line('b=' || v_b);
+    dbms_output.put_line('a+b=' || v_sum);
+    dbms_output.put_line('axb=' || v_multiply);
+    dbms_output.put_line('a÷b=' || v_divide);
+end; 
+
+select * from emp;
+declare
+    type emp_record_type is record(
+         v_empno number(10),
+         v_ename varchar(15),
+         v_job varchar(15),
+         v_mgr number(5),
+         v_hiredate date,
+         v_sal number(7,2),
+         v_comm number(7,2),
+         v_deptno number(3)
+     );
+     e emp_record_type;
+begin
+  select * into e from emp where emp.empno = 7654;
+  dbms_output.put_line('员工编号：' || e.v_empno ||
+                       ' 姓名：' || e.v_ename ||
+                       ' 职位：' || e.v_job ||
+                       ' 管理者编号：' || e.v_mgr ||
+                       ' 入职日期：' || e.v_hiredate ||
+                       ' 薪资：' || e.v_sal ||
+                       ' 奖金：' || e.v_comm ||
+                       ' 部门编号：' || e.v_deptno);
+end;
+
+select * from emp;
+
+declare
+    type emp_record_type is record(
+         v_empno emp.empno%type,  --参照表中的列类型
+         v_ename emp.ename%type,  --同上       
+         v_sal emp.sal%type  --同上
+     );
+     e emp_record_type;
+begin
+  select emp.empno,emp.ename, emp.sal into e from emp where emp.empno = 7654;
+  dbms_output.put_line('员工编号：' || e.v_empno ||
+                       ' 姓名：' || e.v_ename ||                     
+                       ' 薪资：' || e.v_sal 
+                      );
+end;
+
+select rowid, student.* from student order by id;
+alter table student add(name varchar(15), sex char(1));  
+alter table student modify(sex char(2));
+
+update student set name = '孙悟空',sex = '男' where id = 1;
+update student set name = '唐三藏',sex = '男' where id = 2;
+update student set name = '猪八戒',sex = '男' where id = 3;
+update student set name = '沙和尚',sex = '男' where id = 4;
+update student set name = '白龙马',sex = '男' where id = 5;
+
+alter table student add constraint PK_STU_ID primary key(id);
+
+create sequence stu_seq start with 6;
+insert into student values(stu_seq.nextval,'白骨精', '女');
+
+declare 
+    d student%rowtype;
+begin
+    update student set name = '女儿国国王' where id = 6
+    returning id, name, sex into d;
+    dbms_output.put_line(d.id|| d.name|| d.sex);
+end;    
+    
+    
+--返回部门员工的工资，返回被更新的员工姓名，新工资
+declare
+  type emp_record_type is record(
+    v_name employees.last_name%type,
+    v_sal  employees.salary%type   
+    );
+  type emp_table_type is table of emp_record_type index by binary_integer;
+  e emp_table_type;
+begin
+  --select * from employees;
+  update employees
+     set salary = salary + 1
+   where employee_id = 206
+  returning last_name, salary bulk collect into e;
+  dbms_output.put_line('新工资：' || e(1).v_sal);
+end;
+
+
+--**************   作业   *********************
+--1.输入一个数，判断是不是在1-100之间，是返回i，不是返回FALSE、
+declare 
+i number:=&input;
+begin
+  if i>0 and i<=100 then
+    dbms_output.put_line(i);
+    else dbms_output.put_line('false');
+   end if;
+   end;
+   
+--2.三种方法递减50-1
+--loop
+declare 
+    i number:= 50;
+begin
+    loop
+        if(i<=0) then
+            exit;
+        else
+            dbms_output.put_line(i);
+            i:= i - 1;
+        end if;
+     end loop;
+end;
+
+--for
+begin
+    for i in reverse 1..50 loop       
+         dbms_output.put_line(i);
+     end loop;
+end;
+
+--while
+declare 
+    i number:= 50;
+begin
+    while(i>0) loop
+        dbms_output.put_line(i);
+        i:= i - 1;
+    end loop;
+end;
+
+-- 3.10~50营销部  60-90市场部  90以上研发部 其余部门不存在   
+select * from employees;
+declare
+    type emp_table_type is table of employees%rowtype;
+    a emp_table_type;
+    lv_txt varchar2(20);
+    empno employees.department_id%type;
+begin    
+    select * bulk collect into a from employees;
+    for i in 1..a.count loop
+        empno := a(i).department_id;        
+        if( empno >= 10 and empno <= 50) then
+            lv_txt := '营销部';
+        elsif( empno >= 60 and empno < 90) then
+            lv_txt := '市场部';
+        elsif( empno >= 90)  then
+            lv_txt := '研发部';
+        else
+            lv_txt := '部门不存在';
+        end if;
+        dbms_output.put_line(a(i).last_name || '在' || lv_txt);
+     end loop;
+end;   
+
+--     4.遍历数据（employees）
+declare
+    type emp_table_type is table of employees%rowtype;
+    a emp_table_type;
+begin    
+    select * bulk collect into a from employees;
+    for i in 1..a.count loop
+        dbms_output.put_line('员工' || i || '：');
+        dbms_output.put_line('编号：' || a(i).employee_id);     
+        dbms_output.put_line('姓名：' || a(i).first_name || ' ' || a(i).last_name);
+        dbms_output.put_line('邮箱：' || a(i).email);
+        dbms_output.put_line('电话：' || a(i).phone_number);
+        dbms_output.put_line('入职时间：' || a(i).hire_date);
+        dbms_output.put_line('职位编号：' || a(i).job_id);
+        dbms_output.put_line('薪水：' || a(i).salary);
+        dbms_output.put_line('提成：' || nvl(to_char(a(i).commission_pct), '工作太烂了，没有提成'));
+        dbms_output.put_line('上司编号：' || a(i).manager_id);
+        dbms_output.put_line('部门编号' || a(i).department_id);
+        dbms_output.put_line('****************************************');
+        dbms_output.put_line('');
+     end loop;
+end;    
+--     5.取出7369的薪水，<1000 low
+--     <2000 middle   else high 
+select * from emp;
+declare 
+    v_sal emp.sal%type;
+    v_sal_txt varchar(15);
+    v_name emp.ename%type;
+begin
+    select ename, sal into v_name,v_sal from emp where empno = 7369;
+    if(v_sal < 1000) then
+        v_sal_txt := 'Low';
+    elsif(v_sal >= 1000 and v_sal <= 2000) then
+        v_sal_txt := 'Middle';
+    else
+        v_sal_txt := 'High';
+    end if;
+    dbms_output.put_line(v_name || '是个' || v_sal_txt || ' B');
+end;    
+        
