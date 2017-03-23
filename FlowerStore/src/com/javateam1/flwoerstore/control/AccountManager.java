@@ -24,7 +24,9 @@ public class AccountManager {
 	// 读取用户表配置文件
 	private void initAccountArray() {
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(new File("config/accountlist.csv")));
+			File file = new File("config/accountlist.csv");
+			FileReader fr = new FileReader(file);
+			BufferedReader bf = new BufferedReader(fr);
 			String line = "";
 			// 按行读取配置文件
 			while((line = bf.readLine()) != null){
@@ -44,8 +46,9 @@ public class AccountManager {
 				account.setType(Integer.valueOf(attrs[5]));
 				accounts.add(account);
 			}
+			// 必须关闭所有打开的流，否则会报notfoundfile异常
 			bf.close();
-			
+			fr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,11 +60,16 @@ public class AccountManager {
 	
 	private static void saveAccountInfo(Account a){
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("config/accountlist.csv"), true));
-			String s = '\n' + a.getId() + "," + a.getPwd() + "," + a.getName() + "," + a.getTelephone() + "," + a.getType();
+			File file = new File("config/accountlist.csv");
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			String s =a.getId() + "," + a.getPwd() + "," + a.getName()
+					 + "," + a.getAddress()+ "," + a.getTelephone() + "," + a.getType();
 			bw.write(s);
 			bw.flush();
+			// 必须关闭所有打开的流，否则会报notfoundfile异常
 			bw.close();
+			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
