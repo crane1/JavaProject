@@ -114,7 +114,7 @@ public class DataHandle {
 		
 		boolean isAddSucceed = false;
 		if (flower != null){
-			isAddSucceed = account.getShoppingCart().addFlower(flower);
+			isAddSucceed = account.getShoppingCart().addFlower(account ,flower);
 		}
 		
 		String[] dataArray =new String[2];
@@ -151,13 +151,12 @@ public class DataHandle {
 			filist.add(f);
 		}
 		
-		// 生成订单
-		Order order = account.getOrderlist().buildOrder(filist);
-		// 给账户添加订单
-		account.getOrderlist().addOrder(order);
-		// 删除购物车中对于内容
+		// 生成订单,给账户添加订单
+		Order order = account.getOrderlist().buildOrder(account, filist);
+		
 		for(FlowerInfo f : filist){
-			account.getShoppingCart().getList().remove(f);
+			// 删除购物车中对应内容
+			account.getShoppingCart().deleteFlower(account, f.getId());
 		}
 		
 		// 支付
@@ -218,7 +217,7 @@ public class DataHandle {
 	}
 	
 	public void deleteOrder(String[] data){
-		OrderManager.deleteOrder(account, data);
+		account.getOrderlist().deleteOrder(account, data);
 		viewOrder(null);
 	}
 	

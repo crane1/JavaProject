@@ -19,22 +19,21 @@ public class ShoppingCart {
 	
 	public void initShoppingCart(Account a){
 		try {
-			File file = new File("config/shoppingcartlist.csv");
+			File file = new File("config/carts/"+ a.getId() + "_cart.csv");
 			FileReader fr = new FileReader(file);
 			BufferedReader bf = new BufferedReader(fr);
 			String line = "";
 			// 按行读取配置文件
-			while((line = bf.readLine()) != null){
-				// 注释行省略
+			while((line = bf.readLine()) != null && line.length() > 0){
 				if(line.charAt(0) == '#'){
 					continue;
 				}
 				
-				//将读取到的属性按，划分开，分别存储
 				String[] attrs = line.split(",");
-				if(attrs[0].equals(a.getId()) || Integer.valueOf(attrs[2]) > 0){
-					Flower f = FlowerManager.findFoodById(attrs[1]);
-					FlowerInfo fi = new FlowerInfo(f.getId(), f.getName(), f.getPrice(), f.getNum());
+				
+				Flower f = FlowerManager.findFoodById(attrs[0]);
+				if(f != null){
+					FlowerInfo fi = new FlowerInfo(f.getId(), f.getName(), f.getPrice(), Integer.valueOf(attrs[1]));
 					list.add(fi);
 				}
 			}
@@ -50,16 +49,19 @@ public class ShoppingCart {
 		}
 	}
 	
-	private static void saveShoppingInfo(Account a){
+	private void saveShoppingInfo(Account a){
 		try {
-			File file = new File("config/shoppingcartlist.csv");
-			FileWriter fw = new FileWriter(file, true);
+			File file = new File("config/carts/"+ a.getId() + "_cart.csv");
+			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
-			String s =a.getId() + "," + a.getPwd() + "," + a.getName()
-					 + "," + a.getAddress()+ "," + a.getTelephone() + "," + a.getType();
-			bw.write(s);
-			bw.flush();
-			// 必须关闭所有打开的流，否则会报notfoundfile异常
+			String s = "";
+			for(FlowerInfo fi : list){
+				s =fi.getId() + "," + fi.getNum() + "\n";
+				bw.write(s);
+				bw.flush();
+			}
+			
+			// 必须关闭所有打开的流，否则下次使用会报notfoundfile异常
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
@@ -67,12 +69,15 @@ public class ShoppingCart {
 			e.printStackTrace();
 		}
 	}
-	public boolean addFlower(String id){
+	
+	public boolean addFlower(Account a, String id){
 		
 		for(FlowerInfo fi : list){
 			if(fi.getId().equals(id)){
 				fi.addNum();
+				saveShoppingInfo(a);
 				return true;
+				
 			}
 		}
 		
@@ -80,7 +85,19 @@ public class ShoppingCart {
 		FlowerInfo fi = new FlowerInfo(f.getId(), f.getName(), f.getPrice(), 1);
 		
 		if(list.add(fi)){
+			saveShoppingInfo(a);
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean deleteFlower(Account a, String id){
+		for(FlowerInfo fi : list){
+			if(fi.getId().equals(id)){
+				fi.setNum(0);
+				saveShoppingInfo(a);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -88,11 +105,13 @@ public class ShoppingCart {
 	public List<String> viewCart(){
 		List<String> flist = new ArrayList<String>();
 		for(FlowerInfo f : list){
-			flist.add(f.getId());
-			flist.add(f.getName());
-			flist.add(String.valueOf(f.getPrice()));
-			flist.add(String.valueOf(f.getNum()));
-			flist.add(String.valueOf(f.getTotal_price()));
+			if(f.getNum() > 0){
+				flist.add(f.getId());
+				flist.add(f.getName());
+				flist.add(String.valueOf(f.getPrice()));
+				flist.add(String.valueOf(f.getNum()));
+				flist.add(String.valueOf(f.getTotal_price()));
+			}
 		}
 		return flist;
 	}

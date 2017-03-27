@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.javateam1.flowerstore.model.Account;
-import com.javateam1.flowerstore.model.Flower;
 import com.javateam1.flowerstore.model.Order;
 
 public class AccountManager {
@@ -127,6 +126,7 @@ public class AccountManager {
 				return null;
 			} else{
 				System.out.println("验证成功");
+				ad.getShoppingCart().initShoppingCart(ad);
 				return ad;
 			}
 		return ad;

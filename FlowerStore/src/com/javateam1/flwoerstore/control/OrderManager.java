@@ -1,10 +1,19 @@
 package com.javateam1.flwoerstore.control;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.javateam1.flowerstore.model.Account;
+import com.javateam1.flowerstore.model.Flower;
 import com.javateam1.flowerstore.model.FlowerInfo;
 import com.javateam1.flowerstore.model.Order;
 
@@ -12,21 +21,79 @@ public class OrderManager {
 	private List<Order> orders = new ArrayList<Order>();
 	private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public OrderManager(){
+	public void initShoppingCart(Account a){
+		try {
+			File file = new File("config/orders/"+ a.getId() + "_cart.csv");
+			FileReader fr = new FileReader(file);
+			BufferedReader bf = new BufferedReader(fr);
+			String line = "";
+			// 按行读取配置文件
+			while((line = bf.readLine()) != null && line.length() > 0){
+				if(line.charAt(0) == '#'){
+					continue;
+				}
+				
+				String[] attrs = line.split(",");
+				
+//				属性：id，, time, sumMoney, isPay, isDelete,flowerList
+				Order order = new Order();
+				order.setId(attrs[0]);
+				order.setTime(attrs[1]);
+				order.setSumMoney(Double.valueOf(attrs[2]));
+				order.setPay(attrs[3].equals("1") ? true :false);
+				order.setDelete(attrs[4].equals("1") ? true :false);
+				
+				List<FlowerInfo> flowerList = new ArrayList<FlowerInfo>(); 
+				
+				//后面的不定长位表示订单中花的列表，其中只保存ID，和数量
+				for(int i = 5; i < attrs.length; i+=2){
+					Flower f = FlowerManager.findFoodById(attrs[i]);
+					if(f != null){
+						FlowerInfo fi = new FlowerInfo(f.getId(), f.getName(), f.getPrice(), Integer.valueOf(attrs[i+1]));
+						flowerList.add(fi);
+					}
+				}
+				order.setFlowerList(flowerList);
+			}
+			// 必须关闭所有打开的流，否则会报notfoundfile异常
+			bf.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public List<Order> getOrders() {
-		return orders;
-	}
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-	
-	public void addOrder(Order order){
-		orders.add(order);
-	}
-	
-	public void deletOrder(Order order){
+	private void saveShoppingInfo(Account a){
+		try {
+			File file = new File("config/carts/"+ a.getId() + "_cart.csv");
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			String s = "";
+//			属性：id，, time, sumMoney, isPay, isDelete,flowerList
+			for(Order o : orders){
+				//添加订单基础属性
+				s =o.getId() + "," + o.getTime() + "," + o.getSumMoney() + "," +
+						(o.isPay() ? 1 : 0) + "," + (o.isDelete() ? 1 : 0);
+				//循环添加订单花属性
+				for(FlowerInfo fi : o.getFlowerList()){
+					s = s + "," + fi.getId() + "," + fi.getNum();
+				}
+				s = s + "\n"; //追加换行
+				bw.write(s);
+				bw.flush();
+			}
+			
+			// 必须关闭所有打开的流，否则下次使用会报notfoundfile异常
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void printOrderList(){
@@ -49,14 +116,15 @@ public class OrderManager {
 		return list;
 	}
 	
-	public  Order buildOrder(List<FlowerInfo> list){
+	public  Order buildOrder(Account a, List<FlowerInfo> list){
 		Order order = new Order();
 		for(FlowerInfo fi : list){
 			//将获取到的花对象传递给订单中的花列表
 			order.getFlowerList().add(fi);
 			order.addSumMoney(fi.getTotal_price());
+			orders.add(order);
+			saveShoppingInfo(a);
 		}
-		
 		return order;
 	}
 	
@@ -82,24 +150,33 @@ public class OrderManager {
 				for(FlowerInfo fi : o.getFlowerList()){
 					s.append(fi.getName()+":");
 					s.append(fi.getNum() + " ");
+					System.out.println(fi.getName()+"数量："+fi.getNum());
 				}
 				ordersStr.add(s.toString());
 				ordersStr.add(String.valueOf(o.getSumMoney()));
-				ordersStr.add(formater.format(o.getTime()));
+				ordersStr.add(o.getTime());
 				ordersStr.add(String.valueOf(o.isPay()));
 			}
 		}
 		return ordersStr;
 	}
 	
-	public static void deleteOrder(Account a, String[] data){
+	public void deleteOrder(Account a, String[] data){
 		List<Order> list = a.getOrderlist().getOrders();
 		for(int i = 1; i < data.length; i++){
 			for(Order o : list){
 				if (o.getId().equals(data[i])){
 					o.setDelete(false);
+					saveShoppingInfo(a);
 				}
 			}
 		}
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 }

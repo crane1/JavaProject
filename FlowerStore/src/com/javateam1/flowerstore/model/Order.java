@@ -12,7 +12,7 @@ public class Order {
 	SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static int counter = 1;
 	private String id;
-	private Date time;
+	private String time;
 	private double sumMoney = 0;
 	private boolean isPay;
 	private List<FlowerInfo> flowerList;
@@ -24,7 +24,7 @@ public class Order {
 		isPay = false;
 		sumMoney = 0;
 		setDelete(true);
-		time = new Date(); 
+		time = formater.format(new Date()); 
 		flowerList = new ArrayList<FlowerInfo>();
 	}
 	public Order(List<FlowerInfo> flowers){
@@ -32,10 +32,10 @@ public class Order {
 		this.flowerList = flowers;
 	}
 	
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	
