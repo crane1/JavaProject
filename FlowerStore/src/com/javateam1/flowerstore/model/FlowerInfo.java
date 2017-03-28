@@ -52,6 +52,13 @@ public class FlowerInfo {
 		num++;
 		this.total_price = price * num;
 	}
+	@Override
+	public String toString() {
+		return "FlowerInfo [id=" + id + ", name=" + name + ", price=" + price
+				+ ", num=" + num + ", total_price=" + total_price + "]";
+	}
+	
+	
 	
 	
 }

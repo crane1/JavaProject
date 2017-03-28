@@ -21,19 +21,24 @@ public class OrderManager {
 	private List<Order> orders = new ArrayList<Order>();
 	private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public void initShoppingCart(Account a){
+	public void initOrderList(Account a){
 		try {
-			File file = new File("config/orders/"+ a.getId() + "_cart.csv");
+			File file = new File("config/orders/"+ a.getId() + "_order.csv");
 			FileReader fr = new FileReader(file);
 			BufferedReader bf = new BufferedReader(fr);
 			String line = "";
 			// 按行读取配置文件
+			
 			while((line = bf.readLine()) != null && line.length() > 0){
 				if(line.charAt(0) == '#'){
 					continue;
 				}
+				System.out.println(line);
 				
 				String[] attrs = line.split(",");
+				for(String s : attrs){
+					System.out.println(s);
+				}
 				
 //				属性：id，, time, sumMoney, isPay, isDelete,flowerList
 				Order order = new Order();
@@ -54,22 +59,24 @@ public class OrderManager {
 					}
 				}
 				order.setFlowerList(flowerList);
+				orders.add(order);
 			}
 			// 必须关闭所有打开的流，否则会报notfoundfile异常
 			bf.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("无配置文件加载");
+			return;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	private void saveShoppingInfo(Account a){
+	private void saveOrderList(Account a){
 		try {
-			File file = new File("config/carts/"+ a.getId() + "_cart.csv");
+			File file = new File("config/orders/"+ a.getId() + "_order.csv");
 			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
 			String s = "";
@@ -123,7 +130,8 @@ public class OrderManager {
 			order.getFlowerList().add(fi);
 			order.addSumMoney(fi.getTotal_price());
 			orders.add(order);
-			saveShoppingInfo(a);
+			printOrderList();
+			saveOrderList(a);
 		}
 		return order;
 	}
@@ -138,11 +146,10 @@ public class OrderManager {
 		}
 	}
 	
-	public static List<String> getOrderList(Account a){
-		List<Order> list = a.getOrderlist().getOrders();
+	public List<String> getOrderList(){
 		List<String> ordersStr = new ArrayList<String>();
-		
-		for(Order o : list){
+		printOrderList();
+		for(Order o : orders){
 			// 返回没有删除的订单
 			if(o.isDelete()){
 				ordersStr.add(o.getId());
@@ -150,7 +157,6 @@ public class OrderManager {
 				for(FlowerInfo fi : o.getFlowerList()){
 					s.append(fi.getName()+":");
 					s.append(fi.getNum() + " ");
-					System.out.println(fi.getName()+"数量："+fi.getNum());
 				}
 				ordersStr.add(s.toString());
 				ordersStr.add(String.valueOf(o.getSumMoney()));
@@ -167,7 +173,7 @@ public class OrderManager {
 			for(Order o : list){
 				if (o.getId().equals(data[i])){
 					o.setDelete(false);
-					saveShoppingInfo(a);
+					saveOrderList(a);
 				}
 			}
 		}

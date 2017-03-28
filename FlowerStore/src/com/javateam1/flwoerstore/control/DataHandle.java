@@ -148,6 +148,7 @@ public class DataHandle {
 		for(int i = 1; i < data.length; i++){
 			//根据客户端传递的花编号获取购物车中的花信息
 			FlowerInfo f = account.getShoppingCart().getFlowerById(data[i]);
+			System.out.println("build:" + f.getName() + f.getNum());
 			filist.add(f);
 		}
 		
@@ -203,7 +204,7 @@ public class DataHandle {
 	}
 	
 	public void viewOrder(String[] data){
-		List<String> list = OrderManager.getOrderList(account);
+		List<String> list = account.getOrderlist().getOrderList();
 		int size = list.size()+1;
 		String[] dataArray = new String[size];
 		dataArray[0] = DataType.VIEW_ORDER;

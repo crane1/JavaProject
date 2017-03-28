@@ -50,6 +50,7 @@ public class AccountManager {
 			fr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("无配置文件加载");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -127,6 +128,7 @@ public class AccountManager {
 			} else{
 				System.out.println("验证成功");
 				ad.getShoppingCart().initShoppingCart(ad);
+				ad.getOrderlist().initOrderList(ad);
 				return ad;
 			}
 		return ad;
