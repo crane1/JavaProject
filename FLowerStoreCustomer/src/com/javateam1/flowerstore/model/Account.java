@@ -6,21 +6,10 @@ import com.javateam1.flowerstore.control.OrderManager;
 public class Account {
 //	属性：id，pwd，name，address，telephone，orderList, balance, type
 	private static int i = 1; 
-	private String id;
-	private String pwd;
-	private String name;
-	private String address;
-	private String telephone;
-	private Balance balance;
-	private OrderManager orderlist;
-	private int type; // 0 普通账户  1 管理员
+	private String id="";
+	private String pwd="";
 	
 	public Account(){
-		id = String.format("%03d", i++);
-		pwd = id;
-		balance = new Balance();
-		orderlist = new OrderManager();
-		setType(0);
 	}
 	
 	public String getId() {
@@ -39,65 +28,41 @@ public class Account {
 		this.pwd = pwd;
 	}
 
-	public Balance getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Balance balance) {
-		this.balance = balance;
-	}
 	
-	public int getType() {
-		return type;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
+		return result;
 	}
 
-	public void setType(int type) {
-		this.type = type;
-	}
-	
-	
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public OrderManager getOrderlist() {
-		return orderlist;
-	}
-
-	public void setOrderlist(OrderManager orderlist) {
-		this.orderlist = orderlist;
-	}
-
-	public void printOrderInfo() {
-		orderlist.printOrderList();
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (pwd == null) {
+			if (other.pwd != null)
+				return false;
+		} else if (!pwd.equals(other.pwd))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", pwd=" + pwd + ", name=" + name
-				+ ", address=" + address + ", telephone=" + telephone
-				+ ", balance=" + balance + ", type=" + type + "]";
+		return "Account [id=" + id + ", pwd=" + pwd + "]";
 	}
 	
 }

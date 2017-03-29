@@ -126,13 +126,19 @@ public class OrderManager {
 	public  Order buildOrder(Account a, List<FlowerInfo> list){
 		Order order = new Order();
 		for(FlowerInfo fi : list){
+			FlowerInfo f = new FlowerInfo();
+			f.setId(fi.getId());
+			f.setName(fi.getName());
+			f.setNum(fi.getNum());
+			f.setPrice(fi.getPrice());
+			f.setTotal_price(fi.getTotal_price());
 			//将获取到的花对象传递给订单中的花列表
-			order.getFlowerList().add(fi);
+			order.getFlowerList().add(f);
 			order.addSumMoney(fi.getTotal_price());
-			orders.add(order);
-			printOrderList();
-			saveOrderList(a);
 		}
+		orders.add(order);
+		printOrderList();
+		saveOrderList(a);
 		return order;
 	}
 	
@@ -185,4 +191,6 @@ public class OrderManager {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
+	
+	
 }

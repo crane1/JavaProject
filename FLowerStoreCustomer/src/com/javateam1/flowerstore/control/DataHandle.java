@@ -37,6 +37,8 @@ public class DataHandle {
 	private void authenticate(String[] data){
 		if (data[1].equals("1")){
 			JOptionPane.showMessageDialog(null, "µÇÂ¼³É¹¦");
+			LayerLogin layerlogin = (LayerLogin)LayerManager.getLayer(DataType.LOGIN);
+			layerlogin.saveUserDate();
 			LayerManager.hideLayer(DataType.LOGIN);
 			LayerMain layer = (LayerMain)LayerManager.showLayer(DataType.MAIN);
 			layer.getLbAccount().getButton().setText(data[2]);

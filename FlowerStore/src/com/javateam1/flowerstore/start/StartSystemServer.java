@@ -1,4 +1,4 @@
-package com.javateam1.flowerstore.view;
+package com.javateam1.flowerstore.start;
 
 import com.javateam1.flwoerstore.control.AccountManager;
 import com.javateam1.flwoerstore.control.MainServer;
