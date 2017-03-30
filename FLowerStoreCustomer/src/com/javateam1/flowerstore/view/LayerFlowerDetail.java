@@ -1,40 +1,15 @@
 package com.javateam1.flowerstore.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
-import com.javateam1.flowerstore.control.TCPClient;
 
 public class LayerFlowerDetail{
-//	list.add(f.getId());
-//	list.add(f.getName());
-//	list.add(String.valueOf(f.getPrice()));
-//	list.add(f.getMaterials());
-//	list.add(f.getPackages());
-//	list.add(String.valueOf(f.getNum()));
-//	list.add(f.getType());
-//	list.add(f.getFlowerWord());
 	private static JFrame panel = new JFrame();
 	private static Container con = panel.getContentPane();
 	private static JLabel pic = new JLabel();

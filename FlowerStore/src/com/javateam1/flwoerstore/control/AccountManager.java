@@ -8,14 +8,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
 import com.javateam1.flowerstore.model.Account;
-import com.javateam1.flowerstore.model.Order;
 
 public class AccountManager {
 	private static List<Account> accounts = new ArrayList<Account>();
+	private static Map<String, Integer> isLogin = new HashMap<String, Integer>();
+	
 	public AccountManager(){
 		initAccountArray();
 	}
@@ -43,17 +45,17 @@ public class AccountManager {
 				account.setAddress(attrs[3]);
 				account.setTelephone(attrs[4]);
 				account.setType(Integer.valueOf(attrs[5]));
+				account.getBalance().setUser_id(account.getId());
+				account.getBalance().readBalance();  //读入余额
 				accounts.add(account);
+				isLogin.put(account.getId(), 0);
 			}
 			// 必须关闭所有打开的流，否则会报notfoundfile异常
 			bf.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("无配置文件加载");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -127,29 +129,16 @@ public class AccountManager {
 				return null;
 			} else{
 				System.out.println("验证成功");
-				ad.getShoppingCart().initShoppingCart(ad);
-				ad.getOrderlist().initOrderList(ad);
-				return ad;
+				if (isLogin != null && isLogin.get(ad.getId()) != 1){
+					ad.getShoppingCart().initShoppingCart(ad);
+					ad.getOrderlist().initOrderList(ad);
+					isLogin.put(ad.getId(), 1);
+					return ad;
+				}
+				
 			}
 		return ad;
 	}
-	
-	public Account signIn(){
-		Scanner sc = new Scanner(System.in);
-		System.out.println("请输入账户名：");
-		System.out.print("#:");
-		String id = sc.next();
-		System.out.println("请输入密码：");
-		System.out.print("#:");
-		String pwd = sc.next();
-		Account account = authenticate(id, pwd);
-		if ( account != null){
-			return account;
-		} else {
-			return null;
-		}
-	}
-	
 	
 	public static boolean recharge(Account a, double num){
 		if (num > 0){
@@ -179,10 +168,6 @@ public class AccountManager {
 		System.out.println("账号：" + a.getId() + "\t密码：" + a.getPwd());
 	}
 	
-	public void deletOrder(Order o){
-		
-	}
-	
 	public static List<String> getAccountInfo(Account a){
 		List<String> accountInfo = new ArrayList<String>();
 		accountInfo.add(getString(a.getId()));
@@ -199,11 +184,5 @@ public class AccountManager {
 		}else{
 			return s;
 		}
-	}
-
-	public static void main(String[] args) {
-		AccountManager a = new AccountManager();
-		a.printAccountArray();
-		a.printAccountArray();
 	}
 }

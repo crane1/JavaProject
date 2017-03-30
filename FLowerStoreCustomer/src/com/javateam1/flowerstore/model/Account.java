@@ -1,11 +1,7 @@
 package com.javateam1.flowerstore.model;
 
-
-import com.javateam1.flowerstore.control.OrderManager;
-
 public class Account {
 //	 Ù–‘£∫id£¨pwd£¨name£¨address£¨telephone£¨orderList, balance, type
-	private static int i = 1; 
 	private String id="";
 	private String pwd="";
 	

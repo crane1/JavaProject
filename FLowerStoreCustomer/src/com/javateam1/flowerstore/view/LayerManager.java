@@ -2,9 +2,6 @@ package com.javateam1.flowerstore.view;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.JFrame;
-
 import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 

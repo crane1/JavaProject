@@ -26,6 +26,7 @@ public class InputThread extends Thread{
 				dataHandle.handleData(str);
 			} catch (SocketException e){
 				System.out.println("¡¥Ω”“Ï≥£÷’÷π");
+				dataHandle.setAccount(null);
 				try {
 					br.close();
 				} catch (IOException e1) {

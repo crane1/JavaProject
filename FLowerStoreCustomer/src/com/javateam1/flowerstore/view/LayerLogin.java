@@ -30,6 +30,7 @@ import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 import com.javateam1.flowerstore.model.Account;
 
+@SuppressWarnings("serial")
 public class LayerLogin extends LayerDemo{
 	private JLabel lbTop = new JLabel();
 	private JLabel lbCLeft = new JLabel();
@@ -198,6 +199,7 @@ public class LayerLogin extends LayerDemo{
 			FileReader fr;
 			try {
 				fr = new FileReader(f);
+				@SuppressWarnings("resource")
 				BufferedReader br = new BufferedReader(fr);
 				String str = null;
 				while((str = br.readLine()) != null){

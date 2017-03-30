@@ -3,23 +3,11 @@ package com.javateam1.flowerstore.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 
 import com.javateam1.flowerstore.control.TCPClient;
 
+@SuppressWarnings("serial")
 public class LayerDemo extends JFrame{
 	private TCPClient client;
 	private Container con = this.getContentPane();

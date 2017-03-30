@@ -30,6 +30,7 @@ import com.javateam1.flowerstore.control.TCPClient;
  *  购物车页面类
  *
  */
+@SuppressWarnings("serial")
 public class LayerShoppingCart extends LayerDemo{
 	private List<FlowerinfoInCart> list = new ArrayList<FlowerinfoInCart>();
 	private JPanel panel = new JPanel();

@@ -7,9 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.javateam1.flowerstore.model.Account;
@@ -19,7 +17,6 @@ import com.javateam1.flowerstore.model.Order;
 
 public class OrderManager {
 	private List<Order> orders = new ArrayList<Order>();
-	private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public void initOrderList(Account a){
 		try {
@@ -65,11 +62,9 @@ public class OrderManager {
 			bf.close();
 			fr.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("无配置文件加载");
 			return;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -146,6 +141,7 @@ public class OrderManager {
 		double total_money = order.getSumMoney();
 		if(AccountManager.pay(a, total_money)){
 			order.setPay(true);
+			a.getOrderlist().saveOrderList(a);
 			return true;
 		}else{
 			return false;

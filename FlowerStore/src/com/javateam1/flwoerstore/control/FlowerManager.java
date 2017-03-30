@@ -7,10 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import com.javateam1.flowerstore.model.Flower;
 
@@ -22,13 +20,14 @@ public class FlowerManager {
 	static{
 		flowerMap = new HashMap<String,Flower>();
 		recoFlowerId = new ArrayList<String>();
-		initFoodList();
+		initFlowerList();
 	}
 	
 	public FlowerManager(){}
 	
-	private static void initFoodList(){
+	private static void initFlowerList(){
 		try {
+			@SuppressWarnings("resource")
 			BufferedReader bf = new BufferedReader(new FileReader(new File("config/flowerlist.csv")));
 			String line = "";
 			// 按行读取配置文件
@@ -57,10 +56,8 @@ public class FlowerManager {
 				flowerMap.put(attrs[0], f);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -226,15 +223,5 @@ public class FlowerManager {
 		list.add(String.valueOf(f.getNum()));
 		list.add(f.getType());
 		list.add(f.getFlowerWord());
-	}
-	
-	public static void main(String[] args) {
-		FlowerManager fl = new FlowerManager();
-		
-		Flower f = new Flower("rr001", "情窦", 442.0,"黑玫瑰","礼盒",22,"礼盒","无论世界如何在改变");
-		if(fl.modifyFood(f)){
-			System.out.println("修改成功");
-		}
-		fl.printList();
 	}
 }

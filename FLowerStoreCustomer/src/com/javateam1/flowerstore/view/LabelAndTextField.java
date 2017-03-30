@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
+@SuppressWarnings("serial")
 public class LabelAndTextField extends JPanel{
 	private JLabel label;
 	private JTextField textField;

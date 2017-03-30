@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainServer {
 	public void initMainServer(){
@@ -21,7 +17,6 @@ public class MainServer {
 			
 			while(true){
 				client = server.accept();
-				SocketAddress s = client.getRemoteSocketAddress();
 				InetAddress is = client.getInetAddress();
 				System.out.println(is + "Á´½Ó³É¹¦");
 				

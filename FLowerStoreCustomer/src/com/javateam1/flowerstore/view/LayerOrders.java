@@ -13,9 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,6 +22,7 @@ import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 
+@SuppressWarnings("serial")
 public class LayerOrders extends LayerDemo{
 	private List<OrderinfoInCart> list = new ArrayList<OrderinfoInCart>();
 	private JPanel panel = new JPanel();
@@ -96,6 +95,10 @@ public class LayerOrders extends LayerDemo{
 		public OrderinfoInCart(){}
 		public OrderinfoInCart(final String id, String info, String total_price, String time, String ispay){
 			this.id.getLabel().setText("订单编号：" + id);
+			
+//			sb = new StringBuffer("<html>" + info + "</html>");
+//			info = "<html>" + info + "</html>";
+//			info = info.replace(" ", "<br/>");
 			this.info.getLabel().setText(info);
 			this.total_price.getLabel().setText("总价：" + total_price);
 			this.time.getLabel().setText("时间：" + time);

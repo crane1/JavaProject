@@ -3,10 +3,10 @@ package com.javateam1.flowerstore.view;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class MyLabel extends JPanel{
 	private JLabel label;
 	

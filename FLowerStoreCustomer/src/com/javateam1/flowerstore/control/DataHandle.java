@@ -1,7 +1,6 @@
 package com.javateam1.flowerstore.control;
 
 import java.awt.Color;
-import java.util.InputMismatchException;
 
 import javax.swing.JOptionPane;
 
@@ -89,7 +88,6 @@ public class DataHandle {
 	}
 	
 	private void payOrder(String[] data){
-		int result = 0;
 		if (data[1].equals("1")){
 			JOptionPane.showMessageDialog(null, "Ö§¸¶³É¹¦");
 		}else if(data[1].equals("0")){

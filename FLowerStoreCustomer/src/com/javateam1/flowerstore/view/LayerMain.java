@@ -3,7 +3,6 @@ package com.javateam1.flowerstore.view;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,18 +10,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.javateam1.flowerstore.control.ArrayToString;
 import com.javateam1.flowerstore.control.DataType;
 import com.javateam1.flowerstore.control.TCPClient;
 
-
+@SuppressWarnings("serial")
 public class LayerMain extends LayerDemo {
 	private final String[] maters = {"∫Ï√µπÂ","øµƒÀ‹∞","”ÙΩœ„"}; 
 	private final String[] prices = {"0-100","100-200","200-500","500-1000"};
@@ -107,28 +103,24 @@ public class LayerMain extends LayerDemo {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String type = DataType.FIRST;
+			String type = DataType.MAIN;
+			String ttype = null;
 			String ftype = null;
 			if(e.getSource() == btnFirst.getButton()){
-				type = DataType.FIRST;
+				ttype = DataType.FIRST;
 				ftype = btnFirst.getButton().getText();
-				System.out.println(ftype);
 			}else if(e.getSource() == btnMater.getComboBox()){
-				type = DataType.MATER;
+				ttype = DataType.MATER;
 				ftype = (String)btnMater.getComboBox().getSelectedItem();
-				System.out.println(ftype);
 			}else if(e.getSource() == btnPrice.getComboBox()){
-				type = DataType.PRICE;
+				ttype = DataType.PRICE;
 				ftype = (String)btnPrice.getComboBox().getSelectedItem();
-				System.out.println(ftype);
 			}else if(e.getSource() == btnType.getComboBox()){
-				type = DataType.TYPE;
+				ttype = DataType.TYPE;
 				ftype = (String)btnType.getComboBox().getSelectedItem();
-				System.out.println(ftype);
 			}else if(e.getSource() == btnNum.getComboBox()){
-				type = DataType.NUMBER;
+				ttype = DataType.NUMBER;
 				ftype = (String)btnNum.getComboBox().getSelectedItem();
-				System.out.println(ftype);
 			}else if(e.getSource() == btnShoppingCart.getButton()){
 				type = DataType.VIEW_SHOP;
 			}else if(e.getSource() == btnAccount.getButton()){
@@ -136,16 +128,14 @@ public class LayerMain extends LayerDemo {
 			}else if(e.getSource() == btnOrders.getButton()){
 				type = DataType.VIEW_ORDER;
 			}
-			System.out.println("º”‘ÿƒ⁄»›");
-			
 			
 			String[] dataArray = null; 
 			if (!type.equals(DataType.MAIN)){
 				dataArray =new String[]{type};
 			}else if (ftype != null){
-				dataArray =new String[]{DataType.MAIN, type, ftype};
+				dataArray =new String[]{DataType.MAIN, ttype, ftype};
 			} else{
-				dataArray =new String[]{DataType.MAIN, type};
+				dataArray =new String[]{DataType.MAIN, ttype};
 			}
 			
 			String data = ArrayToString.arrayToString(dataArray);
@@ -176,6 +166,14 @@ public class LayerMain extends LayerDemo {
 
 
 	public static void main(String[] args) {
+		StringBuffer sb = null;
+		JFrame j = new JFrame();
+		j.setVisible(true);
+		j.setSize(200, 300);
+        sb = new StringBuffer("<html>xxxx<br/>yyy</html>");
+        JLabel  jLabel1 = new JLabel();
+        jLabel1.setText(sb.toString());
+        j.add(jLabel1);
 	}
 
 }

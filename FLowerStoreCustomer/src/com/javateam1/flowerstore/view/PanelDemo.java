@@ -2,7 +2,6 @@ package com.javateam1.flowerstore.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,10 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class PanelDemo extends JPanel{
 	private MyLabel title;
 	private JPanel center;
@@ -113,14 +112,7 @@ public class PanelDemo extends JPanel{
 		page++;
 		initPanel();
 	}
-//	list.add(f.getId());
-//	list.add(f.getName());
-//	list.add(String.valueOf(f.getPrice()));
-//	list.add(f.getMaterials());
-//	list.add(f.getPackages());
-//	list.add(String.valueOf(f.getNum()));
-//	list.add(f.getType());
-//	list.add(f.getFlowerWord());
+	
 	public void pageUp(){
 		if(isdown == 1){
 			isdown = 0;
