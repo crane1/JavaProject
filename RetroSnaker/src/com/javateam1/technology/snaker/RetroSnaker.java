@@ -84,8 +84,7 @@ public class RetroSnaker {
 		jframe.setLocationRelativeTo(null);
 		
 		//启动面板的动画线程  
-		t = new Thread(playArea);
-		t.start();
+		
 	}
 	
 	class ButtonEvetListener implements ActionListener{
@@ -94,29 +93,22 @@ public class RetroSnaker {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			if (b == start){
-				
-				if (t.getState() == State.NEW){
-					System.out.println("游戏开始了。。。");
+				if (t == null){
+					t = new Thread(playArea);
 					t.start();
+					System.out.println("游戏开始了。。。");
 				}
 					
 			} else if (b == pause){
-				if (t.getState() == State.RUNNABLE){
+				if (playArea.getSuspend() == 0){
+					System.out.println("游戏暂停了。。。");
+					playArea.pause();
+				} else{
 					System.out.println("游戏开始了。。。");
-					try {
-						t.wait();
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} else if (t.getState() == State.WAITING){
-					System.out.println("游戏开始了。。。");
-					t.run();
+					playArea.resume();
 				}
-				
-				System.out.println("游戏暂停了。。。");
 			}
-			
+			playArea.requestFocus();
 		}
 
 	}
@@ -128,6 +120,7 @@ class PlayPanel extends JPanel implements Runnable{
 	Snaker snaker;
 	Food food;
 	JLabel score, deep;
+	private int suspend = 0; //0表示不暂停 
 	
 	
     public PlayPanel(){
@@ -184,23 +177,35 @@ class PlayPanel extends JPanel implements Runnable{
         this.setSize(PlayPanel.PANEL_WIDTH, PlayPanel.PANEL_HEIGHT);
         snaker.drawSnaker(g);
         food.drawFood(g);
-    }  
+    }
       
     //动画过程在线程内实现  
     @Override  
     public void run() {
     	initPanel();
     	int deep = 0;
-    	while(true){
-    		deep = snaker.getSnakerDeep();
-//    		System.out.println("deep=" + deep + " score = " + snaker.getScore());
-    		snakerMove(deep);
-    	}
+    	synchronized (this) {
+    		while(true){
+        		if(suspend == 0){
+        			deep = snaker.getSnakerDeep();
+//            		System.out.println("deep=" + deep + " score = " + snaker.getScore());
+            		snakerMove(deep);
+        		}else{
+        			try {
+    					wait();
+    				} catch (InterruptedException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+        		}
+        		
+        	}
+		}
+    	
     }
     
     public void snakerMove(int deep){
     	try {
-    		
             Thread.sleep(deep);
         } catch (InterruptedException e) { 
             e.printStackTrace();  
@@ -224,6 +229,21 @@ class PlayPanel extends JPanel implements Runnable{
     	int tdeep = snaker.getDeep();
     	deep.setText("速度：" + Integer.toString(tdeep));
     }
+
+	public int getSuspend() {
+		return suspend;
+	}
+
+	public void pause() {
+		this.suspend = 1;
+	}
+	
+	public synchronized void resume(){
+		this.suspend = 0;
+		notifyAll();
+	}
+    
+    
     
 }  
 

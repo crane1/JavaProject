@@ -117,7 +117,7 @@ public class Snaker {
 		SnakerBody head = getHeadPoint();
 		int sx = head.getX();
 		int sy = head.getY();
-		System.out.println("sx=" + sx + "xy=" + sy);
+		System.out.println("sx=" + sx + "sy=" + sy);
 		
 		// ¼ì²â×óºÍÉÏ±ß½ç
 		if (sx < 0 || sy < 0 || sx > PlayPanel.PANEL_WIDTH || 
@@ -249,6 +249,7 @@ public class Snaker {
 	
 	public int getSnakerDeep(){
 		int current_deep = 1000 - this.deep * 100;
+		System.out.println(current_deep);
 		if (current_deep > 100){
 			return current_deep;
 		} else {
