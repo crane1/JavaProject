@@ -1,8 +1,8 @@
-package com.library.bookmanager;
+package com.library.manager;
 
 import java.util.List;
 
-import com.library.book.Book;
+import com.library.model.Book;
 import com.library.tools.ConstStr;
 import com.library.tools.Tools;
 
@@ -81,8 +81,12 @@ public class Menu {
 		}
 	}
 	
+	public void showUserMenu(){
+		new UserManager().showUserMenu();
+	}
+	
 	public static void main(String[] args) {
-		new Menu().showMainMenu();
+		new Menu().showUserMenu();
 	}
 
 }

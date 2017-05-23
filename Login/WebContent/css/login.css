@@ -1,0 +1,25 @@
+body{
+	background-color: #000000;
+	color: #FFFFFF;
+}
+table{
+	margin:0 auto;
+	border-collapse: collapse;
+	background-color: #000000;
+}
+
+td,table{
+	border: 2px solid gray;
+}
+
+td,table,caption{
+	padding: 10px;
+}
+
+#td_btn{
+	text-align: center;
+}
+
+#remember{
+	font-size: 14px;
+}

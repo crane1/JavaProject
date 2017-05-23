@@ -15,4 +15,8 @@ public final class ConstStr {
 	public static final int ATTR_TYPE = 5;
 	
 	public static final int BACK = 0;
+	
+	public static final int LOGIN_USER = 1;
+	public static final int REGISTER_USER = 2;
+	public static final int FIND_USER = 3;
 }

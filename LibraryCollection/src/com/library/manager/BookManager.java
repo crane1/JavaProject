@@ -1,4 +1,12 @@
-package com.library.bookmanager;
+/**
+ *   程序名称：图书管理类
+ *   功能说明：其中包含对书库的"增，删，改，查"功能实现
+ *   做成者：ChianSofti.java170207.lizm    2017年4月19日 19:33:44
+ *   更新者：
+ *   
+ *   
+ */
+package com.library.manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +14,19 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import com.library.book.Book;
+import com.library.model.Book;
 import com.library.tools.ConstStr;
 import com.library.tools.Tools;
 
+/**
+ * 
+ *   类名称：BookManager 图书管理类
+ *   类说明：其中包含对书库的"增，删，改，查"功能实现
+ *   做成者：ChianSofti.java170207.lizm    2017年4月19日 19:33:44
+ *   更新者：
+ *   
+ *
+ */
 public class BookManager {
 	private List<Book> bookList = new ArrayList<Book>(); //书库
 	
@@ -194,10 +211,22 @@ public class BookManager {
 		return books;
 	}
 	
+	/**
+	 * 
+	 * 方法名： printBook 打印单一的一本书信息<br>
+	 * 功能说明： 打印一本图书信息<br>
+	 * @param book 需要打印的图书引用<br>
+	 */
 	public void printBook(Book book){
 		Tools.printContent2(book.toString());
 	}
 	
+	/**
+	 * 
+	 * 方法名： printBooks 打印一组图书信息<br>
+	 * 功能说明： 根据传入的图书列表，循环打印图书信息<br>
+	 * @param books 传入的图书列表<br>
+	 */
 	public void printBooks(List<Book> books){
 		int i = 1;
 		for(Book book : books){
