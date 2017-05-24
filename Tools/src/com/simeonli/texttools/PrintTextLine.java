@@ -1,12 +1,24 @@
 package com.simeonli.texttools;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class PrintTextLine {
+	static File file = new File("d:\\log.txt");
+	static BufferedWriter bw = null;
+	{
+		try {
+			System.out.println("---------kaishi");
+			bw = new BufferedWriter(new FileWriter(file));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static int printTextLine(File f){
 		int i = 0;
@@ -18,10 +30,8 @@ public class PrintTextLine {
 				i++;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return i;
@@ -29,15 +39,28 @@ public class PrintTextLine {
 	
 	public static int printDirTextLine(File f){
 		int i = 0;
+		
 		File[] farray = f.listFiles();
 		if (farray == null){
 			return 0;
 		}
+		
 		for (File file : farray) {
-			if (file.isFile() && file.getName().endsWith(".java")){
-				int num = printTextLine(file);
-				System.out.println("文件" + file.getAbsolutePath()+ ": " + num + "行");
-				i += num;
+			if (file.isFile() && file.getName().endsWith(".scc")){
+				try {
+					String name = file.getName();
+					System.out.println("正在删除：" + name);
+					bw.write("正在删除：" + name);
+					file.delete();
+					System.out.println("删除完成：" + name);
+					bw.write("删除完成：" + name);
+				} catch (IOException e) {
+					System.out.println("异常了");
+					e.printStackTrace();
+				}
+				
+				
+				i = i+1;
 			}else{
 				i += printDirTextLine(file);
 			}
@@ -50,8 +73,9 @@ public class PrintTextLine {
 //		int lineNum = printTextLine(f);
 //		System.out.println("文件：" + f.getName() + " " + lineNum + "行");
 		
+		new PrintTextLine();
 		File dir = new File("d:\\workspace");
 		int all = printDirTextLine(dir);
-		System.out.println(dir.getName() + "下java文件总共" + all + "行");
+		System.out.println("删除文件 "+all+" 个");
 	}
 }

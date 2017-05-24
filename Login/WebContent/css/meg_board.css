@@ -1,0 +1,75 @@
+body{
+	background-color: #000000;
+	color: #A7A7A7;
+}
+.t_head{
+	font-weight: bold;
+}
+hr{
+	margin: 5px;
+}
+.bor_col{
+	border: 1px solid #1f1f1f;
+}
+#out_box{
+	background-color: rgba(0,0,0,0.8);
+	width: 960px;
+	margin: 0 auto;
+}
+
+
+#title{
+	text-align: center;
+	font-size: 200%;
+}
+
+.context{
+	text-indent: 2em;
+}
+
+.in_mes{
+	background-color: rgba(0,0,0,0.5);
+	border: hidden;
+	color: #A7A7A7;
+	width: 900px;
+	height: 200px;
+}
+
+.photo{
+	width: 50px;
+	height: 50px;
+}
+
+.part{
+	margin-top: 15px;
+}
+
+.p_name{
+	position: relative;
+	left: 65px;
+	top: -55px;
+}
+
+.floor{
+	font-size: 80%;
+}
+
+.mesg{
+	position: relative;
+	left: 75px;
+	top: -40px;
+	font-size: 12px;
+}
+
+#submit{
+	color: #FFFFFF;
+    border: 1px solid #6D7C8C;
+    background-color: #7B8C9E;
+    border-radius: 2px;
+}
+
+#t_form{
+	margin: 2px;
+}
+
+
