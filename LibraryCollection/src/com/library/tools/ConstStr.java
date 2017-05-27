@@ -18,5 +18,16 @@ public final class ConstStr {
 	
 	public static final int LOGIN_USER = 1;
 	public static final int REGISTER_USER = 2;
-	public static final int FIND_USER = 3;
+	
+	
+	//用户类型
+	public static final int USE_NORMAL = 0;
+	public static final int USE_MANAGER = 1;
+	public static final int USE_ADMIN = 2;
+	
+	//超级管理员菜单
+	public static final int FIND_USER = 1;
+	public static final int ADD_USER = 2;
+	public static final int MOD_USER = 3;
+	public static final int DEL_USER = 4;
 }

@@ -52,22 +52,24 @@ public class Tools {
 	 *
 	 * @return 返回从键盘接收到的整型
 	 */
-	public static int getInputInt(String promptMessage){
+	public static String getInputInt(String promptMessage){
 		String str = null;  // 接收输入的字符
-		int value = 0;  // 转换为数字的字符
 		
 		printContent(promptMessage);
 		while(true){
 			str = sc.nextLine();
 			checkExitSystem(str);
-			if (str.matches("[0-9]+")){
-				value = Integer.valueOf(str);
+			if (str.matches("^[0-9]+$") || str.equals("back")){
 				break;
-			}else{
+			} else{
 				System.out.println("输入不匹配，请重新输入:");
 			}
 		}
-		return value;
+		return str;  //返回时数字的字符串
+	}
+	
+	public static boolean isBack(String str){
+		return str.equals("back");
 	}
 	
 	/**

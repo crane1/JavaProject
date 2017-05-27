@@ -50,7 +50,14 @@ public class UserOperation {
 			if(book == null){
 				Tools.printContent("Mes_borBookNoExist");
 			}else{
-				int bookCnt = Tools.getInputInt("Mes_borrowCnt");
+				String str = Tools.getInputInt("Mes_borrowCnt");
+				int bookCnt = -1;
+				if(Tools.isBack(str)){
+					return;
+				}else{
+					bookCnt = Integer.parseInt(str);
+				}
+				
 				if(bookCnt > 0){
 					borrowBook(user, book, bookCnt);
 				}else{
@@ -94,7 +101,15 @@ public class UserOperation {
 			if(recordCnt < 1){
 				Tools.printContent("Mes_BookNoLend");
 			}else{
-				int bookCnt = Tools.getInputInt("Mes_returnCnt");
+				
+				String str = Tools.getInputInt("Mes_returnCnt");
+				int bookCnt = -1;
+				if(Tools.isBack(str)){
+					return;
+				}else{
+					bookCnt = Integer.parseInt(str);
+				}
+				
 				if(bookCnt > 0){  //还书记录>0
 					//还书记录<=借阅记录
 					if(bookCnt <= recordCnt){

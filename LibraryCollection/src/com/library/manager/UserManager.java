@@ -11,6 +11,8 @@ package com.library.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.Oneway;
+
 import com.library.model.User;
 import com.library.tools.ConstStr;
 import com.library.tools.Tools;
@@ -24,7 +26,44 @@ import com.library.tools.Tools;
  *   
  */
 public class UserManager {
-	List<User> userList = new ArrayList<User>();
+	private static List<User> userList = new ArrayList<User>();
+	private static List<User> userOnline = new ArrayList<User>();
+	
+	{
+		User admin = new User("admin", "admin","damin");
+		admin.setRight(2);
+		
+		User manager = new User("manager", "manager","manager");
+		manager.setRight(1);
+		
+		User normal = new User("normal", "normal","normal");
+		normal.setRight(0);
+		
+		userList.add(admin);
+		userList.add(manager);
+		userList.add(normal);
+	}
+	
+	
+	/**
+	 * 判断用户的权限
+	 * @param user 需要判断的用户 
+	 * @return 是否拥有某种权限
+	 */
+	
+	// 是否是超级管理员
+	public boolean isAdmin(User user){
+		return user.getRight() == ConstStr.USE_ADMIN;
+	}
+	// 是否是普通管理员
+	public boolean isManager(User user){
+		return user.getRight() == ConstStr.USE_MANAGER;
+	}
+	// 是否是普通用户
+	public boolean isNormal(User user){
+		return user.getRight() == ConstStr.USE_NORMAL;
+	}
+	
 	
 	
 	/**
@@ -43,6 +82,15 @@ public class UserManager {
 		}
 		
 		return flag;
+	}
+	
+	/**
+	 * 带有收集用户信息的添加用户外壳
+	 * @return  返回添加结果
+	 */
+	public boolean addUser(){
+		User user = collectUserInfo(true);
+		return addUser(user);
 	}
 	
 	/**
@@ -125,6 +173,11 @@ public class UserManager {
 		return flag;
 	}
 	
+	public boolean deleteUser(){
+		String id = getInputInfo("Mes_inputUserId","Mes_idCannotEmpty");
+		return deleteUser(id);
+	}
+	
 	public void setUserInfo(User user, String id, String name, String pwd){
 		user.setId(id);
 		user.setName(name);
@@ -153,6 +206,11 @@ public class UserManager {
 		}
 		
 		return flag;
+	}
+	
+	public boolean modifyUser(){
+		String id = getInputInfo("Mes_inputUserId","Mes_idCannotEmpty");
+		return modifyUser(id);
 	}
 	
 	/**
@@ -241,32 +299,7 @@ public class UserManager {
 		return false;
 	}
 	
-	public void showUserMenu(){
-		while(true){
-			
-			Tools.printContent("Mes_login");
-			Tools.printContent("Mes_register");
-			Tools.printContent("Mes_lookAll");
-			int type = Tools.getInputInt("Mes_selectOperation");
-			switch(type){
-			case ConstStr.LOGIN_USER:
-				login();
-				break;
-			case ConstStr.REGISTER_USER:
-				register();
-				break;
-			case ConstStr.FIND_USER:
-				printUsers();
-				break;
-			case ConstStr.BACK:
-				return;
-			default:
-				Tools.printContent("Mes_noIndefineOperation");
-			}
-		}
-	}
-
-	private void printUsers() {
+	public void printUsers() {
 		if(userList.size() == 0){
 			Tools.printContent("Mes_userNoExist");
 		}
@@ -275,8 +308,9 @@ public class UserManager {
 		}
 		
 	}
-
-	public static void main(String[] args) {
-		new UserManager().showUserMenu();
+	
+	
+	public void addOnlineUser(User user){
+		userOnline.add(user);
 	}
 }

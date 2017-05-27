@@ -20,12 +20,15 @@ public class User {
 	private String id;
 	private String pwd;
 	private String name;
+	private int right;  //0普通用户   1 管理员  2 超级管理员
+	
 	
 	public User(String id, String pwd, String name) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
+		this.right = 0;
 	}
 
 	public User() {
@@ -58,5 +61,13 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", pwd=" + pwd + ", name=" + name + "]";
+	}
+
+	public int getRight() {
+		return right;
+	}
+
+	public void setRight(int right) {
+		this.right = right;
 	}
 }

@@ -46,8 +46,25 @@ public class BookManager {
 		book.setBookAuthor(Tools.getInputString("Mes_inputBookAuthor"));
 		book.setBookPublish(Tools.getInputString("Mes_inputBookPublish"));
 		book.setBookType(Tools.getInputString("Mes_inputBookType"));
-		book.setBookTotalNum(Tools.getInputInt("Mes_inputBookTotal"));
-		book.setBookRemainderNum(Tools.getInputInt("Mes_inputBookRemain"));
+		
+		String str = Tools.getInputInt("Mes_inputBookTotal");
+		int bookCnt = -1;
+		if(Tools.isBack(str)){
+			return;
+		}else{
+			bookCnt = Integer.parseInt(str);
+		}
+		
+		book.setBookTotalNum(bookCnt);
+		
+		str = Tools.getInputInt("Mes_inputBookTotal");
+		bookCnt = -1;
+		if(Tools.isBack(str)){
+			return;
+		}else{
+			bookCnt = Integer.parseInt(str);
+		}
+		book.setBookRemainderNum(bookCnt);
 	}
 	
 	/**
