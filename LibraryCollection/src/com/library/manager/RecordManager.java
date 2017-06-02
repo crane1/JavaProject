@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.library.model.Record;
 import com.library.model.User;
+import com.library.tools.Tools;
 
 public class RecordManager {
 	private List<Record> recordList = null; //记录库
+	
 	
 	/**
 	 * 添加借阅记录
@@ -22,17 +24,18 @@ public class RecordManager {
 		return add;
 	}
 	
+	
 	/**
 	 * 根据记录id查询记录
 	 * @param user 需要查询的用户
 	 * @param id 需要查询的记录id
 	 * @return 是否查询到记录
 	 */
-	public boolean findRecordById(User user, int id){
-		boolean flag = false;
+	public Record findRecordById(User user, String id){
+		Record flag = null;
 		for(Record r : recordList){
-			if(user.getId().equals(r.getUserId()) && r.getId() == id){
-				flag = true;
+			if(user.getId().equals(r.getUserId()) && r.getId().equals(id)){
+				flag = r;
 			}
 		}
 		return flag;
@@ -86,6 +89,22 @@ public class RecordManager {
 			}
 		}
 		return list;
+	}
+	
+	public boolean deleteRecord(User user, String id){
+		boolean flag = false;
+		Record r = findRecordById(user, id);
+		if(r != null){
+			flag = recordList.remove(r);
+		}else{
+			Tools.printContent("Mes_recordNoExist");
+		}
+		return flag;
+	}
+	
+	public boolean deleteRecord(User user){
+		String id = Tools.getInputString("Mes_inputRecordId");
+		return deleteRecord(user, id);
 	}
 
 }

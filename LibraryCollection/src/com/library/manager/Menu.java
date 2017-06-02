@@ -60,17 +60,49 @@ public class Menu {
 		}
 	}
 	
+	public static void showUserMenu(User user){
+		while(true){
+			if(userManager.isAdmin(user)){
+				showAdminMenu();
+			}else{
+				showNormalMenu(user);
+			}
+			
+			
+		}
+		
+	}
+	
+	public static void showNormalMenu(User user){
+		Tools.printContent("Mes_bookMenu");
+		Tools.printContent("Mes_recordMenu");
+	}
+	
+	public static void handleNormalMenu(User user, int type){
+		switch(type){
+		case ConstStr.BOOK_MENU:
+			showUserBookMenu(user);
+			break;
+		case ConstStr.RECORD_MENU:
+			showUserRecordMenu(user);
+			break;
+		default:
+			Tools.printContent("Mes_noIndefineOperation");
+		}
+	}
+	
+	
 	/**
 	 * 
 	 * 方法名： showMainMenu 显示主菜单<br>
 	 * 功能说明： 显示主菜单<br>
 	 */
-	public static void showUserMenu(User user){
+	public static void showUserBookMenu(User user){
 		while(true){
 			if(userManager.isNormal(user)){
-				showNormalMenu();
+				showNormalBookMenu();
 			}else if(userManager.isManager(user)){
-				showManagerMenu();
+				showManagerBookMenu();
 			}else{
 				showAdminMenu();
 			}
@@ -90,7 +122,7 @@ public class Menu {
 				continue;
 			//如果是普通用户和普通管理员则调用普通菜单处理方法
 			}else if(userManager.isManager(user) || userManager.isNormal(user)){
-				handleNormalMenu(type);
+				handleNormalBookMenu(type);
 			}else if(userManager.isAdmin(user)){
 				handleAdminMenu(type);
 			}
@@ -100,22 +132,22 @@ public class Menu {
 	public static void showBackPromt(){
 		Tools.printContent("Mes_inputBack");
 	}
-	public static void showNormalMenu(){
+	public static void showNormalBookMenu(){
 		Tools.printContent("Mes_findBooks");
 	}
 	
-	public static void showManagerMenu(){
-		showNormalMenu();
+	public static void showManagerBookMenu(){
+		showNormalBookMenu();
 		Tools.printContent("Mes_addBooks");
 		Tools.printContent("Mes_modBooks");
 		Tools.printContent("Mes_delBooks");
 		
 	}
 	
-	public static void handleNormalMenu(int type){
+	public static void handleNormalBookMenu(int type){
 		switch(type){
 		case ConstStr.FIN_BOOK:
-			showFindMenu();
+			showFindBookMenu();
 			break;
 		case ConstStr.ADD_BOOK:
 			bookManager.operateBook(ConstStr.ADD_BOOK);
@@ -125,6 +157,63 @@ public class Menu {
 			break;
 		case ConstStr.DEL_BOOK:
 			bookManager.operateBook(ConstStr.DEL_BOOK);
+			break;
+		default:
+			Tools.printContent("Mes_noIndefineOperation");
+		}
+	}
+	
+	/**
+	 * 
+	 * 方法名： showMainMenu 显示主菜单<br>
+	 * 功能说明： 显示主菜单<br>
+	 */
+	public static void showUserRecordMenu(User user){
+		while(true){
+			if(userManager.isNormal(user)){
+				showNormalRecordMenu();
+			}else if(userManager.isManager(user)){
+				showManagerRecordMenu();
+			}
+			showBackPromt();
+			
+			String str = Tools.getInputInt("Mes_selectOperation");
+			int type = -1;
+			if(Tools.isBack(str)){
+				return;
+			}else{
+				type = Integer.parseInt(str);
+			}
+			
+			//如果普通用户输入大于1则输入不合法
+			if(userManager.isNormal(user) && type > 1){
+				Tools.printContent("Mes_noIndefineOperation");
+				continue;
+			//如果是普通用户和普通管理员则调用普通菜单处理方法
+			}else if(userManager.isManager(user) || userManager.isNormal(user)){
+				handleNormalRecordMenu(user,type);
+			}
+		}
+	}
+	public static void showNormalRecordMenu(){
+		Tools.printContent("Mes_findRecords");
+	}
+	
+	public static void showManagerRecordMenu(){
+		showNormalBookMenu();
+		Tools.printContent("Mes_addRecords");
+		Tools.printContent("Mes_modRecords");
+		Tools.printContent("Mes_delRecords");
+		
+	}
+	
+	public static void handleNormalRecordMenu(User user,int type){
+		switch(type){
+		case ConstStr.FIN_RECORD:
+			showFindRecordMenu();
+			break;
+		case ConstStr.DEL_RECORD:
+			recordManager.deleteRecord(user);
 			break;
 		default:
 			Tools.printContent("Mes_noIndefineOperation");
@@ -157,7 +246,7 @@ public class Menu {
 		}
 	}
 	
-	public static void showFindMenu(){
+	public static void showFindBookMenu(){
 		while(true){
 			Tools.printContent("Mes_selectFindType");
 			Tools.printContent("Attr_Id");
@@ -204,6 +293,10 @@ public class Menu {
 				Tools.printContent("Mes_noIndefineOperation");
 			}
 		}
+	}
+	
+	public static void showFindRecordMenu(){
+		
 	}
 	
 	public static void main(String[] args) {

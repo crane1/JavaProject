@@ -30,4 +30,14 @@ public final class ConstStr {
 	public static final int ADD_USER = 2;
 	public static final int MOD_USER = 3;
 	public static final int DEL_USER = 4;
+	
+	//记录操作菜单
+	public static final int FIN_RECORD = 1;
+	public static final int ADD_RECORD = 2;
+	public static final int MOD_RECORD = 3;
+	public static final int DEL_RECORD = 4;
+	
+	//普通菜单项
+	public static final int BOOK_MENU = 1;
+	public static final int RECORD_MENU = 2;
 }

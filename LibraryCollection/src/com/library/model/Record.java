@@ -1,34 +1,36 @@
 package com.library.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Record {
-	int id;  // 记录编号
+	String id;  // 记录编号
 	String userId;
 	String bookId; // 图书编号
 	int bookCnt; // 图书记录数量
-	String date; // 记录日期
+	Date date; // 记录日期
 	int type; //0借阅，1还书
 	
 	public Record() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Record(int id, String userId, String bookId, int bookCnt,
+	public Record(String userId, String bookId, int bookCnt,
 			String date, int type) {
 		super();
-		this.id = id;
+		this.id = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		this.userId = userId;
 		this.bookId = bookId;
 		this.bookCnt = bookCnt;
-		this.date = date;
+		this.date = new Date();
 		this.type = type;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -48,11 +50,11 @@ public class Record {
 		this.bookCnt = bookCnt;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
