@@ -1,0 +1,66 @@
+#outer{
+	position: relative;
+	width: 960px;
+	top:100px;
+	left: 50%;
+}
+#main{
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
+	background-color: #eee;
+	float: left;
+	left: -50%;
+	color:#c3c3c3;
+	border-radius:5px;
+}
+
+#user_list{
+	position: relative;
+	width: 200px;
+	background-color: #2e3238;
+	padding: 10px 1px;
+	float: left;
+	height: 700px;
+	border-radius:3px 0px 0px 5px;
+	color:white;
+}
+
+hr{
+	border: 1px inset gray;
+}
+
+#right{
+	position: relative;
+	width: 758px;
+	float: left;
+	color: black;
+	height: 700px;
+	text-indent: 2em;
+}
+
+h4{
+	text-align: center;
+}
+
+.box{
+	margin: 5px;
+	padding: 5px;
+}
+
+#list_title{
+	margin-left: 5px;
+}
+
+.pic{
+	width:50px;
+	height:50px;
+	vertical-align: text-top;
+	border-radius: 3px;
+}
+
+#loginout{
+	text-align:right;
+	padding-right:10px;
+}
+
