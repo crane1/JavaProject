@@ -1,6 +1,7 @@
 package com.study.mvc.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.study.mvc.model.bean.Student;
 import com.study.mvc.model.service.ILoginCheckService;
+import com.study.mvc.model.service.IStudentService;
 import com.study.mvc.model.service.LoginCheckServiceImp;
+import com.study.mvc.model.service.StudentServiceImp;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -26,9 +29,7 @@ public class LoginServlet extends HttpServlet {
 		String pwd = null;  //接收密码
 		
 		// 1 设置编码
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		
 		
 		// 2 接收变量
 		id = request.getParameter("id"); 
@@ -47,6 +48,9 @@ public class LoginServlet extends HttpServlet {
 		Student user = checkService.checkLoginUser(id, pwd);
 		
 		if(user != null){
+			IStudentService stuService = new StudentServiceImp();
+			List<Student> list = stuService.findAll();
+			request.getSession().setAttribute("userlist", list);
 			request.getSession().setAttribute("user", user);
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else{

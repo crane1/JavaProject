@@ -69,33 +69,6 @@ public class DBUtil {
 	}
 	
 	
-	public  List<Student> queryStudents(){
-		getConn(); //获取链接
-		List<Student> stu_list = null;
-		try {
-			String sql = "select s_id, s_name, s_sex, s_age, s_gradInst from s_student"; 
-			Statement state = conn.createStatement();
-			
-			ResultSet resultSet = state.executeQuery(sql);
-			
-			while(resultSet.next()){
-				if(stu_list == null){
-					stu_list = new ArrayList<Student>();
-				}
-				Student stu_temp = new Student(resultSet.getString("s_id"),
-						resultSet.getString("s_name"), 
-						resultSet.getString("s_sex"), 
-						resultSet.getInt("s_age"),
-						resultSet.getString("s_gradInst")
-						);
-				stu_list.add(stu_temp);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return stu_list;
-	}
-	
 	public Map<String, String> queryStudent(String id, String pwd) {
 		getConn(); //获取链接
 		Map<String, String> infoMap = null;
@@ -118,6 +91,31 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 		return infoMap;
+	}
+	
+	public int executeUpdate(String sql){
+		int res = -1;
+		try {
+			Statement state = conn.createStatement();
+			res = state.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public ResultSet query(String sql){
+		ResultSet res = null;
+		
+		try {
+			Statement state = conn.createStatement();
+			res = state.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+				
 	}
 	
 	public static void main(String[] args) {
