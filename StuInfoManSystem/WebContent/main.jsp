@@ -12,7 +12,7 @@
 
 	<body>
 		<div id="outer">
-			<div id="logo" class="div_b">Logo展示</div>
+			<div id="logo" class="div_b"><h1>学生信息管理系统</h1></div>
 			<!--主导航页面-->
 			<div id="main_navig" class="div_b">
 				<ul class="main_navig">

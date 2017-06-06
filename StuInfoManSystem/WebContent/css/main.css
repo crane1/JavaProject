@@ -17,7 +17,7 @@ div{
 	background-color: #fdfcf8;
 }
 #logo{
-	background-color: red;
+	background-color: #fdfcf8;
 	width: 1210px;
 	height: 100px;
 }
@@ -29,19 +29,19 @@ div#main_navig, ul.main_navig{
 }
 
 #inner_navig{
-	background-color: blueviolet;
+	background-color: #fdfcf8;
 	width: 180px;
 	float: left;
 }
 
 #show_info{
-	background-color: goldenrod;
+	background-color: #fdfcf8;
 	width: 1030px;
 	float: left;
 }
 
 #footer{
-	background-color: red;
+	background-color: #fdfcf8;
 	float: left;
 	width: 1210px;
 	height: 100px;
