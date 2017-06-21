@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	
+	<package name="login" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="userRight" class="com.sims.mvc.controller.UserInterceptor"></interceptor>
+		</interceptors>
+		
+		<action name="to_login" class="com.sims.mvc.controller.LoginAction" >
+			<result name="success">/jsp/Login.jsp</result>
+		</action>
+		
+		<action name="login" class="com.sims.mvc.controller.LoginAction" method="login">
+			<result name="success">/content/student/showStuInfo.jsp</result>
+			<result name="error">/jsp/Login.jsp</result>
+		</action>
+		
+		<action name="createNum" class="com.sims.mvc.controller.IdetifyNumAction" >
+			<result name="success">/jsp/Login.jsp</result>
+		</action>
+		
+		<action name="identifyNum" class="com.sims.mvc.controller.IdetifyNumAction" method="idetifyNum">
+			<result name="success">/jsp/Login.jsp</result>
+		</action>
+		
+		<action name="mainPage" class="com.sims.mvc.controller.UserAction" >
+			<interceptor-ref name="userRight"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/content/student/showStuInfo.jsp</result>
+			<result name="error">/jsp/Login.jsp</result>
+			<result name="noRight">/jsp/fail.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="managerTeacher" namespace="/" extends="json-default">
+		<interceptors>
+			<interceptor name="userRight" class="com.sims.mvc.controller.UserInterceptor"></interceptor>
+			<interceptor-stack name="myInter">
+				<interceptor-ref name="userRight"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myInter"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="error">/jsp/Login.jsp</result>
+		</global-results>
+		
+		<action name="getStuData" class="com.sims.mvc.controller.ManTeacherAction" >
+			<interceptor-ref name="myInter"></interceptor-ref>
+			<result  type="json">
+				<param name="root">result</param>
+			</result>
+			
+		</action>
+		
+		
+	</package>
+</struts>
