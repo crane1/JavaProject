@@ -1,3 +1,7 @@
+/**
+ * 功能：所有与学生有关接口
+ * 制作人：李泽明
+ */
 package com.sims.mvc.model.service;
 
 import java.util.List;
@@ -5,15 +9,20 @@ import java.util.List;
 import com.sims.mvc.model.bean.Student;
 
 public interface IStudentService {
+	//查询所有
+	List<Student> findStudentAll();
 	
 	//添加学生
-	int addStudent(Student student);
+	int addStudent(Student student, String pwd);
 	
 	//删除学生
 	int deleteStuent(Student student);
 	
 	//修改学生
 	int modifyStudent(Student student);
+	
+	//修改学生密码
+	int modifyStudentPWD(String id, String pwd);
 	
 	//查询学生
 	//根据id查询一个学生
@@ -52,5 +61,7 @@ public interface IStudentService {
 	//根据多个条件查询多个学生
 	List<Student> findStudentByCondition(String id, String name, String sex, int startAge, int endAge, String gradFrom,
 			int telephone, String address, String idCard, String email, String teamId, String classId);
+	
+	List<Student> findStudentByIsAdmin();
 
 }

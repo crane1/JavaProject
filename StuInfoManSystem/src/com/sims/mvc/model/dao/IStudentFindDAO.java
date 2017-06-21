@@ -5,7 +5,8 @@ import java.util.List;
 import com.sims.mvc.model.bean.Student;
 
 public interface IStudentFindDAO {
-	
+	//查询所有学生
+	List<Student> findStudentAll();
 	//查询学生
 	//根据id查询一个学生
 	Student findStudentById(String id);
@@ -43,5 +44,8 @@ public interface IStudentFindDAO {
 	//根据多个条件查询多个学生
 	List<Student> findStudentByCondition(String id, String name, String sex, int startAge, int endAge, String gradFrom,
 			int telephone, String address, String idCard, String email, String teamId, String classId);
+	
+	//查询是一般管理员的用户
+	List<Student> findStudentByIsAdmin();
 
 }

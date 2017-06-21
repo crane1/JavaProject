@@ -39,7 +39,9 @@ public class DBUtil {
 		return dbUtil;
 	}
 	
-	private  void getConn(){
+	private  boolean getConn(){
+		boolean flag = true;
+		
 		if(conn == null){
 			try {
 				Class.forName(driver);
@@ -47,78 +49,80 @@ public class DBUtil {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("数据库连接失败！");
+				flag = false;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
+				flag = false;
 			}
 		}
+		
+		return flag;
 	}
 	
-	private  void closeConn(){
+	private  boolean closeConn(){
+		boolean flag = true;
+		
 		if(conn != null){
 			try {
 				conn.close();
+				conn = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				System.out.println("数据库关闭失败");
+				flag = false;
 			}
 		}
+		
+		return flag;
 	}
 	
-	
-	public Map<String, String> queryStudent(String id, String pwd) {
-		getConn(); //获取链接
-		Map<String, String> infoMap = null;
-		try {
-			String sql = "select s.s_id, s.s_name, s.s_sex, s.s_age, s.s_gradinst, s.s_pwd from s_student s where s.s_id='" + id + "'"; 
-			Statement state = conn.createStatement();
-			
-			ResultSet resultSet = state.executeQuery(sql);
-			
-			while(resultSet.next()){
-				if(resultSet.getString("s_pwd").equals(pwd)){
-					infoMap = new HashMap<String, String>();
-					infoMap.put("name", resultSet.getString("s_name"));
-					infoMap.put("sex", resultSet.getString("s_sex"));
-					infoMap.put("age", resultSet.getString("s_age"));
-					infoMap.put("gradinst", resultSet.getString("s_gradinst"));
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return infoMap;
-	}
-	
+	//更新数据
 	public int executeUpdate(String sql){
 		int res = -1;
-		try {
-			Statement state = conn.createStatement();
-			res = state.executeUpdate(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(getConn()){
+			try {
+				Statement state = conn.createStatement();
+				System.out.println(sql);
+				res = state.executeUpdate(sql);
+				System.out.println(res);
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				
+				System.out.println("数据库异常:" + e.getMessage());
+			}
 		}
+		
 		return res;
 	}
 	
+	//查询数据
 	public ResultSet query(String sql){
 		ResultSet res = null;
-		
-		try {
-			Statement state = conn.createStatement();
-			res = state.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (getConn()){
+			try {
+				Statement state = conn.createStatement();
+				res = state.executeQuery(sql);
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				System.out.println("数据库异常:" + e.getMessage());
+				StackTraceElement[] trace = e.getStackTrace();
+				for(StackTraceElement ste : trace){
+					
+				}
+				System.out.println("数据库异常:" + e.getMessage());
+			}
 		}
 		
 		return res;
-				
 	}
 	
 	public static void main(String[] args) {
 		DBUtil dbutil = DBUtil.getInstance();
-		Map<String, String> uers = dbutil.queryStudent("java020701","123");
-		System.out.println(uers);
+		String pwd = "1234";
+		String id = "1";
+		String sql = "update sims_student set s_pwd = '" + pwd + "' where s_id = '" + id + "'";
+		System.out.println(sql);
+		int res = dbutil.executeUpdate(sql);
+		System.out.println(res);
 	}
-
-	
-	
 }

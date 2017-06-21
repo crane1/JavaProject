@@ -1,0 +1,18 @@
+body{
+	color:white;
+}
+td{
+	padding: 5px;
+}
+
+.left_td{
+	text-align: right;
+}
+
+.right_td{
+	text-align: left;
+}
+
+[input=text]{
+	width:150px;
+}

@@ -13,14 +13,13 @@ public class StudentServiceImp implements IStudentService{
 	private IStudentUpdateDAO stuUpdate;
 	
 	public StudentServiceImp() {
-		stuFind = new StudentFindDAOImp();
 		stuUpdate = new StudentUpdateDAOImp();
+		stuFind =new StudentFindDAOImp();
 	}
 	
-
 	@Override
-	public int addStudent(Student student) {
-		return stuUpdate.addStudent(student);
+	public int addStudent(Student student, String pwd) {
+		return stuUpdate.addStudent(student, pwd);
 	}
 
 	@Override
@@ -95,6 +94,22 @@ public class StudentServiceImp implements IStudentService{
 			String teamId, String classId) {
 		return stuFind.findStudentByCondition(id, name, sex, startAge, endAge,
 				gradFrom, telephone, address, idCard, email, teamId, classId);
+	}
+
+	@Override
+	public int modifyStudentPWD(String id, String pwd) {
+		return stuUpdate.modifyStudentPWD(id, pwd);
+	}
+
+	@Override
+	public List<Student> findStudentAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Student> findStudentByIsAdmin() {
+		return stuFind.findStudentByIsAdmin();
 	}
 
 }
