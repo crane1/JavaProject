@@ -64,3 +64,26 @@ h4{
 	padding-right:10px;
 }
 
+table{
+		border-collapse: collapse;
+		border:2px solid gray;
+		margin:0 auto;
+	}
+	td{
+		border:1px solid gray;
+		padding:4px;
+	}
+	
+	caption{
+		font-size: 200%;
+	}
+	h1{
+		text-align: center;
+	}
+	
+	#info,#findCondition{
+		float: left;
+		position:relative;
+		left:400px;
+		margin: 10px;
+	}

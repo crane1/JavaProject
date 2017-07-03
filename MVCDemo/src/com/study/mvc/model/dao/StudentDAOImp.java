@@ -1,12 +1,20 @@
 package com.study.mvc.model.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import oracle.jdbc.OracleTypes;
+import oracle.jdbc.driver.OracleBlobInputStream;
+import oracle.jdbc.oracore.OracleType;
+
 import com.study.mvc.model.bean.Student;
 import com.study.mvc.tools.DBUtil;
+import com.study.mvc.tools.PageManager;
 
 public class StudentDAOImp implements IStudentDAO {
 	private DBUtil dbutil= DBUtil.getInstance();
@@ -70,8 +78,50 @@ public class StudentDAOImp implements IStudentDAO {
 
 	@Override
 	public List<Student> findStusByName(String name) {
-		String sql = "select s_id, s_name, s_sex, s_age, s_gradInst from s_student where s_name='" + name + "'";
-		return getResultList(sql);
+		List<Student> list = null;
+		String sql = "{? = call getPageRows(?, ?, ?, ?)}";
+		CallableStatement stat;
+		try {
+			stat = dbutil.getConn().prepareCall(sql);
+			stat.registerOutParameter(1, OracleTypes.CURSOR);
+			stat.registerOutParameter(5, OracleTypes.INTEGER);
+			
+			if(!PageManager.initFlag){
+				PageManager.PageManagerInit(8, 1);
+				PageManager.initFlag = true;
+			}
+			
+			stat.setInt(2, PageManager.getMaxPageRows());
+			stat.setInt(3, PageManager.getCurPageNo());
+			stat.setString(4, name);
+			
+			System.out.println("11111" + PageManager.getMaxPageRows());
+			System.out.println("11111" + PageManager.getCurPageNo());
+			
+			stat.execute();
+			ResultSet res = (ResultSet)stat.getObject(1);
+			System.out.println(stat.getObject(5));
+			PageManager.setMaxRowNumber((int)stat.getObject(5));
+			
+			while(res.next()){
+				if(list == null){
+					list = new ArrayList<Student>();
+				}
+				
+				Student stu = new Student();
+				stu.setS_id(res.getString("s_id"));
+				stu.setS_name(res.getString("s_name"));
+				stu.setS_age(res.getInt("s_age"));
+				stu.setS_sex(res.getString("s_sex"));
+				stu.setS_gradInst(res.getString("s_gradinst"));
+				
+				list.add(stu);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("---------------imp list:" + list);
+		return list;
 	}
 
 	@Override

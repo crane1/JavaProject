@@ -44,7 +44,7 @@ public class DBUtil {
 		return dbUtil;
 	}
 	
-	private  void getConn(){
+	public  Connection getConn(){
 		if(conn == null){
 			try {
 				Class.forName(driver);
@@ -56,6 +56,7 @@ public class DBUtil {
 				e.printStackTrace();
 			}
 		}
+		return conn;
 	}
 	
 	private  void closeConn(){

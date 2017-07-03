@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+     
+    <!-- 配置dataSource -->
+     <bean name="comboPool" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+     	<property name="jdbcUrl" value="jdbc:oracle:thin:@175.3.13.3:1521:orcl"></property>
+     	<property name="user" value="scott"></property>
+     	<property name="password" value="tiger"></property>
+     	<property name="initialPoolSize" value="3"></property>
+     	<property name="maxPoolSize" value="10"></property>
+     	<property name="driverClass" value="oracle.jdbc.OracleDriver"></property>
+     	<property name="minPoolSize" value="1"></property>
+     	<property name="acquireIncrement" value="3"></property>
+     	<property name="maxIdleTime" value="60"></property>
+     </bean>
+     
+     <!-- 配置JdbcTemplate -->
+     <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+     	<property name="dataSource" ref="comboPool"></property>
+     </bean>
+     
+     <!-- 声明式事物控制开始 -->
+     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     	<property name="dataSource" ref="comboPool"></property>
+     </bean>
+     
+     <!-- 声明事物控制通知 -->
+     <tx:advice id="txTransactionManager" transaction-manager="transactionManager">
+     	<tx:attributes>
+     		<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+     		<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+     		<tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+     		<tx:method name="find*" read-only="true"/>
+     		<tx:method name="load*" read-only="true"/>
+     	</tx:attributes>
+     </tx:advice>
+     
+     <!-- 配置事物的切入点 DAO层的所有-->
+     <aop:config>
+     	<aop:pointcut expression="within(com.spring.model.dao..*)" id="txPointCut"/>
+     	<aop:advisor advice-ref="txTransactionManager" pointcut-ref="txPointCut"/>
+     </aop:config>
+     
+	<bean id="userDAO" class="com.spring.model.dao.UserInfoDAOImp">
+		<property name="jt" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="userService" class="com.spring.model.service.UserInfoServiceImp">
+		<property name="userDAO" ref="userDAO"/>
+	</bean>
+	
+</beans>

@@ -1,6 +1,7 @@
 package com.study.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,32 +31,34 @@ public class LoginServlet extends HttpServlet {
 		
 		// 1 设置编码
 		
+		PrintWriter out = response.getWriter();
 		
 		// 2 接收变量
 		id = request.getParameter("id"); 
 		pwd = request.getParameter("pwd");
 		
+		System.out.println("--------------id:" + id);
+		System.out.println("--------------pwd:" + pwd);
 		// 3.1验证合法性
 		if(id == null || pwd == null || id.equals("") || pwd.equals("")){
-			request.setAttribute("erro", "用户名或密码不能为空");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			String data = "用户名或密码不能为空";
+			out.write(data);
 			return;
 		}
 		
 		// 3.2 验证正确性
 		
-		ILoginCheckService checkService= new LoginCheckServiceImp();
+		ILoginCheckService checkService= new LoginCheckServiceImp();//
 		Student user = checkService.checkLoginUser(id, pwd);
 		
 		if(user != null){
-			IStudentService stuService = new StudentServiceImp();
-			List<Student> list = stuService.findAll();
-			request.getSession().setAttribute("userlist", list);
 			request.getSession().setAttribute("user", user);
-			request.getRequestDispatcher("welcome.jsp").forward(request, response);
+			String data = "登录成功";
+			out.write(data);
+			return;
 		}else{
-			request.setAttribute("erro", "用户名或密码不正确");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			String data = "用户名或密码不正确";
+			out.write(data);
 			return;
 		}
 	}
