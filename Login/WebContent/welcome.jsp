@@ -1,4 +1,4 @@
-<%@page import="com.model.UserInfo"%>
+<%@page import="com.study.mvc.model.bean.UserInfo"%>
 <%@page import="java.util.Set"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

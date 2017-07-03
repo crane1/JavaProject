@@ -1,7 +1,7 @@
+<%@page import="com.model.UserInfo"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.manager.ApplicationContains"%>
 <%@page import="java.util.Set"%>
-<%@page import="com.model.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

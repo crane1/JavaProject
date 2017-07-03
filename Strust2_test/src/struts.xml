@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	
+	<package name="mypack" namespace="/" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="LoginInterceptor" class="com.study.action.LoginInterceptor"></interceptor>
+		</interceptors>
+		
+		<action name="hello" class="com.study.action.HelloAction" method="add">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+			<result name="success" >/Ok.jsp</result>
+			<result name="error">/Erro.jsp</result>
+			<exception-mapping result="error" exception="com.study.action.MyException">
+			</exception-mapping>
+		</action>
+		
+		<action name="login"  class="com.study.action.LoginAction">
+			<result name="success">/Ok.jsp</result>
+			<result name="input">/Login.jsp</result>
+		</action>
+		
+		<action name="upload" class="com.study.action.UpFileAction">
+            <param name="upfileSavePath">F:/upload/</param>
+			<result name="input">/FileUpload.jsp</result>
+			<result name="success">/UpFilOk.jsp</result>
+			<interceptor-ref name="fileUpload"> 
+				<param name="maximumSize">5485760</param>
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg</param> 
+            </interceptor-ref> 
+            <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"/>    
+		</action>
+		
+		<action name="download" class="com.study.action.DownloadAction">
+			<result type="stream">
+				<param name="contentDisposition">attachment;fileName='miu-clips.mp3'</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentType">audio/mpeg</param>
+			</result>
+		</action>
+		
+		
+	</package>
+	
+	
+</struts>

@@ -52,9 +52,8 @@ public class Tools {
 	 *
 	 * @return 返回从键盘接收到的整型
 	 */
-	public static int getInputInt(String promptMessage){
+	public static String getInputInt(String promptMessage){
 		String str = null;  // 接收输入的字符
-		int value
 		printContent(promptMessage);
 		while(true){
 			str = sc.nextLine();

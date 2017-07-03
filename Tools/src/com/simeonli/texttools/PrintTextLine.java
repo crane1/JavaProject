@@ -10,10 +10,11 @@ import java.io.IOException;
 
 public class PrintTextLine {
 	static File file = new File("d:\\log.txt");
+	
+	static int filenum = 0;
 	static BufferedWriter bw = null;
 	{
 		try {
-			System.out.println("---------kaishi");
 			bw = new BufferedWriter(new FileWriter(file));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -21,13 +22,15 @@ public class PrintTextLine {
 	}
 	
 	public static int printTextLine(File f){
+//		System.out.println("Filename: " + f.getName());
+		filenum++;
 		int i = 0;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(f));
-			
-			
-			while(br.readLine() != null){
+			String line = "";
+			while((line = br.readLine()) != null){
 				i++;
+//				System.out.println(line+"         line" + i);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -37,7 +40,7 @@ public class PrintTextLine {
 		return i;
 	}
 	
-	public static int printDirTextLine(File f){
+	public static int DelFile(File f){
 		int i = 0;
 		
 		File[] farray = f.listFiles();
@@ -58,9 +61,31 @@ public class PrintTextLine {
 					System.out.println("异常了");
 					e.printStackTrace();
 				}
-				
-				
 				i = i+1;
+			}else{
+				i += printDirTextLine(file);
+			}
+		}
+		return i;
+	}
+	
+	public static int printDirTextLine(File f){
+		int i = 0;
+		
+		File[] farray = f.listFiles();
+		if (farray == null){
+			return 0;
+		}
+		
+		for (File file : farray) {
+			if(file.getName().equals("dist")){
+				continue;
+			}
+			if (file.isFile() && (file.getName().endsWith(".java")
+					|| file.getName().endsWith(".jsp")
+					|| file.getName().endsWith(".js")
+					|| file.getName().endsWith(".css"))){
+				i += printTextLine(file);
 			}else{
 				i += printDirTextLine(file);
 			}
@@ -69,13 +94,10 @@ public class PrintTextLine {
 	}
 
 	public static void main(String[] args) {
-//		File f = new File("src/com/simeonli/texttools/PrintTextLine.java");
-//		int lineNum = printTextLine(f);
-//		System.out.println("文件：" + f.getName() + " " + lineNum + "行");
-		
 		new PrintTextLine();
-		File dir = new File("d:\\workspace");
+		File dir = new File("D:\\workspace\\SIMSStruts2");
 		int all = printDirTextLine(dir);
-		System.out.println("删除文件 "+all+" 个");
+		System.out.println("共 "+all+" 行");
+		System.out.println("共 "+filenum+" 个文件");
 	}
 }

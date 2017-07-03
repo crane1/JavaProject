@@ -1,0 +1,658 @@
+create table s_student(
+       s_id varchar(25),
+       s_name varchar(25),
+       s_sex varchar(6),
+       s_age number(6),
+       s_gradinst varchar(50)
+);
+prompt PL/SQL Developer import file
+prompt Created on 2017年6月2日 by lizem
+set feedback off
+set define off
+prompt Disabling triggers for S_STUDENT...
+alter table S_STUDENT disable all triggers;
+prompt Deleting S_STUDENT...
+delete from S_STUDENT;
+commit;
+prompt Loading S_STUDENT...
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020701', '小四瓣01', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020702', '小四瓣02', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020703', '小四瓣03', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020704', '小四瓣04', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020705', '小四瓣05', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020706', '小四瓣06', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020707', '小四瓣07', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020708', '小四瓣08', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020709', '小四瓣09', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020710', '小四瓣10', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020711', '小四瓣11', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020712', '小四瓣12', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020713', '小四瓣13', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020714', '小四瓣14', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020715', '小四瓣15', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020716', '小四瓣16', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020717', '小四瓣17', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020718', '小四瓣18', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020719', '小四瓣19', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020720', '小四瓣20', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020721', '小四瓣21', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020722', '小四瓣22', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020723', '小四瓣23', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020724', '小四瓣24', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020725', '小四瓣25', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020726', '小四瓣26', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020727', '小四瓣27', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020728', '小四瓣28', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020729', '小四瓣29', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020730', '小四瓣30', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020731', '小四瓣31', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020732', '小四瓣32', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020733', '小四瓣33', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020734', '小四瓣34', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020735', '小四瓣35', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020736', '小四瓣36', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020737', '小四瓣37', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020738', '小四瓣38', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020739', '小四瓣39', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020740', '小四瓣40', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020741', '小四瓣41', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020742', '小四瓣42', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020743', '小四瓣43', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020744', '小四瓣44', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020745', '小四瓣45', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020746', '小四瓣46', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020747', '小四瓣47', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020748', '小四瓣48', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020749', '小四瓣49', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020750', '小四瓣50', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020751', '小四瓣51', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020752', '小四瓣52', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020753', '小四瓣53', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020754', '小四瓣54', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020755', '小四瓣55', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020756', '小四瓣56', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020757', '小四瓣57', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020758', '小四瓣58', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020759', '小四瓣59', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020760', '小四瓣60', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020761', '小四瓣61', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020762', '小四瓣62', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020763', '小四瓣63', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020764', '小四瓣64', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020765', '小四瓣65', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020766', '小四瓣66', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020767', '小四瓣67', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020768', '小四瓣68', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020769', '小四瓣69', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020770', '小四瓣70', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020771', '小四瓣71', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020772', '小四瓣72', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020773', '小四瓣73', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020774', '小四瓣74', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020775', '小四瓣75', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020776', '小四瓣76', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020777', '小四瓣77', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020778', '小四瓣78', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020779', '小四瓣79', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020780', '小四瓣80', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020781', '小四瓣81', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020782', '小四瓣82', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020783', '小四瓣83', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020784', '小四瓣84', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020785', '小四瓣85', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020786', '小四瓣86', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020787', '小四瓣87', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020788', '小四瓣88', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020789', '小四瓣89', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020790', '小四瓣90', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020791', '小四瓣91', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020792', '小四瓣92', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020793', '小四瓣93', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020794', '小四瓣94', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020795', '小四瓣95', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020796', '小四瓣96', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020797', '小四瓣97', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020798', '小四瓣98', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020799', '小四瓣99', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020800', '小四瓣100', '女   ', 22, '西安草滩皇家工业学院');
+commit;
+prompt 100 records committed...
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020801', '小四瓣101', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020802', '小四瓣102', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020803', '小四瓣103', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020804', '小四瓣104', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020805', '小四瓣105', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020806', '小四瓣106', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020807', '小四瓣107', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020808', '小四瓣108', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020809', '小四瓣109', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020810', '小四瓣110', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020811', '小四瓣111', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020812', '小四瓣112', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020813', '小四瓣113', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020814', '小四瓣114', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020815', '小四瓣115', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020816', '小四瓣116', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020817', '小四瓣117', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020818', '小四瓣118', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020819', '小四瓣119', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020820', '小四瓣120', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020821', '小四瓣121', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020822', '小四瓣122', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020823', '小四瓣123', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020824', '小四瓣124', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020825', '小四瓣125', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020826', '小四瓣126', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020827', '小四瓣127', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020828', '小四瓣128', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020829', '小四瓣129', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020830', '小四瓣130', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020831', '小四瓣131', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020832', '小四瓣132', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020833', '小四瓣133', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020834', '小四瓣134', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020835', '小四瓣135', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020836', '小四瓣136', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020837', '小四瓣137', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020838', '小四瓣138', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020839', '小四瓣139', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020840', '小四瓣140', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020841', '小四瓣141', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020842', '小四瓣142', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020843', '小四瓣143', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020844', '小四瓣144', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020845', '小四瓣145', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020846', '小四瓣146', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020847', '小四瓣147', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020848', '小四瓣148', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020849', '小四瓣149', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020850', '小四瓣150', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020851', '小四瓣151', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020852', '小四瓣152', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020853', '小四瓣153', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020854', '小四瓣154', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020855', '小四瓣155', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020856', '小四瓣156', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020857', '小四瓣157', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020701', '小四瓣01', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020702', '小四瓣02', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020703', '小四瓣03', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020704', '小四瓣04', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020705', '小四瓣05', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020706', '小四瓣06', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020707', '小四瓣07', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020708', '小四瓣08', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020709', '小四瓣09', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020710', '小四瓣10', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020711', '小四瓣11', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020712', '小四瓣12', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020713', '小四瓣13', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020714', '小四瓣14', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020715', '小四瓣15', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020716', '小四瓣16', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020717', '小四瓣17', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020718', '小四瓣18', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020719', '小四瓣19', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020720', '小四瓣20', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020721', '小四瓣21', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020722', '小四瓣22', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020723', '小四瓣23', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020724', '小四瓣24', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020725', '小四瓣25', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020726', '小四瓣26', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020727', '小四瓣27', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020728', '小四瓣28', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020729', '小四瓣29', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020730', '小四瓣30', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020731', '小四瓣31', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020732', '小四瓣32', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020733', '小四瓣33', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020734', '小四瓣34', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020735', '小四瓣35', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020736', '小四瓣36', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020737', '小四瓣37', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020738', '小四瓣38', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020739', '小四瓣39', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020740', '小四瓣40', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020741', '小四瓣41', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020742', '小四瓣42', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020743', '小四瓣43', '男   ', 23, '西安草滩皇家工业学院');
+commit;
+prompt 200 records committed...
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020744', '小四瓣44', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020745', '小四瓣45', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020746', '小四瓣46', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020747', '小四瓣47', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020748', '小四瓣48', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020749', '小四瓣49', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020750', '小四瓣50', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020751', '小四瓣51', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020752', '小四瓣52', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020753', '小四瓣53', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020754', '小四瓣54', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020755', '小四瓣55', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020756', '小四瓣56', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020757', '小四瓣57', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020758', '小四瓣58', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020759', '小四瓣59', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020760', '小四瓣60', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020761', '小四瓣61', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020762', '小四瓣62', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020763', '小四瓣63', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020764', '小四瓣64', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020765', '小四瓣65', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020766', '小四瓣66', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020767', '小四瓣67', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020768', '小四瓣68', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020769', '小四瓣69', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020770', '小四瓣70', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020771', '小四瓣71', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020772', '小四瓣72', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020773', '小四瓣73', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020774', '小四瓣74', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020775', '小四瓣75', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020776', '小四瓣76', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020777', '小四瓣77', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020778', '小四瓣78', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020779', '小四瓣79', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020780', '小四瓣80', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020781', '小四瓣81', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020782', '小四瓣82', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020783', '小四瓣83', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020784', '小四瓣84', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020785', '小四瓣85', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020786', '小四瓣86', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020787', '小四瓣87', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020788', '小四瓣88', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020789', '小四瓣89', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020790', '小四瓣90', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020791', '小四瓣91', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020792', '小四瓣92', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020793', '小四瓣93', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020794', '小四瓣94', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020795', '小四瓣95', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020796', '小四瓣96', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020797', '小四瓣97', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020798', '小四瓣98', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020799', '小四瓣99', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020800', '小四瓣100', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020801', '小四瓣101', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020802', '小四瓣102', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020803', '小四瓣103', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020804', '小四瓣104', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020805', '小四瓣105', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020806', '小四瓣106', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020807', '小四瓣107', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020808', '小四瓣108', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020809', '小四瓣109', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020810', '小四瓣110', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020811', '小四瓣111', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020812', '小四瓣112', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020813', '小四瓣113', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020814', '小四瓣114', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020815', '小四瓣115', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020816', '小四瓣116', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020817', '小四瓣117', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020818', '小四瓣118', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020819', '小四瓣119', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020820', '小四瓣120', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020821', '小四瓣121', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020822', '小四瓣122', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020823', '小四瓣123', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020824', '小四瓣124', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020825', '小四瓣125', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020826', '小四瓣126', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020827', '小四瓣127', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020828', '小四瓣128', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020829', '小四瓣129', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020830', '小四瓣130', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020831', '小四瓣131', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020832', '小四瓣132', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020833', '小四瓣133', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020834', '小四瓣134', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020835', '小四瓣135', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020836', '小四瓣136', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020837', '小四瓣137', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020838', '小四瓣138', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020839', '小四瓣139', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020840', '小四瓣140', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020841', '小四瓣141', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020842', '小四瓣142', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020843', '小四瓣143', '男   ', 23, '西安草滩皇家工业学院');
+commit;
+prompt 300 records committed...
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020844', '小四瓣144', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020845', '小四瓣145', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020846', '小四瓣146', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020847', '小四瓣147', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020848', '小四瓣148', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020849', '小四瓣149', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020850', '小四瓣150', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020851', '小四瓣151', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020852', '小四瓣152', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020853', '小四瓣153', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020854', '小四瓣154', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020855', '小四瓣155', '男   ', 23, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020856', '小四瓣156', '女   ', 22, '西安草滩皇家工业学院');
+insert into S_STUDENT (S_ID, S_NAME, S_SEX, S_AGE, S_GRADINST)
+values ('java020857', '小四瓣157', '男   ', 23, '西安草滩皇家工业学院');
+commit;
+prompt 314 records loaded
+prompt Enabling triggers for S_STUDENT...
+alter table S_STUDENT enable all triggers;
+set feedback on
+set define on
+prompt Done.

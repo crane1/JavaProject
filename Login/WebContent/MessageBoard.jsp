@@ -1,10 +1,10 @@
 
 <%@page import="java.util.Random"%>
-<%@page import="com.jdbc.DBUtil"%>
-<%@page import="com.model.Message"%>
+<%@page import="com.study.mvc.tools.DBUtil"%>
+<%@page import="com.study.mvc.model.bean.Message"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
-<%@page import="com.model.UserInfo"%>
+<%@page import="com.study.mvc.model.bean.UserInfo"%>
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
