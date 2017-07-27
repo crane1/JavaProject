@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/><!-- 针对二级缓存 -->
+	</settings>
+	<typeAliases>
+		<typeAlias type="lizem.model.Student" alias="Student" />
+		<typeAlias type="lizem.model.Contry" alias="Contry" />
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="lizem.model.StringArrayHandler" javaType="[Ljava.lang.String;" jdbcType="VARCHAR"/>
+	</typeHandlers>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@175.3.13.3:1521:orcl" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="lizem/mapping/StudentMapper.xml" />
+		<mapper resource="lizem/mapping/ContryMapper.xml" />
+	</mappers>
+</configuration>

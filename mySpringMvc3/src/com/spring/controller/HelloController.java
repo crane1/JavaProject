@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.spring.model.bean.UserInfo;
 import com.spring.model.service.IUserInfoService;
 
-public class HelloController extends AbstractController {
+public class HelloController extends MultiActionController {
 
 	IUserInfoService userService = null;
 	
@@ -42,6 +43,13 @@ public class HelloController extends AbstractController {
 		mav.setViewName(result); // web-inf/jsp/  + hello + .jsp
 		
 		// ·µ»ØmodelºÍview
+		return mav;
+	}
+	
+	public ModelAndView login(HttpServletRequest req,
+			HttpServletResponse arg1) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("success");
 		return mav;
 	}
 	

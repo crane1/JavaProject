@@ -49,7 +49,7 @@
      
      <!-- 配置事物的切入点 DAO层的所有-->
      <aop:config>
-     	<aop:pointcut expression="within(com.study.medol.dao..*)" id="txPointCut"/>
+     	<aop:pointcut expression="within(com.sims.mvc.model.dao..*)" id="txPointCut"/>
      	<aop:advisor advice-ref="txTransactionManager" pointcut-ref="txPointCut"/>
      </aop:config>
      
@@ -73,26 +73,50 @@
      	<property name="jt" ref="jdbcTemplate"/>
      </bean>
      
+     
      <!-- 配置service层  所有的service层都加入到这里来-->
-     <bean name="loginService" class="com.sims.mvc.model.service.LoginServiceImp">
+     <bean name="loginService" class="com.sims.mvc.model.service.LoginServiceImp" scope="prototype">
      	<property name="loginDao" ref="loginDAOImp"></property>
      </bean>
-     <bean name="classService" class="com.sims.mvc.model.service.ClassServiceImp">
+     <bean name="classService" class="com.sims.mvc.model.service.ClassServiceImp" scope="prototype">
      	<property name="icd" ref="classDAOImp"></property>
      </bean>
-     <bean name="teamService" class="com.sims.mvc.model.service.TeamServiceImp">
+     <bean name="teamService" class="com.sims.mvc.model.service.TeamServiceImp" scope="prototype">
      	<property name="iteamdao" ref="teamDAOImp1"></property>
      </bean>
-     <bean name="studentUpdateService" class="com.sims.mvc.model.service.StudentServiceImp">
+     <bean name="studentService" class="com.sims.mvc.model.service.StudentServiceImp" scope="prototype">
      	<property name="stuUpdate" ref="studentUpdateDAOImp"></property>
-     </bean>
-     <bean name="studentFindService" class="com.sims.mvc.model.service.StudentServiceImp">
      	<property name="stuFind" ref="studentFindDAOImp"></property>
      </bean>
      
+     
+     
      <!-- 配置action层 所有的action层都加入到这里来-->
-     <bean name="registAction" class="com.study.controller.RegisterAction">
-     	<property name="stuService" ref="studentService"></property>
+     <bean name="loginAction" class="com.sims.mvc.controller.LoginAction">
+     	<property name="loginService" ref="loginService"></property>
+     </bean> 
+	
+	 <bean name="classActions" class="com.sims.mvc.controller.ClassAction">
+     	<property name="studentService" ref="studentService"/>
+     	<property name="teamService" ref="teamService"/>
+     	<property name="classService" ref="classService"/>
      </bean>
-
+      
+   <bean name="superAdminAction" class="com.sims.mvc.controller.SuperAdminAction">
+     	<property name="stuService" ref="studentService"></property>
+     </bean>  
+     
+     <bean name="Teamservce" class="com.sims.mvc.controller.TeamAction">
+        <property name="teamservce" ref="teamService"/>
+        <property name="StudentService" ref="studentService"/>
+     </bean> 
+     <!-- 修改学生信息 -->
+     <bean name="updateStu" class="com.sims.mvc.controller.UpdateStudentAction" scope="prototype">
+     	<property name="stuService" ref="studentService"></property>
+     </bean> 
+      <bean name="adminAction" class="com.sims.mvc.controller.AdminAction">
+        <property name="is" ref="classService"/>
+        <property name="stuService" ref="studentService"/>
+     </bean>
 </beans>
+

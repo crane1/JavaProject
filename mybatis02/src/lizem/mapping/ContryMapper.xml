@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lizem.dao.ContryMapper" >
+  <resultMap id="BaseResultMap" type="lizem.model.Contry" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <collection property="userlist" ofType="lizem.model.Student" javaType="java.util.List" >
+    	<id column="userid" property="id" javaType="sTRING" jdbcType="VARCHAR"/>
+    	<result column="username" property="name" javaType="String" jdbcType="VARCHAR" />
+    	<!-- <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+	    <result column="QX" property="qx" jdbcType="DECIMAL" />
+	    <result column="LIKES" property="likes" jdbcType="VARCHAR" /> -->
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CONTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+   <select id="selectByPrimaryKey1" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    c.ID, c.NAME, u.id as userid, u.name as username<!--, PWD, QX, LIKES -->
+    from contry c, users u 
+    where c.ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CONTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="lizem.model.Contry" >
+    insert into CONTRY (ID, NAME)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="lizem.model.Contry" >
+    insert into CONTRY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lizem.model.Contry" >
+    update CONTRY
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lizem.model.Contry" >
+    update CONTRY
+    set NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

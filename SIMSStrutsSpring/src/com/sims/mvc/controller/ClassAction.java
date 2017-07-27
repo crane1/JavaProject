@@ -39,19 +39,17 @@ ServletRequestAware {
 	private String teamId;
 	private String teamName;
 	private String result = null;
-	IStudentService StudentService = new StudentServiceImp();
-	ITeamService teamservce = new TeamServiceImp();
-	IClassService  classService=new ClassServiceImp();
-	
+	IStudentService studentService;
+	ITeamService teamService;
+	IClassService  classService;
 	
     public ClassAction() {
-    	init();
+    	
 	}
-     
-    public void init(){
+  
+	public void init(){
     	session = ServletActionContext.getContext().getSession();
 		stu = (Student)session.get("stuInfo");
-		System.out.println("stu===="+stu.toString());
 		classId = stu.getClassID();// 获取班id
     }
     
@@ -63,50 +61,40 @@ ServletRequestAware {
     
 	//	班级成员信息查询
 	public String checkClassStudent(){
-		List<Student> list = StudentService.findStudentByClassID(classId);
-//		System.out.println("list:"+list);
-//		System.out.println("checkClassStudent--班级成员查询---classId:"+classId);
+		init();
+		List<Student> list = studentService.findStudentByClassID(classId);
 		result=JsonMesg.getJsonArray(list);
-//		System.out.println("checkClassStudent--班级成员查询-result:"+result);
 		return SUCCESS;
 	}
 	
 //	班级信息展示
     public String showClass(){
+    	init();
 		CClass classInfo = classService.findClassById(classId);
-//		System.out.println("showClass--班级信息结构---classInfo:"+classInfo);
 		result=JsonMesg.getJsonArray(classInfo);
-//		System.out.println("showClass--班级信息结构---result:"+result);
 		return SUCCESS;
     }
 	
     
 //    创建组
     public String createTeam(){
+    	init();
     	JsonMesg mesg = null;
-//    	System.out.println("teamName-------------" + teamName);
-//    	System.out.println("leaderId-------------" + leaderId);
     	
     	if(teamId==null||teamId.equals("")||teamName==null
     	   ||teamName.equals("")||leaderId==null||leaderId.equals("")){
-    		System.out.println("teamId"+teamId+"teamName"+teamName+"leaderId"+leaderId);
     		  mesg = new JsonMesg("1");
     		  result = JsonMesg.getJsonObject(mesg);
-    		  System.out.println("111111111111111---------------");
     		  return "success";
     	}else{
     	      Team team=new Team(teamId, teamName, leaderId,classId);
-    	      StudentService = new StudentServiceImp();
-    	      teamservce.addTeam(team);
-//    	      System.out.println("team:ID"+team.getId()+"team:name"+team.getName()+"team:getLeaderID"+team.getLeaderID()+"team:getClassID"+team.getClassID());
-//    	      System.out.println("222222222222---------------");
-              Student student = StudentService.findStudentById(leaderId);
-              System.out.println("----teamId:"+teamId);
+    	     
+    	      teamService.addTeam(team);
+              Student student = studentService.findStudentById(leaderId);
               student.setT_leader(1);  //设置组长权限
               student.setTeamID(teamId);  //设置组id
               
-              int res = StudentService.modifyStudent(student);
-              System.out.println("222222222222---------------:"+res);
+              int res = studentService.modifyStudent(student);
               if(res > 0){
               	System.out.println(leaderId + "组长权限授权");
               }
@@ -119,19 +107,16 @@ ServletRequestAware {
     
 //    组成员信息展示
     public String showTeamStudent(){
+    	init();
     	JsonMesg mesg = null;
-    	System.out.println("teamId:"+teamId);
     	if(teamId==null||teamId.equals("")){
 			mesg = new JsonMesg("1");
 			result = JsonMesg.getJsonObject(mesg);
 		    return "success";
     	}else{	
-    		List<Student> list = StudentService.findStudentByTeamID(teamId, classId);
+    		List<Student> list = studentService.findStudentByTeamID(teamId, classId);
     		mesg = new JsonMesg("2");
-//    		System.out.println("teamId:"+teamId);
-//    		System.out.println("showTeamStudent--组成员---list:"+list);
     		result=JsonMesg.getJsonArray(list);
-//    		System.out.println("showTeamStudent--组成员---result:"+result);
     	}
 		return SUCCESS;
     }
@@ -139,41 +124,36 @@ ServletRequestAware {
     
 //    所有组信息展示 通过班长的classID
     public String showTeam(){
-//    	System.out.println("showTeam==classId"+classId);
-    	List<Team> list = teamservce.findTeamsByClassID(classId);
-//    	System.out.println("showTeam--组结构--list"+list);
+    	init();
+    	List<Team> list = teamService.findTeamsByClassID(classId);
     	result=JsonMesg.getJsonArray(list);
-//    	System.out.println("showTeam--组结构--list"+result);
     	return SUCCESS;
     }
     
     
 //    任命组长
     public String appoinTeamLeader(){
-//    	System.out.println("--appoinTeamLeader--teamId:"+teamId+"----leaderId:"+leaderId);
+    	init();
     	JsonMesg mesg = null;
     	if(teamId==null||teamId.equals("")||leaderId==null||leaderId.equals("")){
     		mesg = new JsonMesg("1");
 			result = JsonMesg.getJsonObject(mesg);
 		    return "success";	
     	}else{
-    		Team team = teamservce.findTeamById(teamId);
-    		List<Student> list = StudentService.findStudentByTeamID(teamId, classId);
-//    		System.out.println("----team:"+team+"----teamId:"+teamId+"----leaderId:"+leaderId);
+    		Team team = teamService.findTeamById(teamId);
+    		List<Student> list =studentService.findStudentByTeamID(teamId, classId);
     		
     		for (Student s : list) {
     			 if(s.getT_leader()==1){
 					 s.setT_leader(0);
-					 StudentService.modifyStudent(s);
+					 studentService.modifyStudent(s);
 				   }
     			 
-//    			 System.out.println("list"+list);
     			 if(s.getId().equals(leaderId)&&s.getT_leader()!=1){
     				 s.setT_leader(1);
-					 StudentService.modifyStudent(s);
+					 studentService.modifyStudent(s);
 					 team.setLeaderID(leaderId);
-					 teamservce.modifyTeam(team);
-//					 System.out.println("333"+team.getLeaderID());
+					 teamService.modifyTeam(team);
 					 mesg = new JsonMesg("2");
 					 result = JsonMesg.getJsonObject(mesg);
 				   }
@@ -249,5 +229,30 @@ ServletRequestAware {
 		this.session = session;	
 	}
 
+    
+	
+   public IStudentService getStudentService() {
+		return studentService;
+	}
 
+	public void setStudentService(IStudentService studentService) {
+		this.studentService = studentService;
+	}
+
+	public ITeamService getTeamService() {
+		return teamService;
+	}
+
+	public void setTeamService(ITeamService teamService) {
+		this.teamService = teamService;
+	}
+
+
+	public IClassService getClassService() {
+		return classService;
+	}
+
+	public void setClassService(IClassService classService) {
+		this.classService = classService;
+	}
 }

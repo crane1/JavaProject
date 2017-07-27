@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lizem.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="lizem.model.Student" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="QX" property="qx" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PWD, NAME, QX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USERS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="lizem.model.Student" >
+    insert into USERS (ID, PWD, NAME, 
+      QX)
+    values (#{id,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{qx,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="lizem.model.Student" >
+    insert into USERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pwd != null" >
+        PWD,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="qx != null" >
+        QX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qx != null" >
+        #{qx,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lizem.model.Student" >
+    update USERS
+    <set >
+      <if test="pwd != null" >
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qx != null" >
+        QX = #{qx,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lizem.model.Student" >
+    update USERS
+    set PWD = #{pwd,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      QX = #{qx,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

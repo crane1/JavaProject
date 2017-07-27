@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+		
+		
+	<bean name="/index.action" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+	</bean>
+	
+	<bean id="defaultResolver" class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver" />
+	<bean id="paramMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="method"></property>
+	</bean>
+	
+	<bean name="/hello.action" class="com.spring.controller.HelloController">
+		<property name="userService" ref="userService"/>
+		<property name="MethodNameResolver" ref="paramMethodResolver"></property>
+	</bean>
+	
+	<bean name="/model.action" class="com.spring.controller.MyModelAndDriven">
+	</bean>
+
+	
+	<!-- 3、视图解析器jsp 内部资源视图解析器 /WEB-INF/pages/index.jsp -->
+	<!-- 前缀+逻辑名+后缀 -->
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>

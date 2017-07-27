@@ -53,7 +53,7 @@
 					</div>
 					<div class="block">
 						<input type="text" id="randNum" name="randNum" onblur="checkImgNum()" placeholder="请输入验证码">
-						<img id="image" align="top" alt="1" src="${pageScope.path}/identifyNum" onclick="getNewRand()">
+						<img id="image" align="top" alt="1" src="${pageScope.path}/createNum" onclick="getNewRand()">
 					</div>
 					<div class="block">
 						<button  id="submit" onclick="return login()" >登录</button>
