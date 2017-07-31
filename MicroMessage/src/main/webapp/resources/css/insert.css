@@ -1,0 +1,24 @@
+body{
+	background-color: white;
+	
+}
+
+table{
+	border:3px solid gray;
+	margin: 0 auto;
+	width:500px;
+	height:400px;
+	text-align:center;
+}
+
+textarea,[type=text]{
+	width:400px;
+}
+
+textarea{
+	height: 100px;
+}
+
+caption{
+	font-size: 200%;
+}

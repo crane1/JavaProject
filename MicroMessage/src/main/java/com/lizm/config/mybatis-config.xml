@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="development">
+    <environment id="development">
+      <!-- 事务管理 -->
+      <transactionManager type="JDBC"/>
+      
+      <!-- 连接池配置 -->
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=GBK"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- mapper 映射器（这些 mapper 的 XML 文件包含了 SQL 代码和映射定义信息） -->
+  <mappers>
+    <mapper resource="com/lizm/config/sql/Mapper.xml"/>
+  </mappers>
+</configuration>

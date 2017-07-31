@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>MicroMessage</display-name>
+  <servlet>
+  	<servlet-name>ListServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.ListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ListServlet</servlet-name>
+	<url-pattern>/List.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>DeleteOneServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.DeleteOneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>DeleteOneServlet</servlet-name>
+	<url-pattern>/deleteOne.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>DeleteBatchServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.DeleteBatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>DeleteBatchServlet</servlet-name>
+	<url-pattern>/deleteBatch.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>InsertOneServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.InsertOneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>InsertOneServlet</servlet-name>
+	<url-pattern>/insert.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ALinkServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.ALinkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ALinkServlet</servlet-name>
+	<url-pattern>/alink.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>UpdateOneServlet</servlet-name>
+  	<servlet-class>com.lizm.controller.UpdateOneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>UpdateOneServlet</servlet-name>
+	<url-pattern>/updateOne.action</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+

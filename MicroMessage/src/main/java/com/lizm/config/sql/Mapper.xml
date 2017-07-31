@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间，保证内容的唯一性 -->
+<mapper namespace="Message">
+
+	<!-- 数据库返回值和对象属性的映射关系 -->
+	<resultMap type="com.lizm.beans.Message" id="MessageResult">
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="commod" jdbcType="VARCHAR" property="commod"/>
+		<result column="descript" jdbcType="VARCHAR" property="descript"/>
+		<result column="context" jdbcType="VARCHAR" property="context"/>
+	</resultMap>
+	
+	<!-- 查询单条数据语句 -->
+	<select id="queryMesgById"  parameterType="int" resultMap="MessageResult">
+		select id, commod, descript, context from micro_message where id = #{_parameter}
+	</select>
+	
+	<!-- 查询语句 -->
+	<select id="queryMesgList"  parameterType="com.lizm.beans.Message" resultMap="MessageResult">
+		select id, commod, descript, context from micro_message where 1 = 1
+		<!-- 模糊查询'%'与变量之间必须有空格，否则无效 -->
+		<if test="commod != null and !&quot;&quot;.equals(commod)">
+			and commod like '%' #{commod} '%'
+		</if>
+		<if test="descript != null and !&quot;&quot;.equals(descript)">
+			and descript like '%' #{descript} '%'
+		</if>
+	</select>
+	
+	<delete id="deleteOne"  parameterType="int">
+		delete from micro_message where id = #{_parameter}
+	</delete>
+	
+	<delete id="deleteBatch"  parameterType="java.util.List">
+		delete from micro_message where id in (
+		<foreach collection="list" item="item" separator=",">
+			#{item}
+		</foreach>
+		)
+	</delete>
+	
+	<insert  id="InsertOne"  parameterType="com.lizm.beans.Message">
+		insert into micro_message(commod, descript, context) values(#{commod}, #{descript}, #{context});
+	</insert>
+	
+	<update  id="UpdateOne"  parameterType="com.lizm.beans.Message">
+		update micro_message set commod = #{commod}, descript = #{descript}, context = #{context}
+		where id = #{id}
+	</update>
+
+</mapper>
